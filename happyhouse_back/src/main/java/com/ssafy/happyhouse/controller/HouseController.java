@@ -6,17 +6,24 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.service.HouseService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/house")
+
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET , RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+
 public class HouseController {
 
 	private HouseService houseService;
@@ -31,6 +38,9 @@ public class HouseController {
 	 * @return
 	 */
 	@GetMapping("/deal/list")
+	// 해당 메서드에 대해 Swagger ui 에서 표시할 설명 , 리턴 정보
+	/** @A : ApiOperation 어노테이션으로 swagger에서 표시할 설명과 리턴 타입 클래스를 입력해준다. */
+	@ApiOperation(value = "전체 부동산 거래내역 불러오기", response = HouseDeal.class)
 	public ResponseEntity<?> houseDealList(){
 		System.out.println("searchAll housedeal ");
 		List<HouseDeal> houseDealList = houseService.list();
@@ -38,6 +48,7 @@ public class HouseController {
 	}
 	
 	@GetMapping("/deal/view")
+	@ApiOperation(value = "핫한 지역 top3 불러오기", response = HouseDeal.class)
 	public ResponseEntity<?> houseBestView(){
 		System.out.println("Houseview");
 		List<HouseDeal> houseViewList = houseService.view();
@@ -45,6 +56,7 @@ public class HouseController {
 	}
 	
 	@PostMapping("/deal/list")
+	@ApiOperation(value = "키워드로 부동산 거래내역을 조회", response = HouseDeal.class)
 	public ResponseEntity<?> searchHouseDeals(String key, String word, String sido, String gugun, String dong, String k) {
 		System.out.println("POST searchHouseDeals");
 		System.out.println("key : "+key+" word : "+word+" dongCode : "+dong);
