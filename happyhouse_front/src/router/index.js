@@ -31,6 +31,11 @@ const routes = [
     name: "home",
     component: HomeView,
   },
+  {
+    path: "happyhouse/house",
+    name: "",
+    component: () => import("@/views/HouseView.vue"),
+  },
 ];
 
 const router = new VueRouter({
