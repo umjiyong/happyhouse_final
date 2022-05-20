@@ -2,13 +2,13 @@
   <md-toolbar
     id="toolbar"
     md-elevation="0"
-    class="md-transparent md-absolute"
+    class="md-transparent md-absolute justify-start"
     :class="extraNavClasses"
     :color-on-scroll="colorOnScroll"
   >
-    <div class="md-toolbar-row md-collapse-lateral">
+    <div class="md-toolbar-column md-collapse-lateral   align-left">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Vue Material Kit</h3>
+        <h3 class="md-title">Happy House</h3>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -63,13 +63,14 @@
                 </a>
               </li>
 
+              <!--router-link-->
               <md-list-item
                 href="https://demos.creative-tim.com/vue-material-kit/documentation/"
                 target="_blank"
                 v-if="showDownload"
               >
-                <i class="material-icons">content_paste</i>
-                <p>Documentation</p>
+                <i class="material-icons">house</i>
+                <p>아파트</p>
               </md-list-item>
 
               <md-list-item
@@ -176,7 +177,7 @@ function resizeThrottler(actualResizeHandler) {
 import MobileMenu from "@/layout/MobileMenu";
 export default {
   components: {
-    MobileMenu
+    MobileMenu,
   },
   props: {
     type: {
@@ -190,26 +191,26 @@ export default {
           "danger",
           "success",
           "warning",
-          "info"
+          "info",
         ].includes(value);
-      }
+      },
     },
     colorOnScroll: {
       type: Number,
-      default: 0
-    }
+      default: 400,
+    },
   },
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
     };
   },
   computed: {
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
+      return excludedRoutes.every((r) => r !== this.$route.name);
+    },
   },
   methods: {
     bodyClick() {
@@ -255,13 +256,19 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    }
+    },
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  }
+  },
 };
 </script>
+
+<style scoped>
+.justify-start {
+  justify-content: flex-start;
+}
+</style>
