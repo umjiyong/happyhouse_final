@@ -16,6 +16,22 @@ Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
+import MaterialKit from "./plugins/material-kit";
+
+Vue.use(MaterialKit);
+
+const NavbarStore = {
+  showNavbar: false,
+};
+
+Vue.mixin({
+  data() {
+    return {
+      NavbarStore,
+    };
+  },
+});
+
 new Vue({
   router,
   store,
