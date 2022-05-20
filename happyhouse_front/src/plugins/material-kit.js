@@ -4,7 +4,6 @@ import "@/assets/scss/material-kit.scss";
 import "@/assets/demo.css";
 import globalDirectives from "./globalDirectives";
 import globalMixins from "./globalMixins";
-import globalComponents from "./globalComponents";
 import VueLazyload from "vue-lazyload";
 import VueCarousel from "vue-carousel";
 
@@ -13,7 +12,6 @@ export default {
     Vue.use(VueMaterial);
     Vue.use(globalDirectives);
     Vue.use(globalMixins);
-    Vue.use(globalComponents);
     Vue.use(VueCarousel);
     Vue.use(VueLazyload, {
       observer: true,
