@@ -46,7 +46,7 @@ const houseStore = {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     getGugun: ({ commit }, sidoCode) => {
@@ -61,7 +61,7 @@ const houseStore = {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     getHouseList: ({ commit }, gugunCode) => {
@@ -84,7 +84,7 @@ const houseStore = {
         },
         (error) => {
           console.log(error);
-        },
+        }
       );
     },
     detailHouse: ({ commit }, house) => {
