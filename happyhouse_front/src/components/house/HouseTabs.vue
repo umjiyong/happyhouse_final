@@ -11,18 +11,20 @@
 
     <md-card-content>
       <md-list class="nav-tabs">
-        <md-list-item
-          v-for="(item, index) in tabName"
-          @click="switchPanel(tabName[index])"
-          :key="item"
-          :class="[
-            { active: isActivePanel(tabName[index]) },
-            { [getColorButton(colorButton)]: isActivePanel(tabName[index]) },
-          ]"
-        >
-          {{ tabName[index] }}
-          <md-icon v-if="navPillsIcons">{{ tabIcon[index] }}</md-icon>
-        </md-list-item>
+        <router-link :to="{ name: 'houseDeal' }">
+          <md-list-item
+            v-for="(item, index) in tabName"
+            @click="switchPanel(tabName[index])"
+            :key="item"
+            :class="[
+              { active: isActivePanel(tabName[index]) },
+              { [getColorButton(colorButton)]: isActivePanel(tabName[index]) },
+            ]"
+          >
+            {{ tabName[index] }}
+            <md-icon v-if="navPillsIcons">{{ tabIcon[index] }}</md-icon>
+          </md-list-item>
+        </router-link>
       </md-list>
 
       <!-- <transition name="fade" mode="out-in">
@@ -31,7 +33,6 @@
             :class="getTabContent(index + 1)"
             v-for="(item, index) in tabName"
             :key="item"
-            v-if="isActivePanel(tabName[index])"
           >
             <slot :name="getTabContent(index + 1)">
               This is the default text!
@@ -74,6 +75,12 @@ export default {
     getTabContent: function(index) {
       return "tab-pane-" + index + "";
     },
+    printTabIcons() {
+      console.log(this.tabIcon);
+    },
+  },
+  updated() {
+    this.printTabIcons();
   },
 };
 </script>

@@ -1,27 +1,14 @@
-import { apiInstance, houseInstance } from "./index.js";
+import { happyHouseApi } from "./index.js";
 
-const api = apiInstance();
-const house = houseInstance();
+const api = happyHouseApi();
 
-function sidoList(success, fail) {
+
+function areaList(params, success, fail) {
   api
-    .get(`/map/sido`)
+    .get(`/house/area`, { params })
     .then(success)
     .catch(fail);
 }
 
-function gugunList(params, success, fail) {
-  api
-    .get(`/map/gugun`, { params: params })
-    .then(success)
-    .catch(fail);
-}
+export { areaList };
 
-function houseList(params, success, fail) {
-  house
-    .get(``, { params: params })
-    .then(success)
-    .catch(fail);
-}
-
-export { sidoList, gugunList, houseList };

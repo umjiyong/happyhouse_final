@@ -8,7 +8,9 @@
   >
     <div class="md-toolbar-column md-collapse-lateral   align-left">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Happy House</h3>
+        <router-link :to="{ name: 'main' }">
+          <h3 class="md-title">Happy House</h3>
+        </router-link>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -64,15 +66,12 @@
               </li>
 
               <!--router-link-->
-              <md-list-item
-                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                target="_blank"
-                v-if="showDownload"
-              >
-                <i class="material-icons">house</i>
-                <p>아파트</p>
+              <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'houseView' }">
+                  <i class="material-icons">house</i>
+                  <p>아파트</p>
+                </router-link>
               </md-list-item>
-
               <md-list-item
                 href="https://demos.creative-tim.com/vue-material-kit/documentation/"
                 target="_blank"
