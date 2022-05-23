@@ -18,7 +18,6 @@
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.3",
     "nouislider": "14.1.0",
-    "regenerator-runtime": "^0.13.9",
     "v-tooltip": "2.0.2",
     "vue": "2.6.10",
     "vue-carousel": "0.18.0",
