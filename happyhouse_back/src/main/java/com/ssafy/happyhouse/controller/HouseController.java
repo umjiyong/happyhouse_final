@@ -8,13 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.model.dto.AreaCode;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
+import com.ssafy.happyhouse.model.dto.HouseInfo;
 import com.ssafy.happyhouse.model.service.HouseService;
 
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +33,35 @@ public class HouseController {
 	@Autowired
 	public HouseController(HouseService houseService) {
 		this.houseService = houseService;
+	}
+	
+	// 시도, 구군, 동 정보 불러오기
+	@GetMapping("/area")
+	public ResponseEntity<?> areaCodeList(String areaUnit, String areaCode){
+		return new ResponseEntity<List<AreaCode>>(houseService.searchAllAreaCode(areaUnit, areaCode),HttpStatus.OK);
+	}
+	
+	
+	// 아파트 리스트 불러오기
+	@GetMapping("list")
+	public ResponseEntity<?> searchHouseInfo(String key, String word, String gugunCode, String dongCode) {
+		
+		if(key==null) return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		if(key.equals("searchbyarea")) {
+			List<HouseInfo> houseInfoList = houseService.searchHouseInfoByArea(gugunCode, dongCode);
+			return new ResponseEntity<List<HouseInfo>>(houseInfoList,HttpStatus.OK);
+		} else if(key.equals("searchbyname")){
+			List<HouseInfo> houseInfoList = houseService.searchHouseInfoByName(word);
+			return new ResponseEntity<List<HouseInfo>>(houseInfoList,HttpStatus.OK);			
+		} else return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	//아파트 코드로 거래내역 조회
+	@GetMapping("/deal/{aptCode}")
+	public ResponseEntity<?> searchHouseDealByAptCode(@PathVariable String aptCode){
+		List<HouseDeal> houseDealList = houseService.searchHouseDealByAptCode(aptCode);
+		return new ResponseEntity<List<HouseDeal>>(houseDealList,HttpStatus.OK);
 	}
 	
 	/**
