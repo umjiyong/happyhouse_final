@@ -111,7 +111,7 @@ export default {
       gugunCode: null,
       sidos: [{ value: null, text: "선택하세요" }],
       guguns: [{ value: null, text: "선택하세요" }],
-      dongs: [{ value: "all", text: "전체동" }],
+      dongs: [{ value: "all", text: "전체동" }]
     };
   },
   computed: {
@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     ...mapActions(houseStore, ["getArea"]),
-    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST"]),
+    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST"])
     // // sidoList() {
     // //   this.getSido();
     // // },
@@ -143,7 +143,7 @@ export default {
     // searchApt() {
     //   if (this.gugunCode) this.getHouseList(this.gugunCode);
     // },
-  },
+  }
 };
 </script>
 

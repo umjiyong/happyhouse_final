@@ -7,31 +7,31 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     dongs: [{ value: null, text: "선택하세요" }],
     houses: [],
-    house: null,
+    house: null
   },
 
   getters: {},
 
   mutations: {
     SET_SIDO_LIST: (state, sidos) => {
-      sidos.forEach((sido) => {
+      sidos.forEach(sido => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
       });
     },
     SET_GUGUN_LIST: (state, guguns) => {
-      guguns.forEach((gugun) => {
+      guguns.forEach(gugun => {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
     SET_DONG_LIST: (state, dongs) => {
-      dongs.forEach((dong) => {
+      dongs.forEach(dong => {
         state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
     },
-    CLEAR_SIDO_LIST: (state) => {
+    CLEAR_SIDO_LIST: state => {
       state.sidos = [{ value: null, text: "선택하세요" }];
     },
-    CLEAR_GUGUN_LIST: (state) => {
+    CLEAR_GUGUN_LIST: state => {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
     SET_HOUSE_LIST: (state, houses) => {
@@ -40,7 +40,7 @@ const houseStore = {
     },
     SET_DETAIL_HOUSE: (state, house) => {
       state.house = house;
-    },
+    }
   },
 
   actions: {
@@ -48,7 +48,7 @@ const houseStore = {
       console.log("getAREA!!");
       const params = {
         areaUnit,
-        areaCode,
+        areaCode
       };
       areaList(params, ({ data }) => {
         if (areaUnit === "sido") {
@@ -59,7 +59,7 @@ const houseStore = {
           context.commit("SET_DONG_LIST", data);
         }
       });
-    },
+    }
     // getSido: ({ commit }) => {
     //   sidoList(
     //     ({ data }) => {
@@ -113,7 +113,7 @@ const houseStore = {
     //   // 나중에 house.일련번호를 이용하여 API 호출
     //   commit("SET_DETAIL_HOUSE", house);
     // },
-  },
+  }
 };
 
 export default houseStore;
