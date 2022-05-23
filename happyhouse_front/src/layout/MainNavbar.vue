@@ -74,6 +74,15 @@
               </md-list-item>
 
               <md-list-item
+                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                target="_blank"
+                v-if="showDownload"
+              >
+                <i class="material-icons">login</i>
+                <p>로그인</p>
+              </md-list-item>
+
+              <md-list-item
                 href="javascript:void(0)"
                 @click="scrollToElement()"
                 v-if="showDownload"
@@ -177,7 +186,7 @@ function resizeThrottler(actualResizeHandler) {
 import MobileMenu from "@/layout/MobileMenu";
 export default {
   components: {
-    MobileMenu,
+    MobileMenu
   },
   props: {
     type: {
@@ -191,26 +200,26 @@ export default {
           "danger",
           "success",
           "warning",
-          "info",
+          "info"
         ].includes(value);
-      },
+      }
     },
     colorOnScroll: {
       type: Number,
-      default: 400,
-    },
+      default: 400
+    }
   },
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false,
+      toggledClass: false
     };
   },
   computed: {
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every((r) => r !== this.$route.name);
-    },
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
   },
   methods: {
     bodyClick() {
@@ -256,14 +265,14 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    },
+    }
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  },
+  }
 };
 </script>
 

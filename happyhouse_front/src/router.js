@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Main from "./views/MainView.vue"; 
+import Main from "./views/MainView.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
@@ -16,8 +16,7 @@ export default new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
       }
-    },
-    
+    }
   ],
   scrollBehavior: to => {
     if (to.hash) {

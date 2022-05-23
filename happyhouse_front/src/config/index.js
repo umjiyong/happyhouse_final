@@ -1,5 +1,4 @@
-
-const HAPPYHOUSE_SPRING_SEVER_URL = "http://localhost:8080/happyhouse"
+const HAPPYHOUSE_SPRING_SEVER_URL = "http://localhost:8080/happyhouse";
 
 // 규섭님 URL
 

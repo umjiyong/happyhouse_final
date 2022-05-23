@@ -25,6 +25,8 @@ public interface UserDao {
 	public int remove(String id)    throws SQLException;   // 회원 삭제
 	
 	public User login(Map<String, String> map) throws SQLException;   // 로그인
+	
+	public User userInfo(String id) throws SQLException; // Info
 }
 
 

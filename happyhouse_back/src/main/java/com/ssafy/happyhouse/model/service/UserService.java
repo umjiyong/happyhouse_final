@@ -19,7 +19,7 @@ public interface UserService {
 	
 	public int remove(String id);
 	
-	public User login(String id, String password) throws SQLException;
+	public User login(User user) throws SQLException;
 
-
+	public User userInfo(String id) throws Exception;
 }
