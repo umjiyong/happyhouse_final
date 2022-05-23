@@ -15,8 +15,8 @@ export default new Router({
       components: { default: Main, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 200 },
-        footer: { backgroundColor: "black" },
-      },
+        footer: { backgroundColor: "black" }
+      }
     },
     {
       path: "/house",
@@ -27,16 +27,16 @@ export default new Router({
         {
           path: "deal",
           name: "houseDeal",
-          component: HouseDeal,
-        },
-      ],
-    },
+          component: HouseDeal
+        }
+      ]
+    }
   ],
-  scrollBehavior: (to) => {
+  scrollBehavior: to => {
     if (to.hash) {
       return { selector: to.hash };
     } else {
       return { x: 0, y: 0 };
     }
-  },
+  }
 });

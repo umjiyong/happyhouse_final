@@ -8,7 +8,7 @@
 <script>
 import HouseSearchBar from "@/components/house/HouseSearchBar.vue";
 export default {
-  components: { HouseSearchBar },
+  components: { HouseSearchBar }
 };
 </script>
 

@@ -3,7 +3,7 @@ const boardStore = {
   state: {},
   getters: {},
   mutations: {},
-  actions: {},
+  actions: {}
 };
 
 export default boardStore;

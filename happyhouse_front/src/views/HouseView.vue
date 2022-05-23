@@ -35,7 +35,7 @@
 <script>
 import HouseTabs from "@/components/house/HouseTabs.vue";
 export default {
-  components: { HouseTabs },
+  components: { HouseTabs }
 };
 </script>
 

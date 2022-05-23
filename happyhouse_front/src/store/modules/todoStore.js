@@ -4,22 +4,22 @@ const todoStore = {
     todos: [
       // { title: '할 일1', completed: false },
       // { title: '할 일2', completed: false },
-    ],
+    ]
   },
   getters: {
     allTodosCount(state) {
       return state.todos.length;
     },
     completedTodosCount(state) {
-      return state.todos.filter((todo) => {
+      return state.todos.filter(todo => {
         return todo.completed === true;
       }).length;
     },
     unCompletedTodosCount(state) {
-      return state.todos.filter((todo) => {
+      return state.todos.filter(todo => {
         return todo.completed === false;
       }).length;
-    },
+    }
   },
   mutations: {
     CREATE_TODO(state, todoItem) {
@@ -35,17 +35,17 @@ const todoStore = {
     UPDATE_TODO_STATUS(state, todoItem) {
       // console.log(state);
       // console.log(todoItem);
-      state.todos = state.todos.map((todo) => {
+      state.todos = state.todos.map(todo => {
         if (todo === todoItem) {
           return {
             // title: todoItem.title,
             ...todo,
-            completed: !todoItem.completed,
+            completed: !todoItem.completed
           };
         }
         return todo;
       });
-    },
+    }
   },
   actions: {
     // destructuring 활용
@@ -59,8 +59,8 @@ const todoStore = {
     },
     updateTodoStatus({ commit }, todoItem) {
       commit("UPDATE_TODO_STATUS", todoItem);
-    },
-  },
+    }
+  }
 };
 
 export default todoStore;
