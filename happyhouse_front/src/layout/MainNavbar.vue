@@ -8,7 +8,9 @@
   >
     <div class="md-toolbar-column md-collapse-lateral   align-left">
       <div class="md-toolbar-section-start">
-        <h3 class="md-title">Happy House</h3>
+        <router-link :to="{ name: 'main' }">
+          <h3 class="md-title">Happy House</h3>
+        </router-link>
       </div>
       <div class="md-toolbar-section-end">
         <md-button
@@ -64,13 +66,19 @@
               </li>
 
               <!--router-link-->
+              <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'houseView' }">
+                  <i class="material-icons">house</i>
+                  <p>아파트</p>
+                </router-link>
+              </md-list-item>
               <md-list-item
                 href="https://demos.creative-tim.com/vue-material-kit/documentation/"
                 target="_blank"
                 v-if="showDownload"
               >
-                <i class="material-icons">house</i>
-                <p>아파트</p>
+                <i class="material-icons">login</i>
+                <p>로그인</p>
               </md-list-item>
 
               <md-list-item
@@ -177,7 +185,7 @@ function resizeThrottler(actualResizeHandler) {
 import MobileMenu from "@/layout/MobileMenu";
 export default {
   components: {
-    MobileMenu,
+    MobileMenu
   },
   props: {
     type: {
@@ -191,26 +199,26 @@ export default {
           "danger",
           "success",
           "warning",
-          "info",
+          "info"
         ].includes(value);
-      },
+      }
     },
     colorOnScroll: {
       type: Number,
-      default: 400,
-    },
+      default: 400
+    }
   },
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false,
+      toggledClass: false
     };
   },
   computed: {
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every((r) => r !== this.$route.name);
-    },
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
   },
   methods: {
     bodyClick() {
@@ -256,14 +264,14 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    },
+    }
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  },
+  }
 };
 </script>
 

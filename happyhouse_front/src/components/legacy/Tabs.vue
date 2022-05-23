@@ -25,7 +25,7 @@
         </md-list-item>
       </md-list>
 
-      <transition name="fade" mode="out-in">
+      <!-- <transition name="fade" mode="out-in">
         <div class="tab-content">
           <div
             :class="getTabContent(index + 1)"
@@ -38,7 +38,7 @@
             </slot>
           </div>
         </div>
-      </transition>
+      </transition> -->
     </md-card-content>
   </md-card>
 </template>

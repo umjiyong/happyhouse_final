@@ -6,8 +6,8 @@ function happyHouseApi() {
   const instance = axios.create({
     baseURL: HAPPYHOUSE_SPRING_SEVER_URL,
     headers: {
-      "Content-type": "application/json",
-    },
+      "Content-type": "application/json"
+    }
   });
   return instance;
 }

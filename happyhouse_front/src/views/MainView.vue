@@ -1,8 +1,9 @@
 <template>
   <div>
-    <main-navbar />
-
     Main 뷰입니다.
+    <main-navbar />
+    <user-view />
+
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     <main-footer />
   </div>
@@ -11,8 +12,15 @@
 <script>
 import MainNavbar from "../layout/MainNavbar.vue";
 import MainFooter from "../layout/MainFooter.vue";
+import UserView from "./UserView.vue";
 export default {
-  components: { MainNavbar, MainFooter },
+  data() {
+    return {
+      modalOn: true
+    };
+  },
+
+  components: { MainNavbar, MainFooter, UserView }
 };
 </script>
 

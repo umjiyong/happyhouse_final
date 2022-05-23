@@ -1,11 +1,17 @@
 <template>
   <div id="material-kit">
     <div :class="{ 'nav-open': NavbarStore.showNavbar }">
-      <router-view name="header" />
+      <!-- <router-view name="header" /> -->
       <div>
-        <router-view />
+        <div class="main main-raised">
+          <router-view />
+        </div>
       </div>
-      <router-view name="footer" />
+      <!-- <router-view name="footer" /> -->
     </div>
   </div>
 </template>
+
+<script>
+export default {};
+</script>

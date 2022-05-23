@@ -5,30 +5,50 @@
 <mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
 
 	
-<!-- 
-	public List<HouseDeal> searchHouseDealByDong(String dongCode) throws SQLException;
-	public List<HouseDeal> searchHouseDealByName(String aptName) throws SQLException;
-	public List<HouseDeal> searchAll() throws SQLException;
-	public List<HouseDeal> searchFavorite(String userId) throws SQLException;
+	<select id="searchAllSido" resultType="AreaCode">
+		SELECT *
+		FROM sidoCode
+		ORDER BY sidoCode
+	</select>
 	
-	public List<HouseInfo> searchHouseInfo(String aptCode) throws SQLException;
+	<select id="searchAllGugun" parameterType="string" resultType="AreaCode">
+		SELECT *
+		FROM gugunCode
+		WHERE gugunCode like CONCAT(#{areaCodePrefix},'%') 
+		ORDER BY gugunCode
+	</select>
 	
+	<select id="searchAllDong" parameterType="string" resultType="AreaCode">
+		SELECT distinct(dongCode), dongName
+		FROM houseinfo
+		WHERE dongCode like CONCAT(#{areaCodePrefix},'%')
+		ORDER BY dongCode
+	</select>
 	
+	<select id="searchHouseInfoByArea" parameterType="string" resultType="HouseInfo">
+		SELECT *
+		FROM houseinfo
+		WHERE dongCode like CONCAT(#{areaCodePrefix},'%')
+	</select>
+	<select id="searchHouseInfoByName" parameterType="string" resultType="HouseInfo">
+		SELECT *
+		FROM houseinfo
+		WHERE aptName like CONCAT('%',#{word},'%')
+	</select>
+	
+	<!-- deal -->
 
- -->
- <!-- 
- 		WHERE dongCode in (
-							SELECT dongCode 
-							FROM baseaddress
-							WHERE 
-								sidoName like CONCAT('%',#{sidoName},'%')
-								AND gugunName like CONCAT('%',#{gugunName},'%')
-								AND dongName like CONCAT('%',#{dongName},'%')		
-							)
-  -->
 	<sql id="orderbydate_desc">
 		ORDER BY dealYear DESC, dealMonth DESC, dealDay DESC
 	</sql>
+	
+	<select id="searchHouseDealByAptCode" parameterType="string" resultType ="HouseDeal">
+		SELECT * 
+		FROM housedeal
+		WHERE aptCode = #{aptCode}		
+		<include refid="orderbydate_desc"/>
+		limit 1, 10;
+	</select>
  
 	<select id="searchHouseDealByDong" parameterType="map" resultType="HouseDeal">
 		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,' ',gugunName,' ',dongcode.dongName) as address, lat, lng

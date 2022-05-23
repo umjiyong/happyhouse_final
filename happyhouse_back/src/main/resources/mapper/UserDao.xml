@@ -52,5 +52,11 @@
 		and	   password = #{password}
 	</select>
 	
+	<select id="userInfo" parameterType="String" resultType="User">
+		select *
+		from user
+		where id = #{id}
+	</select>
+	
 	
 </mapper>
