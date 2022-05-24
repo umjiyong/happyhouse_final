@@ -1,6 +1,6 @@
 <template>
   <div class="map-container">
-    <div id="map" style="width: 100%; height: 90vh"></div>
+    <div id="map" style="width: 100%; height: 80vh"></div>
     <div class="map-controller flex-row gap-item"></div>
   </div>
   <!--카카오 맵 API-->

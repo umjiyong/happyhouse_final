@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-primary">
     <select v-model="key">
       <option value="searchbyarea" selected>지역으로 찾기</option>
       <option value="searchbyname">이름으로 찾기</option>

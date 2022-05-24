@@ -4,27 +4,31 @@
     :class="[
       { 'flex-column': flexColumn },
       { 'nav-pills-icons': navPillsIcons },
-      { 'md-card-plain': plain }
+      { 'md-card-plain': plain },
     ]"
   >
     <md-card-header slot="header-title"> </md-card-header>
 
     <md-card-content>
-      <md-list class="nav-tabs">
-        <router-link :to="{ name: 'houseDeal' }">
-          <md-list-item
+      <md-list class="nav-tabs  ">
+        <div class="padding-box">
+          <router-link
             v-for="(item, index) in tabName"
-            @click="switchPanel(tabName[index])"
-            :key="item"
-            :class="[
-              { active: isActivePanel(tabName[index]) },
-              { [getColorButton(colorButton)]: isActivePanel(tabName[index]) }
-            ]"
+            :key="item.name"
+            :to="{ name: item.comp }"
           >
-            {{ tabName[index] }}
-            <md-icon v-if="navPillsIcons">{{ tabIcon[index] }}</md-icon>
-          </md-list-item>
-        </router-link>
+            <md-list-item
+              @click="switchPanel(item.name)"
+              :class="[
+                { active: isActivePanel(item.name) },
+                { [getColorButton(colorButton)]: isActivePanel(item.name) },
+              ]"
+            >
+              {{ item.name }}
+              <md-icon v-if="navPillsIcons">{{ tabIcon[index] }}</md-icon>
+            </md-list-item>
+          </router-link>
+        </div>
       </md-list>
 
       <!-- <transition name="fade" mode="out-in">
@@ -54,12 +58,12 @@ export default {
     tabIcon: Array,
     colorButton: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   data() {
     return {
-      activePanel: this.tabName[0]
+      activePanel: this.tabName[0],
     };
   },
   methods: {
@@ -77,12 +81,17 @@ export default {
     },
     printTabIcons() {
       console.log(this.tabIcon);
-    }
+    },
   },
   updated() {
     this.printTabIcons();
-  }
+  },
 };
 </script>
 
-<style lang="css"></style>
+<style scoped>
+.padding-box {
+  background: white;
+  border-radius: 5px;
+}
+</style>

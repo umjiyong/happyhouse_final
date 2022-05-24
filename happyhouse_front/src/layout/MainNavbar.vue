@@ -72,15 +72,20 @@
                   <p>아파트</p>
                 </router-link>
               </md-list-item>
+              <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'qnaView' }">
+                  <i class="material-icons">help</i>
+                  <p>QnA</p>
+                </router-link>
+              </md-list-item>
               <md-list-item>
-              <router-link :to="{ name: 'userView' }"
-              >
-                <i class="material-icons">login</i>
-                <p>로그인</p>
-              </router-link>
+                <router-link :to="{ name: 'userView' }">
+                  <i class="material-icons">login</i>
+                  <p>로그인</p>
+                </router-link>
               </md-list-item>
 
-              <md-list-item  @click="logout" v-if="isLogin == true">
+              <md-list-item @click="logout" v-if="isLogin == true">
                 <i class="material-icons">login</i>
                 <p>로그 아웃</p>
               </md-list-item>
@@ -191,7 +196,7 @@ import MobileMenu from "@/layout/MobileMenu";
 const memberStore = "memberStore";
 export default {
   components: {
-    MobileMenu
+    MobileMenu,
   },
   props: {
     type: {
@@ -205,19 +210,19 @@ export default {
           "danger",
           "success",
           "warning",
-          "info"
+          "info",
         ].includes(value);
-      }
+      },
     },
     colorOnScroll: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
   },
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
     };
   },
 
@@ -225,8 +230,8 @@ export default {
     ...mapState(memberStore, ["isLogin"]),
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
+      return excludedRoutes.every((r) => r !== this.$route.name);
+    },
   },
   methods: {
     ...mapActions(memberStore, ["logoutMember"]),
@@ -277,14 +282,14 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
-    }
+    },
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  }
+  },
 };
 </script>
 
