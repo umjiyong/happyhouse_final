@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.QnADao">
+
+
+	<!-- // Question public List<Question> searchAllQuestion() throws SQLException;; 
+		public List<Question> searchQuestionByTitle(String title) throws SQLException;; 
+		public Question searchQuestionById(int id) throws SQLException;; public int 
+		addQuestion(Question question) throws SQLException;; public int updateQuestion(Question 
+		question) throws SQLException;; public int removeQuestion(int id) throws 
+		SQLException;; // Reply public List<Reply> searchAllReply(int qId) throws 
+		SQLException;; public int addReply(Reply reply) throws SQLException;; public 
+		int updateReply(Reply reply) throws SQLException;; public int removeReply(int 
+		id) throws SQLException;; -->
+
+<!-- 	<resultMap id="question" type="Question">
+		<result property="id" column=""/>
+		<result property="title" column=""/>
+		<result property="content" column=""/>
+		<result property="category" column=""/>
+		<result property="userId" column=""/>
+		<result property="" column=""/>
+	</resultMap> -->
+	
+	<select id="searchAllCategory" resultType="Category">
+		SELECT *
+		FROM q_category
+	</select>
+
+	<select id="searchAllQuestion" resultType="Question">
+		SELECT *
+		FROM question
+		ORDER BY reg_time desc
+	</select>
+
+	<select id="searchQuestionByTitle" parameterType="string"
+		resultType="Question">
+		SELECT *
+		FROM question
+		WHERE q_title like CONCAT('%',#{title},'%')
+		ORDER BY reg_time desc;
+	</select>
+
+	<select id="searchQuestionById" parameterType="int"
+		resultType="Question">
+		SELECT *
+		FROM question
+		WHERE q_id = #{id}
+	</select>
+
+
+	<select id="getNewQuestionId" resultType="int">
+		SELECT  ifnull(max(q_id),0) +1
+		FROM question
+	</select>
+	
+	<insert id="addQuestion" parameterType="Question">
+		INSERT INTO question(q_id,q_title, q_content,q_category,user_id)
+		VALUES(#{id}, #{title}, #{content}, #{category}, #{userId})
+
+	</insert>
+	<update id="updateQuestion" parameterType="Question">
+		UPDATE question
+		SET
+		q_title = #{title},
+		q_content = #{content},
+		q_category = #{category}
+		WHERE q_id = #{id}
+	</update>
+
+	<delete id="removeQuestion" parameterType="int">
+		DELETE
+		FROM question
+		WHERE q_id = #{id}
+	</delete>
+
+	<select id="searchAllReply" parameterType="int"
+		resultType="Reply">
+ 		select *
+		from reply
+		where q_id = #{qId}
+		order by pr_id, r_id;
+	</select>
+	
+	<select id="getNewReplyId" resultType="int">
+		SELECT ifnull(max(r_id),0) +1
+		FROM reply
+	</select>
+
+	<insert id="addReply" parameterType="Reply">
+		INSERT
+		INTO reply(r_id,q_id, pr_id,r_content,user_id)
+		VALUES(#{id},#{qId}, #{prId}, #{content} , #{userId});
+	</insert>
+
+	<update id="updateReply" parameterType="Reply">
+		UPDATE
+		SET reply r_content = #{content}
+	</update>
+
+	<delete id="removeReply" parameterType="int">
+		DELETE
+		FROM reply
+		WHERE r_id = #{id} OR pr_id = #{id}
+	</delete>
+ 
+ </mapper>
+ 

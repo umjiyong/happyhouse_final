@@ -3,8 +3,6 @@ import Router from "vue-router";
 import Main from "./views/MainView.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
-import HouseView from "@/views/HouseView.vue";
-import HouseDeal from "@/components/house/HouseDeal";
 import MemberMyPage from "@/components/user/MemberMyPage";
 Vue.use(Router);
 
@@ -50,22 +48,55 @@ export default new Router({
     {
       path: "/house",
       name: "houseView",
-      // components: { default: Main, header: MainNavbar, footer: MainFooter },
-      component: HouseView,
+      component: () => import("@/views/HouseView.vue"),
+      redirect: "/house/search",
       children: [
         {
-          path: "deal",
-          name: "houseDeal",
-          component: HouseDeal
-        }
-      ]
-    }
+          path: "search",
+          name: "houseSearch",
+          component: () => import("@/components/house/HouseSearch.vue"),
+        },
+        {
+          path: "detail",
+          name: "houseDetail",
+          component: () => import("@/components/house/HouseDetail.vue"),
+        },
+      ],
+    },
+    {
+      path: "/qna",
+      name: "qnaView",
+      component: () => import("@/views/QnaView.vue"),
+      redirect: "/qna/list",
+      children: [
+        {
+          path: "list",
+          name: "qnaList",
+          component: () => import("@/components/qna/QnaList.vue"),
+        },
+        {
+          path: "regist",
+          name: "questionRegist",
+          component: () => import("@/components/qna/QuestionRegist.vue"),
+        },
+        {
+          path: "update",
+          name: "questionUpdate",
+          component: () => import("@/components/qna/QuestionUpdate.vue"),
+        },
+        {
+          path: ":q_id",
+          name: "qnaPage",
+          component: () => import("@/components/qna/QnaPage.vue"),
+        },
+      ],
+    },
   ],
-  scrollBehavior: to => {
+  scrollBehavior: (to) => {
     if (to.hash) {
       return { selector: to.hash };
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });

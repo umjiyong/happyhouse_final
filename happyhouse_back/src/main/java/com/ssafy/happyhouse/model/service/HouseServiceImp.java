@@ -13,6 +13,7 @@ import com.ssafy.happyhouse.model.dao.HouseDao;
 import com.ssafy.happyhouse.model.dto.AreaCode;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
+import com.ssafy.happyhouse.model.dto.Status;
 
 @Service
 public class HouseServiceImp implements HouseService {
@@ -56,13 +57,43 @@ public class HouseServiceImp implements HouseService {
 	public List<HouseInfo> searchHouseInfoByName(String word) {
 		return houseDao.searchHouseInfoByName(word);
 	}
-	
 
-	//deal
-	
+	// status
+
+	@Override
+	public Map<String, List<Status>> searchAllStatus(String aptCode) {
+		Map<String, List<Status>> statusMap = new HashMap<String, List<Status>>();
+
+		final Status aptPos = houseDao.searchAptPos(aptCode);
+		Map<String, Double> pos = new HashMap<String, Double>() {
+			{
+				put("aptLat", aptPos.getLat());
+				put("aptLng", aptPos.getLng());
+			}
+		};
+		
+		List<Status> transportationList = houseDao.searchAllTransportation(pos);
+		List<Status> cultureList = houseDao.searchAllTransportation(pos);
+		List<Status> educationList = houseDao.searchAllEducation(pos);
+		List<Status> environmentList = houseDao.searchAllEnvironment(pos);
+		List<Status> lifeList = houseDao.searchAllLife(pos);
+		List<Status> safetyList = houseDao.searchAllSafety(pos);
+
+		statusMap.put("transportation", transportationList);
+		statusMap.put("culture", cultureList);
+		statusMap.put("education", educationList);
+		statusMap.put("environment", environmentList);
+		statusMap.put("life", lifeList);
+		statusMap.put("safety", safetyList);
+		
+		return statusMap;
+	}
+
+	// deal
+
 	@Override
 	public List<HouseDeal> searchHouseDealByAptCode(String aptCode) {
-		 return houseDao.searchHouseDealByAptCode(aptCode);
+		return houseDao.searchHouseDealByAptCode(aptCode);
 	}
 
 	@Override
@@ -214,6 +245,5 @@ public class HouseServiceImp implements HouseService {
 		System.out.println(viewlist);
 		return viewlist;
 	}
-
 
 }
