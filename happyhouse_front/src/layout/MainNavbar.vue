@@ -79,14 +79,12 @@
                   <p>QnA</p>
                 </router-link>
               </md-list-item>
-              <md-list-item>
 
               <md-list-item v-if="isLogin == false">
                 <router-link :to="{ name: 'userView' }">
                   <i class="material-icons">login</i>
                   <p>로그인</p>
                 </router-link>
-
               </md-list-item>
 
               <md-list-item v-if="isLogin == true">
