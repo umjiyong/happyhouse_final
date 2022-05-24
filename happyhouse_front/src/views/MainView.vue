@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br /><br /><br />
     Main 뷰입니다.
     <main-navbar />
     <user-view />

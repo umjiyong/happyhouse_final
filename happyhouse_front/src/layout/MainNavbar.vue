@@ -82,6 +82,16 @@
               </md-list-item>
 
               <md-list-item
+                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                target="_blank"
+                
+              >
+                <i class="material-icons">login</i>
+                <p>로그인</p>
+              </md-list-item>
+
+
+              <md-list-item
                 href="javascript:void(0)"
                 @click="scrollToElement()"
                 v-if="showDownload"
