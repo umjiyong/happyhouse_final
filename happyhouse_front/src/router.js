@@ -17,13 +17,35 @@ export default new Router({
       props: {
         header: { colorOnScroll: 200 },
         footer: { backgroundColor: "black" }
-      },
+      }
     },
     {
-      path: "/mypage",
-      name: "myPage",
-      // components: { default: Main, header: MainNavbar, footer: MainFooter },
-      component: MemberMyPage,
+      path: "/user",
+      name: "userView",
+      component: () => import("@/views/UserView.vue"),
+      children: [
+        // {
+        //   path: "singin",
+        //   name: "signIn",
+        //   component: () => import("@/components/user/MemberLogin.vue"),
+        // },
+        // {
+        //   path: "singup",
+        //   name: "signUp",
+        //   component: () => import("@/components/user/MemberRegister.vue"),
+        // },
+        {
+          path: "mypage",
+          name: "mypage",
+          // beforeEnter: onlyAuthUser,
+          component: () => import("@/components/user/MemberMyPage.vue"),
+        },
+        {
+          path: "update",
+          name: "update",
+          component: () => import("@/components/user/MemberUpdate.vue"),
+        },
+      ],
     },
     {
       path: "/house",

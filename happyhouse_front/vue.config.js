@@ -7,6 +7,6 @@ module.exports = {
     }
   },
   devServer: {
-    host: 'localhost',
-  },
+    host: "localhost"
+  }
 };

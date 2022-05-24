@@ -20,6 +20,14 @@ export default {
       modalOn: true
     };
   },
+  methods: {
+    openModal() {
+      this.modalOn = true;
+    },
+    closeModal() {
+      this.modalOn = false;
+    }
+  },
 
   components: { MainNavbar, MainFooter, UserView }
 };

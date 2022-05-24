@@ -72,24 +72,16 @@
                   <p>아파트</p>
                 </router-link>
               </md-list-item>
-              <md-list-item
-                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                target="_blank"
-                v-if="showDownload"
+              <router-link :to="{ name: 'userView' }"
               >
                 <i class="material-icons">login</i>
                 <p>로그인</p>
-              </md-list-item>
+              </router-link>
 
-              <md-list-item
-                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                target="_blank"
-                
-              >
+              <md-list-item  @click="logout" v-if="isLogin == true">
                 <i class="material-icons">login</i>
-                <p>로그인</p>
+                <p>로그 아웃</p>
               </md-list-item>
-
 
               <md-list-item
                 href="javascript:void(0)"
@@ -191,8 +183,10 @@ function resizeThrottler(actualResizeHandler) {
     }, 66);
   }
 }
-
+import { mapActions, mapState } from "vuex";
 import MobileMenu from "@/layout/MobileMenu";
+
+const memberStore = "memberStore";
 export default {
   components: {
     MobileMenu
@@ -224,13 +218,20 @@ export default {
       toggledClass: false
     };
   },
+
   computed: {
+    ...mapState(memberStore, ["isLogin"]),
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
       return excludedRoutes.every(r => r !== this.$route.name);
     }
   },
   methods: {
+    ...mapActions(memberStore, ["logoutMember"]),
+    logout() {
+      this.logoutMember();
+      this.$router.go("this.$router.currentRoute");
+    },
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 

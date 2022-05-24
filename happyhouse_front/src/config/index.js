@@ -6,4 +6,4 @@ const API_BASE_URL = "http://localhost:8080/happyhouse";
 // ------------------------------- URL 분계선 ---------------------------------------//
 
 // 지용님 URL
-export { API_BASE_URL , HAPPYHOUSE_SPRING_SEVER_URL };
+export { API_BASE_URL, HAPPYHOUSE_SPRING_SEVER_URL };

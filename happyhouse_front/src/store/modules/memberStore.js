@@ -4,7 +4,7 @@ import {
   findById,
   modifyMemberInfo,
   unregisterMember,
-  signUpMember,
+  signUpMember
 } from "@/api/member.js";
 
 const memberStore = {
@@ -14,12 +14,12 @@ const memberStore = {
     isLoginError: false,
     userInfo: null,
 
-    isSignupError: false,
+    isSignupError: false
   },
   getters: {
-    checkUserInfo: function (state) {
+    checkUserInfo: function(state) {
       return state.userInfo;
-    },
+    }
   },
   mutations: {
     SET_IS_LOGIN: (state, isLogin) => {
@@ -33,7 +33,7 @@ const memberStore = {
       state.userInfo = userInfo;
     },
 
-    RESET_USER_INFO: (state) => {
+    RESET_USER_INFO: state => {
       state.isLogin = false;
       state.userInfo = null;
     },
@@ -43,7 +43,7 @@ const memberStore = {
     },
     SET_USER_MYHOME: (state, userInfo) => {
       state.userInfo = userInfo;
-    },
+    }
   },
   actions: {
     async userConfirm({ commit }, user) {
@@ -62,23 +62,23 @@ const memberStore = {
             commit("SET_IS_LOGIN_ERROR", true);
           }
         },
-        () => {},
+        () => {}
       );
     },
     getUserInfo({ commit }, token) {
       let decode_token = jwt_decode(token);
       findById(
         decode_token.id,
-        (response) => {
+        response => {
           if (response.data.message === "success") {
             commit("SET_USER_INFO", response.data.userInfo);
           } else {
             console.log("유저 정보 없음!!");
           }
         },
-        (error) => {
+        error => {
           console.log(error);
-        },
+        }
       );
     },
     modifyMember({ commit }, user) {
@@ -88,7 +88,7 @@ const memberStore = {
     deleteMember({ commit }, id) {
       unregisterMember(
         id,
-        (response) => {
+        response => {
           console.log(response.data);
           if (response.data === "success") {
             commit("SET_IS_LOGIN", false);
@@ -98,9 +98,9 @@ const memberStore = {
             console.log("response data fail");
           }
         },
-        (error) => {
+        error => {
           console.log(error);
-        },
+        }
       );
     },
     logoutMember({ commit }) {
@@ -127,10 +127,10 @@ const memberStore = {
         () => {
           alert("Store Sign Up Member Fail!!");
           commit("SET_IS_SIGNUP_ERROR", true);
-        },
+        }
       );
-    },
-  },
+    }
+  }
 };
 
 export default memberStore;

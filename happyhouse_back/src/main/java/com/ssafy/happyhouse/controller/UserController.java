@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -136,16 +137,15 @@ public class UserController {
 	}
 
 	
-	@PostMapping("/modify")
-	public String modify(User user, HttpSession session) {
-		int n = userservice.update(user);
-		if(n > 0) {
-			session.setAttribute("userinfo", user);
+	@ApiOperation(value = "회원수정", notes = "회원 정보를 수정한다.", response = Map.class)
+	@PutMapping("/modify")
+	public ResponseEntity<String> update(@RequestBody User user) throws Exception {
+		if (userservice.update(user) == 1) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
-		
-		return "/user/modify";
+		return new ResponseEntity<String>(FAIL, HttpStatus.OK);
 	}
-	
+
 	@ApiOperation(value = "회원탈퇴", notes = "회원 정보를 삭제한다.", response = Map.class)
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") String userid) throws Exception {

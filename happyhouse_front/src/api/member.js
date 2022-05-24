@@ -3,12 +3,18 @@ import { apiInstance } from "./index.js";
 const api = apiInstance();
 
 async function login(user, success, fail) {
-  await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
+  await api
+    .post(`/user/login`, JSON.stringify(user))
+    .then(success)
+    .catch(fail);
 }
 
 async function findById(user, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
-  await api.get(`/user/findpwd`).then(success).catch(fail);
+  await api
+    .get(`/user/findpwd`)
+    .then(success)
+    .catch(fail);
 }
 
 async function collectMemberInfo(userid) {
@@ -19,14 +25,17 @@ async function modifyMemberInfo(user) {
   await api.put(`/user/modify`, JSON.stringify(user));
 }
 async function unregisterMember(userid, success, fail) {
-  await api.delete(`/user/delete/${userid}`).then(success).catch(fail);
+  await api
+    .delete(`/user/delete/${userid}`)
+    .then(success)
+    .catch(fail);
 }
 
 async function signUpMember(user, success, fail) {
   await api
     .post(`/user/regist`, JSON.stringify(user))
     .then(success)
-    .catch(fail)
+    .catch(fail);
 }
 // function logout(success, fail)
 
@@ -36,5 +45,5 @@ export {
   modifyMemberInfo,
   unregisterMember,
   signUpMember,
-  collectMemberInfo,
+  collectMemberInfo
 };
