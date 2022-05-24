@@ -24,7 +24,9 @@
                 { [getColorButton(colorButton)]: isActivePanel(item.name) },
               ]"
             >
-              {{ item.name }}
+              <p :class="[{ whiteFont: isActivePanel(item.name) }]">
+                {{ item.name }}
+              </p>
               <md-icon v-if="navPillsIcons">{{ tabIcon[index] }}</md-icon>
             </md-list-item>
           </router-link>
@@ -63,7 +65,7 @@ export default {
   },
   data() {
     return {
-      activePanel: this.tabName[0],
+      activePanel: this.tabName[0].name,
     };
   },
   methods: {
@@ -93,5 +95,9 @@ export default {
 .padding-box {
   background: white;
   border-radius: 5px;
+}
+
+.whiteFont {
+  color: white;
 }
 </style>

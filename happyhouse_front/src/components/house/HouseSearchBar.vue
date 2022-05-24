@@ -1,48 +1,62 @@
 <template>
-  <div class="bg-primary">
-    <select v-model="key">
-      <option value="searchbyarea" selected>지역으로 찾기</option>
-      <option value="searchbyname">이름으로 찾기</option>
-    </select>
-    <div></div>
-    <div class="flex-row gap-item">
-      <div class="flex-row gap-item" v-if="key === 'searchbyname'">
-        <input type="text" v-model="word" placeholder="아파트 이름 입력" />
-      </div>
-      <div class="flex-row gap-item" v-if="key === 'searchbyarea'">
-        <div>
-          <label for="sido">시도</label>
-          <select v-model="sido" name="sido" id="sido" @change="changeSido">
-            <option v-for="sido in sidos" :value="sido.value" :key="sido.value">
-              {{ sido.text }}
-            </option>
-          </select>
+  <div class="bg-sub">
+    <div class="flex-row gap-item search-box">
+      <select v-model="key">
+        <option value="searchbyarea" selected>지역으로 찾기</option>
+        <option value="searchbyname">이름으로 찾기</option>
+      </select>
+      <div>
+        <div v-if="key === 'searchbyname'">
+          <input type="text" v-model="word" placeholder="아파트 이름 입력" />
         </div>
-        <div>
-          <label for="gugun">구군</label>
-          <select v-model="gugun" name="gugun" id="gugun" @change="changeGugun">
-            <option
-              v-for="gugun in guguns"
-              :value="gugun.value"
-              :key="gugun.value"
+        <div class="flex-row gap-item" v-if="key === 'searchbyarea'">
+          <div>
+            <label for="sido">시도</label>
+            <select v-model="sido" name="sido" id="sido" @change="changeSido">
+              <option
+                v-for="sido in sidos"
+                :value="sido.value"
+                :key="sido.value"
+              >
+                {{ sido.text }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label for="gugun">구군</label>
+            <select
+              v-model="gugun"
+              name="gugun"
+              id="gugun"
+              @change="changeGugun"
             >
-              {{ gugun.text }}
-            </option>
-          </select>
-        </div>
-        <div>
-          <label for="dong">동</label>
-          <select v-model="dong" name="dong" id="dong" @change="changeDong">
-            <option v-for="dong in dongs" :value="dong.value" :key="dong.value">
-              {{ dong.text }}
-            </option>
-          </select>
+              <option
+                v-for="gugun in guguns"
+                :value="gugun.value"
+                :key="gugun.value"
+              >
+                {{ gugun.text }}
+              </option>
+            </select>
+          </div>
+          <div>
+            <label for="dong">동</label>
+            <select v-model="dong" name="dong" id="dong" @change="changeDong">
+              <option
+                v-for="dong in dongs"
+                :value="dong.value"
+                :key="dong.value"
+              >
+                {{ dong.text }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
+      <span class="hover-pointer search-btn" @click="doSearchHouseList">
+        <md-icon>search</md-icon>
+      </span>
     </div>
-    <button @click="searchHouseList({ key, word, gugunCode, dongCode })">
-      검색
-    </button>
   </div>
 </template>
 
@@ -69,7 +83,7 @@ export default {
       gugun: "",
       dong: "",
       key: "searchbyarea",
-      word: ""
+      word: "",
     };
   },
   computed: {
@@ -79,8 +93,8 @@ export default {
       "dongs",
       "sidoCode",
       "gugunCode",
-      "dongCode"
-    ])
+      "dongCode",
+    ]),
   },
   created() {
     // this.$store.dispatch("getSido");
@@ -104,7 +118,7 @@ export default {
 
       "SET_SIDOCODE",
       "SET_GUGUNCODE",
-      "SET_DONGCODE"
+      "SET_DONGCODE",
     ]),
     changeSido() {
       this.CLEAR_GUGUN_LIST();
@@ -122,7 +136,17 @@ export default {
     },
     changeDong() {
       this.SET_DONGCODE(this.dong);
-    }
+    },
+    doSearchHouseList() {
+      this.$emit("closeDetail");
+      this.searchHouseList({
+        key: this.key,
+        word: this.word,
+        gugunCode: this.gugunCode,
+        dongCode: this.dongCode,
+      });
+    },
+
     // // sidoList() {
     // //   this.getSido();
     // // },
@@ -135,8 +159,28 @@ export default {
     // searchApt() {
     //   if (this.gugunCode) this.getHouseList(this.gugunCode);
     // },
-  }
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.search-box {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+}
+.search-box input,
+.search-box select {
+  padding: 0.2rem;
+  margin-left: 0.2rem;
+  font-size: 1rem;
+}
+.search-btn {
+  background: white;
+  border: 2px solid gainsboro;
+  border-radius: 0 5px 5px 0;
+  padding: 0.2rem;
+}
+</style>

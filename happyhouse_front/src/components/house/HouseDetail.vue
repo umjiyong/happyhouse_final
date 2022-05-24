@@ -1,10 +1,11 @@
 <template>
   <div class="house-detail-container">
-    <button @click="closeDetail">X</button>
-    <div v-if="houseInfo1">
+    <span class="hover-pointer x-box" @click="closeDetail">
+      <md-icon>close</md-icon>
+    </span>
+    <div v-if="houseInfo1" class="house-detail-box">
       <div>
-        <h5>Hello Detail</h5>
-        <h4>{{ houseInfo1.aptName }}</h4>
+        <p class="bold-display">{{ houseInfo1.aptName }}</p>
       </div>
       <div>transportation : {{ transportationList.length }}</div>
       <div>culture : {{ cultureList.length }}</div>
@@ -12,49 +13,48 @@
       <div>environment : {{ environmentList.length }}</div>
       <div>life : {{ lifeList.length }}</div>
       <div>safety : {{ safetyList.length }}</div>
-      <div>거래내역 {{ housedealList.length }}</div>
-      <div v-if="housedealList.length">
-        <div v-for="housedeal in housedealList" :key="housedeal.no">
-          {{ housedeal.dealAmount }}
-        </div>
-      </div>
+      <house-deal-list />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+import HouseDealList from "@/components/house/HouseDealList.vue";
 export default {
+  components: {
+    HouseDealList,
+  },
   computed: {
     ...mapState("houseStore", [
       "houseInfo1",
-      "housedealList",
       "transportationList",
       "cultureList",
       "educationList",
       "environmentList",
       "lifeList",
-      "safetyList"
-    ])
+      "safetyList",
+    ]),
   },
   watch: {
     houseInfo1(val) {
       console.log("houseInfo updated!!");
       this.searchHouseDealByAptCode(val.aptCode);
       this.searchStatusByAptCode(val.aptCode);
-    }
+    },
   },
+
   methods: {
     ...mapMutations("houseStore", ["CLEAR_HOUSEDEAL_LIST"]),
     ...mapActions("houseStore", [
       "searchHouseDealByAptCode",
-      "searchStatusByAptCode"
+      "searchStatusByAptCode",
     ]),
     closeDetail() {
       this.CLEAR_HOUSEDEAL_LIST();
       this.$emit("closeDetail");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -62,5 +62,18 @@ export default {
 .house-detail-container {
   flex-grow: 2;
   transition: all 500ms ease 100ms;
+  position: relative;
+}
+.house-detail-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+.x-box {
+  position: absolute;
+  top: 2px;
+  right: 2px;
 }
 </style>

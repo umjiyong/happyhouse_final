@@ -1,6 +1,5 @@
 <template>
   <div class="view-container">
-    HouseView
     <div class="fixed">
       <house-tabs
         :tab-name="[
@@ -24,7 +23,7 @@
 import HouseNavBar from "@/components/house/layout/HouseNavBar.vue";
 import HouseTabs from "@/components/house/HouseTabs.vue";
 export default {
-  components: { HouseNavBar, HouseTabs }
+  components: { HouseNavBar, HouseTabs },
 };
 </script>
 

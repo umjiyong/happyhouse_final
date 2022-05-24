@@ -1,7 +1,6 @@
 <template>
   <div class="view-container">
-    HouseView
-    <house-search-bar />
+    <house-search-bar @closeDetail="closeDetail" />
     <div class="flex-row">
       <house-list @openDetail="openDetail" v-show="!detailOn" />
       <house-detail @closeDetail="closeDetail" v-show="detailOn" />
@@ -20,7 +19,7 @@ import HouseDetail from "@/components/house/HouseDetail.vue";
 export default {
   data() {
     return {
-      detailOn: false
+      detailOn: false,
     };
   },
   components: { HouseSearchBar, HouseList, KakaoMap, HouseDetail },
@@ -30,8 +29,8 @@ export default {
     },
     closeDetail() {
       this.detailOn = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

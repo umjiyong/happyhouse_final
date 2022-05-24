@@ -3,7 +3,7 @@
     <div :class="{ 'nav-open': NavbarStore.showNavbar }">
       <main-navbar />
       <div class="main main-raised">
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <div class="fill-box"></div>
         <router-view />
       </div>
       <main-footer />
@@ -44,6 +44,21 @@ export default {
   background: rgb(255, 255, 255);
 }
 .bg-primary {
-  background-color: rgba(191, 59, 59);
+  background-color: rgb(191, 59, 59);
+}
+.bg-sub {
+  background-color: rgb(70, 70, 70);
+}
+.bold-display {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.hover-pointer {
+  cursor: pointer;
+}
+
+.fill-box {
+  width: 100%;
+  height: 180px;
 }
 </style>
