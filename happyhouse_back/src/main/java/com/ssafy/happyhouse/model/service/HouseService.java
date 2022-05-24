@@ -6,6 +6,7 @@ import java.util.Map;
 import com.ssafy.happyhouse.model.dto.AreaCode;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
+import com.ssafy.happyhouse.model.dto.Status;
 
 public interface HouseService {
 
@@ -13,6 +14,10 @@ public interface HouseService {
 	
 	public List<HouseInfo> searchHouseInfoByArea(String gugunCode, String dongCode);
 	public List<HouseInfo> searchHouseInfoByName(String word);
+	
+	// status 
+	
+	public Map<String,List<Status>> searchAllStatus(String aptCode);
 	
 	// deal
 	public List<HouseDeal> searchHouseDealByAptCode(String aptCode);
