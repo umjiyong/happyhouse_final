@@ -1,12 +1,7 @@
 <template>
   <div>
     <div class="wrapper" v-if="(modalOn == true) & (joinusMode == false)">
-      <div class="section page-header header-filter" :style="headerStyle">
-        <div class="container">
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
-            >
+      
               <div class="modal-bg">
                 <div class="modal-container">
                   <login-card header-color="red">
@@ -52,19 +47,11 @@
                   </login-card>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            
     </div>
 
     <div class="wrapper" v-else-if="(modalOn == true) & (joinusMode == true)">
-      <div class="section page-header header-filter" :style="headerStyle">
-        <div class="container">
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
-            >
+      
               <div class="modal-bg">
                 <div class="modal-container">
                   <login-card header-color="red">
@@ -130,10 +117,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 

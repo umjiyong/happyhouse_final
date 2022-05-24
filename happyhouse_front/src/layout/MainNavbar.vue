@@ -72,11 +72,13 @@
                   <p>아파트</p>
                 </router-link>
               </md-list-item>
+              <md-list-item>
               <router-link :to="{ name: 'userView' }"
               >
                 <i class="material-icons">login</i>
                 <p>로그인</p>
               </router-link>
+              </md-list-item>
 
               <md-list-item  @click="logout" v-if="isLogin == true">
                 <i class="material-icons">login</i>
@@ -209,7 +211,7 @@ export default {
     },
     colorOnScroll: {
       type: Number,
-      default: 400
+      default: 1
     }
   },
   data() {

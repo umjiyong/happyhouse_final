@@ -1,15 +1,27 @@
 <template>
   <div id="material-kit">
     <div :class="{ 'nav-open': NavbarStore.showNavbar }">
+      <main-navbar/>
       <div class="main main-raised">
         <router-view />
+        
       </div>
+      <main-footer/>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import MainNavbar from "./layout/MainNavbar.vue";
+import MainFooter from "./layout/MainFooter.vue";
+
+
+
+export default {
+  
+components: { MainNavbar, MainFooter},
+
+};
 </script>
 
 <style>
