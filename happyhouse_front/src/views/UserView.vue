@@ -1,122 +1,113 @@
 <template>
   <div>
     <div class="wrapper" v-if="(modalOn == true) & (joinusMode == false)">
-      
-              <div class="modal-bg">
-                <div class="modal-container">
-                  <login-card header-color="red">
-                    <h4 slot="title" class="card-title">Log in</h4>
-                    <p slot="description" class="description">
-                      Or Be Classical
-                    </p>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>man</md-icon>
-                      <label>아이디 입력...</label>
-                      <md-input v-model="user.id" type="id"></md-input>
-                    </md-field>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>lock_outline</md-icon>
-                      <label>비밀번호 입력...</label>
-                      <md-input
-                        v-model="user.password"
-                        @keyup.enter="confirm"
-                        type="password"
-                      ></md-input>
-                    </md-field>
-                    <md-button
-                      slot="footer"
-                      @click="confirm"
-                      class="md-simple md-success md-lg"
-                    >
-                      Log in
-                    </md-button>
-                    <md-button
-                      slot="footer"
-                      @click="swapJoinusMode"
-                      class="md-simple md-success md-lg"
-                    >
-                      Join us
-                    </md-button>
-                    <md-button
-                      slot="footer"
-                      @click="logout"
-                      class="md-simple md-success md-lg"
-                    >
-                      창 닫기
-                    </md-button>
-                  </login-card>
-                </div>
-              </div>
-            
+      <div class="modal-bg">
+        <div class="modal-container">
+          <login-card header-color="red">
+            <h4 slot="title" class="card-title">Log in</h4>
+            <p slot="description" class="description">
+              Or Be Classical
+            </p>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>man</md-icon>
+              <label>아이디 입력...</label>
+              <md-input v-model="user.id" type="id"></md-input>
+            </md-field>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>lock_outline</md-icon>
+              <label>비밀번호 입력...</label>
+              <md-input
+                v-model="user.password"
+                @keyup.enter="confirm"
+                type="password"
+              ></md-input>
+            </md-field>
+            <md-button
+              slot="footer"
+              @click="confirm"
+              class="md-simple md-success md-lg"
+            >
+              Log in
+            </md-button>
+            <md-button
+              slot="footer"
+              @click="swapJoinusMode"
+              class="md-simple md-success md-lg"
+            >
+              Join us
+            </md-button>
+            <md-button
+              slot="footer"
+              @click="closeModal"
+              class="md-simple md-success md-lg"
+            >
+              창 닫기
+            </md-button>
+          </login-card>
+        </div>
+      </div>
     </div>
 
     <div class="wrapper" v-else-if="(modalOn == true) & (joinusMode == true)">
-      
-              <div class="modal-bg">
-                <div class="modal-container">
-                  <login-card header-color="red">
-                    <h4 slot="title" class="card-title">
-                      Welcome to Happyhouse!
-                    </h4>
-                    <p slot="description" class="description">
-                      Or Be Classical
-                    </p>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>man</md-icon>
-                      <label>아이디 입력...</label>
-                      <md-input v-model="user.id" type="id"></md-input>
-                    </md-field>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>lock_outline</md-icon>
-                      <label>비밀번호 입력...</label>
-                      <md-input
-                        v-model="user.password"
-                        type="password"
-                      ></md-input>
-                    </md-field>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>lock_outline</md-icon>
-                      <label>비밀번호 확인...</label>
-                      <md-input
-                        v-model="userpwdConfirm"
-                        type="password"
-                      ></md-input>
-                    </md-field>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>man</md-icon>
-                      <label>이름 입력...</label>
-                      <md-input v-model="user.name" type="text"></md-input>
-                    </md-field>
-                    <md-field class="md-form-group" slot="inputs">
-                      <md-icon>email</md-icon>
-                      <label>이메일 입력...</label>
-                      <md-input v-model="user.email" type="email"></md-input>
-                    </md-field>
-                    <md-button
-                      slot="footer"
-                      @click="register"
-                      class="md-simple md-success md-lg"
-                    >
-                      가입하기
-                    </md-button>
-                    <md-button
-                      slot="footer"
-                      @click="swapJoinusMode"
-                      class="md-simple md-success md-lg"
-                    >
-                      로그인 창으로
-                    </md-button>
-                    <md-button
-                      slot="footer"
-                      @click="swapModalOn"
-                      class="md-simple md-success md-lg"
-                    >
-                      창 닫기
-                    </md-button>
-                  </login-card>
-                </div>
-              </div>
-            </div>
+      <div class="modal-bg">
+        <div class="modal-container">
+          <login-card header-color="red">
+            <h4 slot="title" class="card-title">
+              Welcome to Happyhouse!
+            </h4>
+            <p slot="description" class="description">
+              Or Be Classical
+            </p>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>man</md-icon>
+              <label>아이디 입력...</label>
+              <md-input v-model="user.id" type="id"></md-input>
+            </md-field>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>lock_outline</md-icon>
+              <label>비밀번호 입력...</label>
+              <md-input v-model="user.password" type="password"></md-input>
+            </md-field>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>lock_outline</md-icon>
+              <label>비밀번호 확인...</label>
+              <md-input v-model="userpwdConfirm" type="password"></md-input>
+            </md-field>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>man</md-icon>
+              <label>이름 입력...</label>
+              <md-input v-model="user.name" type="text"></md-input>
+            </md-field>
+            <md-field class="md-form-group" slot="inputs">
+              <md-icon>email</md-icon>
+              <label>이메일 입력...</label>
+              <md-input v-model="user.email" type="email"></md-input>
+            </md-field>
+            <md-button
+              slot="footer"
+              @click="register"
+              class="md-simple md-success md-lg"
+            >
+              가입하기
+            </md-button>
+            <md-button
+              slot="footer"
+              @click="swapJoinusMode"
+              class="md-simple md-success md-lg"
+            >
+              로그인 창으로
+            </md-button>
+            <md-button
+              slot="footer"
+              @click="closeModal"
+              class="md-simple md-success md-lg"
+            >
+              창 닫기
+            </md-button>
+          </login-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -168,13 +159,17 @@ export default {
       "logoutMember"
     ]),
     async confirm() {
-      await this.userConfirm(this.user);
-      let token = sessionStorage.getItem("access-token");
-      console.log(this.user);
-      console.log(this.isLogin);
-      if (this.isLogin) {
-        await this.getUserInfo(token);
-        this.$router.go("this.$router.currentRoute");
+      if (this.user.id != null && this.user.password != null) {
+        await this.userConfirm(this.user);
+        let token = sessionStorage.getItem("access-token");
+        console.log(this.user);
+        console.log(this.isLogin);
+        if (this.isLogin) {
+          await this.getUserInfo(token);
+          this.$router.push({ name: "main" });
+        }
+      } else {
+        alert("빈 칸이 있나 확인해주세요");
       }
     },
     logout() {
@@ -190,15 +185,24 @@ export default {
       }
     },
     async register() {
-      console.log("회원가입 버튼 눌렸음");
-      this.pwCheck();
-      if (this.pwMatches) {
-        console.log(this.user);
-        await this.registerMember(this.user);
-        if (this.isSignupError == false) {
-          alert("가입을 환영합니다!");
+      if (
+        this.user.id != null &&
+        this.user.password != null &&
+        this.userpwdConfirm != null &&
+        this.user.name != null &&
+        this.user.email != null
+      ) {
+        this.pwCheck();
+        if (this.pwMatches) {
+          console.log(this.user);
+          await this.registerMember(this.user);
+          if (this.isSignupError == false) {
+            alert("가입을 환영합니다!");
+          }
+          this.$router.push({ name: "main" });
         }
-        this.movePage();
+      } else {
+        alert("빈 칸이 있나 확인해주세요");
       }
     },
     swapJoinusMode() {

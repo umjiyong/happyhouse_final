@@ -17,19 +17,19 @@
 import { mapState, mapMutations } from "vuex";
 export default {
   computed: {
-    ...mapState("houseStore", ["houseList"]),
+    ...mapState("houseStore", ["houseList"])
   },
   methods: {
     ...mapMutations("houseStore", ["CLEAR_HOUSE_LIST", "SET_HOUSE_INFO1"]),
     openDetail(houseInfo) {
       this.SET_HOUSE_INFO1(houseInfo);
       this.$emit("openDetail");
-    },
+    }
   },
   created() {
     this.CLEAR_HOUSE_LIST();
     console.log("create");
-  },
+  }
 };
 </script>
 

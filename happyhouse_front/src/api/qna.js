@@ -52,5 +52,5 @@ export {
   removeQuestion,
   registReply,
   updateReply,
-  removeReply,
+  removeReply
 };

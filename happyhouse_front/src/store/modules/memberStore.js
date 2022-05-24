@@ -94,6 +94,7 @@ const memberStore = {
             commit("SET_IS_LOGIN", false);
             commit("SET_IS_LOGIN_ERROR", false);
             commit("SET_USER_INFO", null);
+            commit("RESET_USER_INFO");
           } else {
             console.log("response data fail");
           }

@@ -48,15 +48,15 @@ export default {
         content: "",
         category: "",
         userId: "testman",
-        regTime: "",
-      },
+        regTime: ""
+      }
     };
   },
   methods: {
     ...mapActions("qnaStore", [
       "getCategoryList",
       "registQuestion",
-      "getQuestionList",
+      "getQuestionList"
     ]),
     registNewQuestion() {
       console.log("new Question!! : " + JSON.stringify(this.newQuestion));
@@ -66,14 +66,14 @@ export default {
         }, 500);
         this.$router.push({ name: "qnaList" });
       });
-    },
+    }
   },
   computed: {
-    ...mapState("qnaStore", ["categoryList"]),
+    ...mapState("qnaStore", ["categoryList"])
   },
   created() {
     this.getCategoryList();
-  },
+  }
 };
 </script>
 

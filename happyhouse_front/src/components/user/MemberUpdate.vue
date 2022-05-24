@@ -66,14 +66,14 @@ export default {
   name: "MemberUpdate",
   data() {
     return {
-      user: {},
+      user: {}
     };
   },
   created() {
     this.user = this.userInfo;
   },
   computed: {
-    ...mapState(memberStore, ["userInfo"]),
+    ...mapState(memberStore, ["userInfo"])
   },
   methods: {
     ...mapActions(memberStore, ["modifyMember"]),
@@ -84,8 +84,8 @@ export default {
     },
     mvMyPage() {
       this.$router.push({ name: "home" });
-    },
-  },
+    }
+  }
 };
 </script>
 

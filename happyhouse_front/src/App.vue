@@ -1,12 +1,11 @@
 <template>
   <div id="material-kit">
     <div :class="{ 'nav-open': NavbarStore.showNavbar }">
-      <main-navbar/>
+      <main-navbar />
       <div class="main main-raised">
         <router-view />
-        
       </div>
-      <main-footer/>
+      <main-footer />
     </div>
   </div>
 </template>
@@ -15,12 +14,8 @@
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
-
-
 export default {
-  
-components: { MainNavbar, MainFooter},
-
+  components: { MainNavbar, MainFooter }
 };
 </script>
 

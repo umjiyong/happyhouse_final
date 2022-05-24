@@ -11,7 +11,7 @@
 import HouseNavBar from "@/components/house/layout/HouseNavBar.vue";
 import HouseTabs from "@/components/house/HouseTabs.vue";
 export default {
-  components: { HouseNavBar, HouseTabs },
+  components: { HouseNavBar, HouseTabs }
 };
 </script>
 

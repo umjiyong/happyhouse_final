@@ -20,15 +20,15 @@ import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      word: "",
+      word: ""
     };
   },
   methods: {
     ...mapActions("qnaStore", ["getQuestionList", "searchQuestionByTitle"]),
-    ...mapMutations("qnaStore", ["CLEAR_QUESTION", "CLEAR_REPLY_LIST"]),
+    ...mapMutations("qnaStore", ["CLEAR_QUESTION", "CLEAR_REPLY_LIST"])
   },
   computed: {
-    ...mapState("qnaStore", ["questionList"]),
+    ...mapState("qnaStore", ["questionList"])
   },
   created() {
     this.getQuestionList();
@@ -37,7 +37,7 @@ export default {
     console.log("clear qna....");
     this.CLEAR_QUESTION();
     this.CLEAR_REPLY_LIST();
-  },
+  }
 };
 </script>
 
