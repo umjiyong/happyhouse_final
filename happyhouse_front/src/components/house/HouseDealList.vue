@@ -1,33 +1,35 @@
 <template>
   <div class="housedeal-list-container">
     <p class="bold-display">거래내역 {{ housedealList.length }}</p>
-    <table class="housedeal-table">
-      <thead class="md-table-head">
-        <th width="30%">날짜</th>
-        <!--{{dealYear}}년 {{dealMonth}}월 {{dealDay}}일-->
-        <th width="30%">거래금액</th>
-        <!--{{dealAmout}}만원-->
-        <th width="15%">층수</th>
-        <!--{{floor}}층-->
-        <th width="25%">면적</th>
-        <!--{{area}}m<sup>2</sup>-->
-      </thead>
-      <tbody v-if="housedealList.length">
-        <tr v-for="housedeal in housedealList" :key="housedeal.no">
-          <td>
-            {{ housedeal.dealYear }}년 {{ housedeal.dealMonth }}월
-            {{ housedeal.dealDay }}일
-          </td>
-          <td>{{ housedeal.dealAmount | changeUnit }}</td>
-          <td>{{ housedeal.floor }}층</td>
-          <td>
-            {{ housedeal.area }}m<sup>2</sup> ({{
-              parseInt(housedeal.area / 3.3)
-            }}평)
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="housedeal-list-scroll-box">
+      <table class="housedeal-table">
+        <thead class="md-table-head">
+          <th width="30%">날짜</th>
+          <!--{{dealYear}}년 {{dealMonth}}월 {{dealDay}}일-->
+          <th width="30%">거래금액</th>
+          <!--{{dealAmout}}만원-->
+          <th width="15%">층수</th>
+          <!--{{floor}}층-->
+          <th width="25%">면적</th>
+          <!--{{area}}m<sup>2</sup>-->
+        </thead>
+        <tbody v-if="housedealList.length">
+          <tr v-for="housedeal in housedealList" :key="housedeal.no">
+            <td>
+              {{ housedeal.dealYear }}년 {{ housedeal.dealMonth }}월
+              {{ housedeal.dealDay }}일
+            </td>
+            <td>{{ housedeal.dealAmount | changeUnit }}</td>
+            <td>{{ housedeal.floor }}층</td>
+            <td>
+              {{ housedeal.area }}m<sup>2</sup> ({{
+                parseInt(housedeal.area / 3.3)
+              }}평)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -76,5 +78,9 @@ export default {
 }
 .housedeal-table tr:nth-child(even) {
   background-color: rgba(100, 100, 100, 0.2);
+}
+.housedeal-list-scroll-box {
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 </style>

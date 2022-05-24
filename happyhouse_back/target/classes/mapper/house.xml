@@ -126,7 +126,6 @@
 		FROM housedeal
 		WHERE aptCode = #{aptCode}
 		<include refid="orderbydate_desc" />
-		limit 1, 10;
 	</select>
 
 	<select id="searchHouseDealByDong" parameterType="map"

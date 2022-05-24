@@ -1,55 +1,57 @@
 <template>
-  <div class="bg-sub">
-    <div class="flex-row gap-item search-box">
-      <select v-model="key">
-        <option value="searchbyarea" selected>지역으로 찾기</option>
-        <option value="searchbyname">이름으로 찾기</option>
-      </select>
-      <div>
-        <div v-if="key === 'searchbyname'">
-          <input type="text" v-model="word" placeholder="아파트 이름 입력" />
-        </div>
-        <div class="flex-row gap-item" v-if="key === 'searchbyarea'">
-          <div>
-            <label for="sido">시도</label>
-            <select v-model="sido" name="sido" id="sido" @change="changeSido">
-              <option
-                v-for="sido in sidos"
-                :value="sido.value"
-                :key="sido.value"
-              >
-                {{ sido.text }}
-              </option>
-            </select>
+  <div class="flex-row gap-item search-container bg-sub">
+    <div class="flex-row search-box">
+      <div class="flex-row gap-item input-box">
+        <select v-model="key">
+          <option value="searchbyarea" selected>지역으로 찾기</option>
+          <option value="searchbyname">이름으로 찾기</option>
+        </select>
+        <div>
+          <div v-if="key === 'searchbyname'">
+            <input type="text" v-model="word" placeholder="아파트 이름 입력" />
           </div>
-          <div>
-            <label for="gugun">구군</label>
-            <select
-              v-model="gugun"
-              name="gugun"
-              id="gugun"
-              @change="changeGugun"
-            >
-              <option
-                v-for="gugun in guguns"
-                :value="gugun.value"
-                :key="gugun.value"
+          <div class="flex-row gap-item" v-if="key === 'searchbyarea'">
+            <div>
+              <label for="sido">시도</label>
+              <select v-model="sido" name="sido" id="sido" @change="changeSido">
+                <option
+                  v-for="sido in sidos"
+                  :value="sido.value"
+                  :key="sido.value"
+                >
+                  {{ sido.text }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="gugun">구군</label>
+              <select
+                v-model="gugun"
+                name="gugun"
+                id="gugun"
+                @change="changeGugun"
               >
-                {{ gugun.text }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <label for="dong">동</label>
-            <select v-model="dong" name="dong" id="dong" @change="changeDong">
-              <option
-                v-for="dong in dongs"
-                :value="dong.value"
-                :key="dong.value"
-              >
-                {{ dong.text }}
-              </option>
-            </select>
+                <option
+                  v-for="gugun in guguns"
+                  :value="gugun.value"
+                  :key="gugun.value"
+                >
+                  {{ gugun.text }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="dong">동</label>
+              <select v-model="dong" name="dong" id="dong" @change="changeDong">
+                <option
+                  v-for="dong in dongs"
+                  :value="dong.value"
+                  :key="dong.value"
+                >
+                  {{ dong.text }}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -164,17 +166,24 @@ export default {
 </script>
 
 <style scoped>
-.search-box {
+.search-container {
   width: 100%;
   height: 100%;
   align-items: center;
   padding: 1rem;
   color: white;
 }
-.search-box input,
-.search-box select {
+.search-box {
+}
+.input-box {
+  background-color: rgba(5, 5, 5, 0.959);
+  width: auto;
+  padding: 0.2rem 0.4rem;
+}
+.input-box input,
+.input-box select {
   padding: 0.2rem;
-  margin-left: 0.2rem;
+  margin-left: 0.3rem;
   font-size: 1rem;
 }
 .search-btn {

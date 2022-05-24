@@ -15,7 +15,7 @@ export default {
     return {
       markers: [],
       infowindow: null,
-      customOverlay: null
+      customOverlay: null,
     };
   },
   mounted() {
@@ -38,7 +38,7 @@ export default {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 6 // 초기 확대 레벨(클수록 넓은 시야)
+        level: 6, // 초기 확대 레벨(클수록 넓은 시야)
       };
 
       //지도 객체를 등록합니다.
@@ -48,9 +48,9 @@ export default {
     // 마커 표시
     displayMarker(placeList, kind) {
       if (this.markers.length > 0) {
-        this.markers.forEach(marker => marker.setMap(null));
+        this.markers.forEach((marker) => marker.setMap(null));
       }
-      const positions = placeList.map(place => {
+      const positions = placeList.map((place) => {
         // plcaeList에 lat, long이 있어야 한다.
         return new kakao.maps.LatLng(place.lat, place.lng);
       });
@@ -78,7 +78,7 @@ export default {
           const marker = new kakao.maps.Marker({
             map: this.map,
             position,
-            image: markerImage
+            image: markerImage,
           });
 
           // 마커 클릭 시 동작
@@ -106,13 +106,13 @@ export default {
       	<div class="boxtitle">${place.aptName}</div>
       	<div class="first"></div>
         <div>
+      			<span class="count">${place.dongName} ${place.jibun}</span>
+        </div>
+        <div>
       			<span class="title">건축년도</span>
       			<span class="count">${place.buildYear}</span>
         </div>
-        <div>
-      			<span class="title">주소</span>
-      			<span class="count">${place.dongName} ${place.jibun}</span>
-        </div>
+        <div id="detail-btn" class="hover-pointer"">상세정보 ▶</div>
       </div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
       const mLan = marker.getPosition().getLat() + 0.00033;
       const mLng = marker.getPosition().getLng();
@@ -120,19 +120,28 @@ export default {
       // const iwPosition = new kakao.maps.LatLng(place.lat, place.lng); //인포윈도우 표시 위치입니다
       const iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
-      this.infowindow = new kakao.maps.InfoWindow({
+      const iw = new kakao.maps.InfoWindow({
         map: this.map, // 인포윈도우가 표시될 지도
         position: iwPosition,
         content: iwContent,
-        removable: iwRemoveable
+        removable: iwRemoveable,
       });
-      this.infowindow.addListener();
+      this.infowindow = iw;
+      // this.infowindow.addListener();
+      // iw.addListener("domready", () => {
+      //   console.log("heloo");
+      // });
 
       this.map.setCenter(iwPosition);
-    }
+    },
+    // 상세 페이지 열기
+    openHouseDetail() {
+      console.log("open detail!!");
+      this.$emit("openDetail");
+    },
   },
   computed: {
-    ...mapState("houseStore", ["houseList"])
+    ...mapState("houseStore", ["houseList"]),
   },
   watch: {
     // houseList 변화 시 마커 표시 동작
@@ -143,8 +152,8 @@ export default {
       // });
       // lat, lng가 포함된 객체 리스트를 전달하고, 표시할 마커 타입을 전달한다.
       this.displayMarker(houses, "house");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -158,9 +167,10 @@ export default {
   left: 30%;
 }
 .overlaybox {
-  width: auto;
-  height: auto;
+  width: 150px;
+  height: 150px;
   padding: 15px;
+  padding-bottom: 20px;
   margin-bottom: 10px;
 }
 </style>

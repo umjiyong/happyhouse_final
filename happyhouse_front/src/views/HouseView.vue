@@ -15,15 +15,13 @@
       />
     </div>
     <router-view></router-view>
-    <house-nav-bar />
   </div>
 </template>
 
 <script>
-import HouseNavBar from "@/components/house/layout/HouseNavBar.vue";
 import HouseTabs from "@/components/house/HouseTabs.vue";
 export default {
-  components: { HouseNavBar, HouseTabs },
+  components: { HouseTabs },
 };
 </script>
 

@@ -44,6 +44,9 @@ export default {
 }
 .house-list-container {
   flex-grow: 1;
+  max-height: 80vh;
+  overflow-y: scroll;
+  border-bottom: 2px solid rgba(100, 100, 100, 0.2);
 }
 .house-list-box {
   width: 100%;

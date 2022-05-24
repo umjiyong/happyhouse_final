@@ -63,6 +63,8 @@ export default {
   flex-grow: 2;
   transition: all 500ms ease 100ms;
   position: relative;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 .house-detail-box {
   width: 100%;
