@@ -2,11 +2,16 @@
   <md-toolbar
     id="toolbar"
     md-elevation="0"
-    class="md-transparent md-absolute justify-start"
+    class="md-absolute justify-start bg-happyhouse"
     :class="extraNavClasses"
     :color-on-scroll="colorOnScroll"
   >
-    <div class="md-toolbar-column md-collapse-lateral   align-left">
+    <div class="md-toolbar-column md-collapse-lateral align-left">
+      <div class="md-toolbar-section-start">
+        <router-link :to="{ name: 'main' }">
+          <h3 class="md-title"></h3>
+        </router-link>
+      </div>
       <div class="md-toolbar-section-start">
         <router-link :to="{ name: 'main' }">
           <h3 class="md-title">Happy House</h3>
@@ -25,9 +30,6 @@
 
         <div class="md-collapse">
           <div class="md-collapse-wrapper">
-            <mobile-menu nav-mobile-section-start="false">
-              <!-- Here you can add your items from the section-start of your toolbar -->
-            </mobile-menu>
             <md-list>
               <li class="md-list-item" v-if="!showDownload">
                 <a
@@ -96,7 +98,7 @@
 
               <md-list-item @click="logout" v-if="isLogin == true">
                 <i class="material-icons">login</i>
-                <p>로그 아웃</p>
+                <p class="margin-free">로그아웃</p>
               </md-list-item>
 
               <md-list-item
@@ -149,16 +151,6 @@
               </li>
 
               <md-list-item
-                href="https://twitter.com/CreativeTim"
-                target="_blank"
-              >
-                <i class="fab fa-twitter"></i>
-                <p class="hidden-lg">Twitter</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow us on Twitter</md-tooltip
-                >
-              </md-list-item>
-              <md-list-item
                 href="https://www.facebook.com/CreativeTim"
                 target="_blank"
               >
@@ -200,13 +192,10 @@ function resizeThrottler(actualResizeHandler) {
   }
 }
 import { mapActions, mapState } from "vuex";
-import MobileMenu from "@/layout/MobileMenu";
 
 const memberStore = "memberStore";
 export default {
-  components: {
-    MobileMenu,
-  },
+  components: {},
   props: {
     type: {
       type: String,
@@ -305,5 +294,12 @@ export default {
 <style scoped>
 .justify-start {
   justify-content: flex-start;
+}
+.bg-happyhouse {
+  background-color: rgba(191, 59, 59, 1) !important;
+}
+.margin-free {
+  margin: 0;
+  margin-left: 5px;
 }
 </style>
