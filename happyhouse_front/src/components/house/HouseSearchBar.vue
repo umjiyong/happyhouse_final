@@ -1,95 +1,69 @@
 <template>
-  <div>
-    <!-- <b-col class="sm-3">
-      <b-form-input
-        v-model.trim="dongCode"
-        placeholder="동코드 입력...(예 : 11110)"
-        @keypress.enter="sendKeyword"
-      ></b-form-input>
-    </b-col>
-    <b-col class="sm-3" align="left">
-      <b-button variant="outline-primary" @click="sendKeyword">검색</b-button>
-    </b-col>
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="sidoCode"
-        :options="sidos"
-        @change="gugunList"
-      ></b-form-select>
-    </b-col>
-    <b-col class="sm-3">
-      <b-form-select
-        v-model="gugunCode"
-        :options="guguns"
-        @change="searchApt"
-      ></b-form-select>
-    </b-col> -->
-
-    <div>{{ sidoCode }}</div>
-    <div class="md-layout md-gutter">
-      <div class="md-layout-item">
-        <md-field>
-          <label for="movie">Movie</label>
-          <select v-model="sidoCode" name="movie" id="movie">
-            <option
-              v-for="sido in sidos"
-              :value="sido.value"
-              :key="sido.value"
-              >{{ sido.text }}</option
-            >
-          </select>
-        </md-field>
+  <div class="flex-row gap-item search-container bg-sub">
+    <div class="flex-row search-box">
+      <div class="flex-row gap-item input-box">
+        <select v-model="key">
+          <option value="searchbyarea" selected>지역으로 찾기</option>
+          <option value="searchbyname">이름으로 찾기</option>
+        </select>
+        <div>
+          <div v-if="key === 'searchbyname'">
+            <input type="text" v-model="word" placeholder="아파트 이름 입력" />
+          </div>
+          <div class="flex-row gap-item" v-if="key === 'searchbyarea'">
+            <div>
+              <label for="sido">시도</label>
+              <select v-model="sido" name="sido" id="sido" @change="changeSido">
+                <option
+                  v-for="sido in sidos"
+                  :value="sido.value"
+                  :key="sido.value"
+                >
+                  {{ sido.text }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="gugun">구군</label>
+              <select
+                v-model="gugun"
+                name="gugun"
+                id="gugun"
+                @change="changeGugun"
+              >
+                <option
+                  v-for="gugun in guguns"
+                  :value="gugun.value"
+                  :key="gugun.value"
+                >
+                  {{ gugun.text }}
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="dong">동</label>
+              <select v-model="dong" name="dong" id="dong" @change="changeDong">
+                <option
+                  v-for="dong in dongs"
+                  :value="dong.value"
+                  :key="dong.value"
+                >
+                  {{ dong.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- <div class="md-layout-item">
-        <md-field>
-          <md-select
-            v-model="country"
-            name="country"
-            id="country"
-            placeholder="Country"
-          >
-            <md-option value="australia">Australia</md-option>
-            <md-option value="brazil">Brazil</md-option>
-            <md-option value="japan">Japan</md-option>
-            <md-option value="united-states">United States</md-option>
-          </md-select>
-        </md-field>
-      </div> -->
-
-      <!-- <div class="md-layout-item">
-        <md-field>
-          <label for="font">Font</label>
-          <md-select v-model="font" name="font" id="font">
-            <md-option value="arial">Arial</md-option>
-            <md-option value="calibri">Calibri</md-option>
-            <md-option value="cambria">Cambria</md-option>
-            <md-option value="comic-sans">Comic Sans</md-option>
-            <md-option value="consolas">Consolas</md-option>
-            <md-option value="courier">Courier</md-option>
-            <md-option value="droid-sans">Droid Sans</md-option>
-            <md-option value="georgia">Georgia</md-option>
-            <md-option value="helvetica">Helvetica</md-option>
-            <md-option value="impact">Impact</md-option>
-            <md-option value="roboto">Roboto</md-option>
-            <md-option value="segoe-ui">Segoe UI</md-option>
-            <md-option value="times-new-roman">Times New Roman</md-option>
-            <md-option value="ubuntu">Ubuntu</md-option>
-            <md-option value="verdana">Verdana</md-option>
-          </md-select>
-        </md-field>
-      </div> -->
+      <span class="hover-pointer search-btn" @click="doSearchHouseList">
+        <md-icon>search</md-icon>
+      </span>
     </div>
-
-    <md-button class="md-primary md-raised" @click="movie = 'pulp-fiction'"
-      >Set Pulp Fiction</md-button
-    >
   </div>
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import { areaList } from "@/api/house.js";
 
 /*
   namespaced: true를 사용했기 때문에 선언해줍니다.
@@ -107,30 +81,74 @@ export default {
   name: "HouseSearchBar",
   data() {
     return {
-      sidoCode: "default",
-      gugunCode: null,
-      sidos: [{ value: null, text: "선택하세요" }],
-      guguns: [{ value: null, text: "선택하세요" }],
-      dongs: [{ value: "all", text: "전체동" }]
+      sido: "",
+      gugun: "",
+      dong: "",
+      key: "searchbyarea",
+      word: "",
     };
   },
   computed: {
-    // ...mapState(houseStore, ["sidos", "guguns", "houses"]),
-    // sidos() {
-    //   return this.$store.state.sidos;
-    // },
+    ...mapState(houseStore, [
+      "sidos",
+      "guguns",
+      "dongs",
+      "sidoCode",
+      "gugunCode",
+      "dongCode",
+    ]),
   },
   created() {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
+    this.CLEAR_GUGUN_LIST();
+    this.CLEAR_DONG_LIST();
     // this.$store.dispatch("getArea");
-    console.log("GETAREA before");
-    this.getArea({ areaUnit: "sido", areaName: "" });
+    console.log("before getArea");
+    this.getArea({ areaUnit: "sido", areaCode: "" });
   },
   methods: {
-    ...mapActions(houseStore, ["getArea"]),
-    ...mapMutations(houseStore, ["CLEAR_SIDO_LIST", "CLEAR_GUGUN_LIST"])
+    ...mapActions(houseStore, ["getArea", "searchHouseList"]),
+    ...mapMutations(houseStore, [
+      "CLEAR_SIDO_LIST",
+      "CLEAR_GUGUN_LIST",
+      "CLEAR_DONG_LIST",
+      "CLEAR_SIDOCODE",
+      "CLEAR_GUGUNCODE",
+      "CLEAR_DONGCODE",
+
+      "SET_SIDOCODE",
+      "SET_GUGUNCODE",
+      "SET_DONGCODE",
+    ]),
+    changeSido() {
+      this.CLEAR_GUGUN_LIST();
+      this.CLEAR_DONG_LIST();
+      this.CLEAR_GUGUNCODE();
+      this.CLEAR_DONGCODE();
+      this.SET_SIDOCODE(this.sido);
+      this.getArea({ areaUnit: "gugun", areaCode: this.sido });
+    },
+    changeGugun() {
+      this.CLEAR_DONG_LIST();
+      this.CLEAR_DONGCODE();
+      this.SET_GUGUNCODE(this.gugun);
+      this.getArea({ areaUnit: "dong", areaCode: this.gugun });
+    },
+    changeDong() {
+      this.SET_DONGCODE(this.dong);
+    },
+    doSearchHouseList() {
+      this.$emit("closeDetail");
+      this.searchHouseList({
+        key: this.key,
+        word: this.word,
+        gugunCode: this.gugunCode,
+        dongCode: this.dongCode,
+      });
+    },
+
     // // sidoList() {
     // //   this.getSido();
     // // },
@@ -143,8 +161,35 @@ export default {
     // searchApt() {
     //   if (this.gugunCode) this.getHouseList(this.gugunCode);
     // },
-  }
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+.search-container {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 1rem;
+  color: white;
+}
+.search-box {
+}
+.input-box {
+  background-color: rgba(5, 5, 5, 0.959);
+  width: auto;
+  padding: 0.2rem 0.4rem;
+}
+.input-box input,
+.input-box select {
+  padding: 0.2rem;
+  margin-left: 0.3rem;
+  font-size: 1rem;
+}
+.search-btn {
+  background: white;
+  border: 2px solid gainsboro;
+  border-radius: 0 5px 5px 0;
+  padding: 0.2rem;
+}
+</style>

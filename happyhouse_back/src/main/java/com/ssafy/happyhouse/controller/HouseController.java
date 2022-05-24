@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.happyhouse.model.dto.AreaCode;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
+import com.ssafy.happyhouse.model.dto.Status;
 import com.ssafy.happyhouse.model.service.HouseService;
 
 import io.swagger.annotations.ApiOperation;
@@ -62,6 +63,15 @@ public class HouseController {
 	public ResponseEntity<?> searchHouseDealByAptCode(@PathVariable String aptCode){
 		List<HouseDeal> houseDealList = houseService.searchHouseDealByAptCode(aptCode);
 		return new ResponseEntity<List<HouseDeal>>(houseDealList,HttpStatus.OK);
+	}
+	
+	
+	// status 별 조회
+	
+	@GetMapping("/status/{aptCode}")
+	public ResponseEntity<?> searchStatusLists(@PathVariable String aptCode){
+		Map<String,List<Status>> statusMap = houseService.searchAllStatus(aptCode);
+		return new ResponseEntity<Map<String,List<Status>>>(statusMap,HttpStatus.OK);
 	}
 	
 	/**

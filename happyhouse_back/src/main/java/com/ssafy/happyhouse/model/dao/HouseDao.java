@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ssafy.happyhouse.model.dto.AreaCode;
 import com.ssafy.happyhouse.model.dto.HouseDeal;
 import com.ssafy.happyhouse.model.dto.HouseInfo;
+import com.ssafy.happyhouse.model.dto.Status;
 
 @Repository
 public interface HouseDao {
@@ -19,6 +20,15 @@ public interface HouseDao {
 	public List<HouseInfo> searchHouseInfoByArea(String areaCodePrefix);
 	public List<HouseInfo> searchHouseInfoByName(String word);
 	
+	// status
+	
+	public Status searchAptPos(String aptCode); 
+	public List<Status> searchAllTransportation(Map<String,Double> map);
+	public List<Status> searchAllCulture(Map<String,Double> map);
+	public List<Status> searchAllEducation(Map<String,Double> map);
+	public List<Status> searchAllEnvironment(Map<String,Double> map);
+	public List<Status> searchAllLife(Map<String,Double> map);
+	public List<Status> searchAllSafety(Map<String,Double> map);	
 	
 	//deal
 	

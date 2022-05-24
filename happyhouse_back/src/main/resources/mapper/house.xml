@@ -1,147 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.ssafy.happyhouse.model.dao.HouseDao">
 
-	
+
 	<select id="searchAllSido" resultType="AreaCode">
 		SELECT *
 		FROM sidoCode
 		ORDER BY sidoCode
 	</select>
-	
-	<select id="searchAllGugun" parameterType="string" resultType="AreaCode">
+
+	<select id="searchAllGugun" parameterType="string"
+		resultType="AreaCode">
 		SELECT *
 		FROM gugunCode
-		WHERE gugunCode like CONCAT(#{areaCodePrefix},'%') 
+		WHERE gugunCode like
+		CONCAT(#{areaCodePrefix},'%')
 		ORDER BY gugunCode
 	</select>
-	
-	<select id="searchAllDong" parameterType="string" resultType="AreaCode">
+
+	<select id="searchAllDong" parameterType="string"
+		resultType="AreaCode">
 		SELECT distinct(dongCode), dongName
 		FROM houseinfo
-		WHERE dongCode like CONCAT(#{areaCodePrefix},'%')
+		WHERE
+		dongCode like CONCAT(#{areaCodePrefix},'%')
 		ORDER BY dongCode
 	</select>
-	
-	<select id="searchHouseInfoByArea" parameterType="string" resultType="HouseInfo">
+
+	<select id="searchHouseInfoByArea" parameterType="string"
+		resultType="HouseInfo">
 		SELECT *
 		FROM houseinfo
-		WHERE dongCode like CONCAT(#{areaCodePrefix},'%')
+		WHERE dongCode like
+		CONCAT(#{areaCodePrefix},'%')
 	</select>
-	<select id="searchHouseInfoByName" parameterType="string" resultType="HouseInfo">
+	<select id="searchHouseInfoByName" parameterType="string"
+		resultType="HouseInfo">
 		SELECT *
 		FROM houseinfo
-		WHERE aptName like CONCAT('%',#{word},'%')
+		WHERE aptName like
+		CONCAT('%',#{word},'%')
 	</select>
-	
+
+
+	<!-- status -->
+
+	<select id="searchAptPos" parameterType="string"
+		resultType="Status">
+		SELECT lat, lng
+		FROM houseInfo
+		WHERE aptCode = #{aptCode}
+	</select>
+
+	<select id="searchAllTransportation" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM transportation
+		WHERE abs(lat-#{aptLat}) < 0.012 and abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
+	<select id="searchAllCulture" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM culture
+		WHERE abs(lat-#{aptLat}) < 0.012 and
+		abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
+	<select id="searchAllEducation" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM education
+		WHERE abs(lat-#{aptLat}) < 0.012 and
+		abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
+	<select id="searchAllEnvironment" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM environment
+		WHERE abs(lat-#{aptLat}) < 0.012
+		and
+		abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
+	<select id="searchAllLife" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM life
+		WHERE abs(lat-#{aptLat}) < 0.012 and
+		abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
+	<select id="searchAllSafety" parameterType="map"
+		resultType="Status">
+		<![CDATA[
+		SELECT *
+		FROM safety
+		WHERE abs(lat-#{aptLat}) < 0.012 and
+		abs(lng-#{aptLng}) < 0.012;
+		]]>
+	</select>
+
 	<!-- deal -->
 
 	<sql id="orderbydate_desc">
 		ORDER BY dealYear DESC, dealMonth DESC, dealDay DESC
 	</sql>
-	
-	<select id="searchHouseDealByAptCode" parameterType="string" resultType ="HouseDeal">
-		SELECT * 
-		FROM housedeal
-		WHERE aptCode = #{aptCode}		
-		<include refid="orderbydate_desc"/>
-		limit 1, 10;
-	</select>
- 
-	<select id="searchHouseDealByDong" parameterType="map" resultType="HouseDeal">
-		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,' ',gugunName,' ',dongcode.dongName) as address, lat, lng
-		FROM (housedeal INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using (dongCode)
-		WHERE dongCode=#{dongCode}
-		<include refid="orderbydate_desc"/>
-		limit 1, 10;
-	</select>
-	
 
-    <update id="countView" parameterType="string">
-		UPDATE baseaddress SET view = view + 1
+	<select id="searchHouseDealByAptCode" parameterType="string"
+		resultType="HouseDeal">
+		SELECT *
+		FROM housedeal
+		WHERE aptCode = #{aptCode}
+		<include refid="orderbydate_desc" />
+	</select>
+
+	<select id="searchHouseDealByDong" parameterType="map"
+		resultType="HouseDeal">
+		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,'
+		',gugunName,' ',dongcode.dongName) as address, lat, lng
+		FROM (housedeal
+		INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using
+		(dongCode)
 		WHERE dongCode=#{dongCode}
-    </update>
-	
-	<select id="searchHouseDealByGugun" parameterType="map" resultType="HouseDeal">
-		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,' ',gugunName,' ',dongcode.dongName) as address, lat, lng
-		FROM (housedeal INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using (dongCode)
-		WHERE dongCode in(SELECT dongCode FROM dongcode WHERE sidoName=(SELECT sidoName FROM sidocode WHERE sidoCode=#{sidoCode}) AND gugunName=(SELECT gugunName FROM guguncode WHERE gugunCode=#{gugunCode}))
-		<include refid="orderbydate_desc"/>
+		<include refid="orderbydate_desc" />
+		limit 1, 10;
+	</select>
+
+
+	<update id="countView" parameterType="string">
+		UPDATE baseaddress SET view
+		= view + 1
+		WHERE dongCode=#{dongCode}
+	</update>
+
+	<select id="searchHouseDealByGugun" parameterType="map"
+		resultType="HouseDeal">
+		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,'
+		',gugunName,' ',dongcode.dongName) as address, lat, lng
+		FROM (housedeal
+		INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using
+		(dongCode)
+		WHERE dongCode in(SELECT dongCode FROM dongcode WHERE
+		sidoName=(SELECT sidoName FROM sidocode WHERE sidoCode=#{sidoCode})
+		AND gugunName=(SELECT gugunName FROM guguncode WHERE
+		gugunCode=#{gugunCode}))
+		<include refid="orderbydate_desc" />
 		limit 1, 10
 	</select>
-	
-	<select id="searchHouseDealByName" parameterType="map" resultType="HouseDeal">
-		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,' ',gugunName,' ',dongcode.dongName) as address, lat, lng
-		FROM (housedeal INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using (dongCode)
-		WHERE aptName like CONCAT('%',#{aptName},'%') 
-		<include refid="orderbydate_desc"/>
+
+	<select id="searchHouseDealByName" parameterType="map"
+		resultType="HouseDeal">
+		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,'
+		',gugunName,' ',dongcode.dongName) as address, lat, lng
+		FROM (housedeal
+		INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using
+		(dongCode)
+		WHERE aptName like CONCAT('%',#{aptName},'%')
+		<include refid="orderbydate_desc" />
 		limit 1, 10
 	</select>
-	
+
 	<select id="searchAll" resultType="HouseDeal">
-		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,' ',gugunName,' ',dongcode.dongName) as address
-		FROM (housedeal INNER JOIN houseInfo using (aptCode)) INNER JOIN dongcode using (dongCode)
-		<include refid="orderbydate_desc"/>
-		limit 1, 10 
+		SELECT housedeal.*, aptName, buildYear, CONCAT(sidoName,'
+		',gugunName,' ',dongcode.dongName) as address
+		FROM (housedeal INNER
+		JOIN houseInfo using (aptCode)) INNER JOIN dongcode using (dongCode)
+		<include refid="orderbydate_desc" />
+		limit 1, 10
 	</select>
-	
+
 	<select id="searchView" resultType="HouseDeal">
-		SELECT view, CONCAT(sidoName,' ',gugunName,' ',dongName) as address
+		SELECT view,
+		CONCAT(sidoName,' ',gugunName,' ',dongName) as address
 		FROM baseaddress
 	</select>
-	
+
 	<select id="searchHouseInfo"></select>
- 
- 
- 
-<!-- 
-	public List<Housedeal> searchbydong(String sidoName, String gugunName, String dongName) throws SQLException {
 
-			con = DButil.getConnection();
-			stmt = con.prepareStatement("select housedeal.*, aptName, buildYear, dongName\n"
-					+ "from housedeal\n"
-					+ "inner join houseinfo hi\n"
-					+ "using (aptCode)\n"
-					+ "where dongCode in (select dongCode from baseaddress where sidoName like ? and gugunName like ? and dongName like ?)\n"
-					+ "limit 1, 10");
-			
-			
- -->
- 
- 
- <!-- 
- 	public List<Housedeal> searchbyapt(String aptName) throws SQLException {
 
-			con = DButil.getConnection();
-			stmt = con.prepareStatement("select housedeal.*, aptName, buildYear, dongName "
-					+ "from housedeal "
-					+ "inner join houseinfo hi "
-					+ "using (aptCode) "
-					+ "where aptName like ? "
-					+ "limit 1, 10 ");
-  -->
-  
-  
-  
-  <!-- 
-  	public List<Housedeal> searchAll() throws SQLException {
 
-			con = DButil.getConnection();
-			stmt = con.prepareStatement("select housedeal.*, aptName, buildYear, dongName "
-					+ "from housedeal "
-					+ "inner join houseinfo hi "
-					+ "using (aptCode) "
-					+ "limit 1, 10 ");
-  
-  
-   -->
-   
-   <!-- 
-   
-	public List<Housedeal> searchFavorite(String user_id) throws SQLException {
-    -->
+	<!-- public List<Housedeal> searchbydong(String sidoName, String gugunName, 
+		String dongName) throws SQLException { con = DButil.getConnection(); stmt 
+		= con.prepareStatement("select housedeal.*, aptName, buildYear, dongName\n" 
+		+ "from housedeal\n" + "inner join houseinfo hi\n" + "using (aptCode)\n" 
+		+ "where dongCode in (select dongCode from baseaddress where sidoName like 
+		? and gugunName like ? and dongName like ?)\n" + "limit 1, 10"); -->
+
+
+	<!-- public List<Housedeal> searchbyapt(String aptName) throws SQLException 
+		{ con = DButil.getConnection(); stmt = con.prepareStatement("select housedeal.*, 
+		aptName, buildYear, dongName " + "from housedeal " + "inner join houseinfo 
+		hi " + "using (aptCode) " + "where aptName like ? " + "limit 1, 10 "); -->
+
+
+
+	<!-- public List<Housedeal> searchAll() throws SQLException { con = DButil.getConnection(); 
+		stmt = con.prepareStatement("select housedeal.*, aptName, buildYear, dongName 
+		" + "from housedeal " + "inner join houseinfo hi " + "using (aptCode) " + 
+		"limit 1, 10 "); -->
+
+	<!-- public List<Housedeal> searchFavorite(String user_id) throws SQLException 
+		{ -->
 
 
 </mapper>
