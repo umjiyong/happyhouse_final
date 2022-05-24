@@ -5,6 +5,7 @@ import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 import HouseView from "@/views/HouseView.vue";
 import HouseDeal from "@/components/house/HouseDeal";
+import MemberMyPage from "@/components/user/MemberMyPage";
 Vue.use(Router);
 
 export default new Router({
@@ -16,7 +17,13 @@ export default new Router({
       props: {
         header: { colorOnScroll: 200 },
         footer: { backgroundColor: "black" }
-      }
+      },
+    },
+    {
+      path: "/mypage",
+      name: "myPage",
+      // components: { default: Main, header: MainNavbar, footer: MainFooter },
+      component: MemberMyPage,
     },
     {
       path: "/house",
