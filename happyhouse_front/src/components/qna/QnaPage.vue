@@ -55,7 +55,7 @@ export default {
         prId: 0,
         content: "",
         userId: "testman",
-        regTime: "",
+        regTime: ""
       },
       reReply: {
         id: "",
@@ -63,8 +63,8 @@ export default {
         prId: 0,
         content: "",
         userId: "testman",
-        regTime: "",
-      },
+        regTime: ""
+      }
     };
   },
   methods: {
@@ -72,7 +72,7 @@ export default {
       "getQnA",
       "removeQuestion",
       "registReply",
-      "removeReply",
+      "removeReply"
     ]),
     moveUpdatePage() {
       this.$router.push({ name: "questionUpdate", params: { q_id: this.qId } });
@@ -109,17 +109,17 @@ export default {
           this.getQnA(this.qId);
         }, 500);
       });
-    },
+    }
   },
   computed: {
-    ...mapState("qnaStore", ["question", "replyList"]),
+    ...mapState("qnaStore", ["question", "replyList"])
   },
   watch: {
     replyList(newVal, oldVal) {
       console.log("reply List changed!! : ");
       console.log(oldVal);
       console.log(newVal);
-    },
+    }
   },
   created() {
     const qId = this.$route.params.q_id;
@@ -127,7 +127,7 @@ export default {
     this.getQnA(qId);
     this.reply.qId = qId;
     this.reReply.qId = qId;
-  },
+  }
 };
 </script>
 

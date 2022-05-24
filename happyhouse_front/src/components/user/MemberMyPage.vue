@@ -1,65 +1,106 @@
 <template>
-  <b-container class="mt-4" v-if="userInfo">
-    <b-row>
-      <b-col></b-col>
-      <b-col cols="8">
-        <b-jumbotron>
-          <template #header>My Page</template>
-
-          <template #lead> 내 정보 확인페이지입니다. </template>
-
-          <hr class="my-4" />
-
-          <b-container class="mt-4">
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">아이디</b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.id }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이름</b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.name }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이메일</b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.email }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-          </b-container>
-          <hr class="my-4" />
-
-          <b-button variant="primary" href="#" class="mr-1" @click="movePage"
-            >정보수정</b-button
+  <div class="wrapper" v-if="userInfo">
+    <div class="modal-bg">
+      <div class="modal-container">
+        <login-card header-color="red">
+          <h4 slot="title" class="card-title">
+            회원 정보 수정하기
+          </h4>
+          <p slot="description" class="description">
+            Or Be Classical
+          </p>
+          <md-field class="md-form-group" slot="inputs">
+            <md-icon>man</md-icon>
+            <label>회원님의 아이디</label>
+            <md-input v-model="userInfo.id" type="id" readonly></md-input>
+          </md-field>
+          <md-field class="md-form-group" slot="inputs">
+            <md-icon>lock_outline</md-icon>
+            <label>비밀번호 입력...</label>
+            <md-input v-model="user.password" type="password"></md-input>
+          </md-field>
+          <md-field class="md-form-group" slot="inputs">
+            <md-icon>lock_outline</md-icon>
+            <label>비밀번호 확인...</label>
+            <md-input v-model="userpwdConfirm" type="password"></md-input>
+          </md-field>
+          <md-field class="md-form-group" slot="inputs">
+            <md-icon>man</md-icon>
+            <label>{{ userInfo.name }}</label>
+            <md-input v-model="user.name" type="text"></md-input>
+          </md-field>
+          <md-field class="md-form-group" slot="inputs">
+            <md-icon>email</md-icon>
+            <label>{{ userInfo.email }}</label>
+            <md-input v-model="user.email" type="email"></md-input>
+          </md-field>
+          <md-button
+            slot="footer"
+            @click="updateMember"
+            class="md-simple md-success md-lg"
           >
-          <b-button variant="danger" href="#" @click="unregister"
-            >회원탈퇴</b-button
+            수정하기
+          </md-button>
+          <md-button
+            slot="footer"
+            @click="unregister"
+            class="md-simple md-success md-lg"
           >
-        </b-jumbotron>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
-  </b-container>
+            탈퇴하기
+          </md-button>
+        </login-card>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { LoginCard } from "@/components/user";
 
 const memberStore = "memberStore";
 
 export default {
   name: "MemberMyPage",
-  components: {},
+
+  data() {
+    return {
+      user: {
+        name: null,
+        email: null,
+        id: null,
+        password: null
+      },
+      userpwdConfirm: null,
+      pwMatches: true
+    };
+  },
+
+  components: {
+    LoginCard
+  },
   computed: {
     ...mapState(memberStore, ["userInfo"])
   },
   methods: {
-    ...mapActions(memberStore, ["deleteMember"]),
-    movePage() {
-      this.$router.push({ name: "update" });
+    ...mapActions(memberStore, ["modifyMember", "deleteMember"]),
+
+    pwCheck() {
+      if (this.user.password == this.userpwdConfirm) {
+        this.pwMatches = true;
+      } else {
+        this.pwMatches = false;
+      }
+    },
+    updateMember() {
+      this.pwCheck();
+      if (this.pwMatches) {
+        this.modifyMember(this.user);
+        alert("수정 완료");
+        this.$router.push({ name: "main" });
+      } else {
+        alert("비밀번호 확인하세요");
+      }
     },
     unregister() {
       if (confirm("정말로 탈퇴하시겠습니까?")) {

@@ -34,27 +34,27 @@ export default {
       "educationList",
       "environmentList",
       "lifeList",
-      "safetyList",
-    ]),
+      "safetyList"
+    ])
   },
   watch: {
     houseInfo1(val) {
       console.log("houseInfo updated!!");
       this.searchHouseDealByAptCode(val.aptCode);
       this.searchStatusByAptCode(val.aptCode);
-    },
+    }
   },
   methods: {
     ...mapMutations("houseStore", ["CLEAR_HOUSEDEAL_LIST"]),
     ...mapActions("houseStore", [
       "searchHouseDealByAptCode",
-      "searchStatusByAptCode",
+      "searchStatusByAptCode"
     ]),
     closeDetail() {
       this.CLEAR_HOUSEDEAL_LIST();
       this.$emit("closeDetail");
-    },
-  },
+    }
+  }
 };
 </script>
 

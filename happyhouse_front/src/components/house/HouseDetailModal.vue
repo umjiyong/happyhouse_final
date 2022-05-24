@@ -14,7 +14,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("houseStore", ["houseInfo1"]),
+    ...mapState("houseStore", ["houseInfo1"])
   },
   mounted() {
     console.log("modal mounted : " + this.houseInfo1);
@@ -22,8 +22,8 @@ export default {
   methods: {
     closeModal() {
       this.$emit("closeModal");
-    },
-  },
+    }
+  }
 };
 </script>
 

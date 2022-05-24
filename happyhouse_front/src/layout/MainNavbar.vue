@@ -72,6 +72,7 @@
                   <p>아파트</p>
                 </router-link>
               </md-list-item>
+
               <md-list-item v-if="showDownload">
                 <router-link :to="{ name: 'qnaView' }">
                   <i class="material-icons">help</i>
@@ -79,9 +80,19 @@
                 </router-link>
               </md-list-item>
               <md-list-item>
+
+              <md-list-item v-if="isLogin == false">
                 <router-link :to="{ name: 'userView' }">
                   <i class="material-icons">login</i>
                   <p>로그인</p>
+                </router-link>
+
+              </md-list-item>
+
+              <md-list-item v-if="isLogin == true">
+                <router-link :to="{ name: 'mypage' }">
+                  <i class="material-icons">man</i>
+                  <p>마이페이지</p>
                 </router-link>
               </md-list-item>
 
