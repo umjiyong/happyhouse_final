@@ -103,7 +103,7 @@
 	<delete id="removeReply" parameterType="int">
 		DELETE
 		FROM reply
-		WHERE r_id = #{id}
+		WHERE r_id = #{id} OR pr_id = #{id}
 	</delete>
  
  </mapper>
