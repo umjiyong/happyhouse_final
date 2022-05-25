@@ -2,8 +2,8 @@ import { happyHouseApi } from "./index.js";
 
 const api = happyHouseApi();
 
-function getQuestionList(success) {
-  api.get("/qna/list").then(success);
+function getQuestionList(params, success) {
+  api.get("/qna/list", { params }).then(success);
 }
 
 function getQnA(qId, success) {
@@ -52,5 +52,5 @@ export {
   removeQuestion,
   registReply,
   updateReply,
-  removeReply
+  removeReply,
 };

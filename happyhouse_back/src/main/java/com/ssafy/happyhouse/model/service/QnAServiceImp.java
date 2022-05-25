@@ -1,7 +1,9 @@
 package com.ssafy.happyhouse.model.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,10 +38,26 @@ public class QnAServiceImp implements QnAService {
 	
 	
 	@Override
-	public List<Question> searchAllQuestion() {
+	public Map<String,Object> searchAllQuestion(String key, String word, String sizePerPage, String currentPage) {
 		
 		try {
-			return qnaDao.searchAllQuestion();
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("key",key);
+			map.put("word",word);
+			
+			int cp = Integer.parseInt(currentPage);
+			int spp = Integer.parseInt(sizePerPage);
+			int start = (cp- 1) * spp;
+			
+			map.put("start",start);
+			map.put("spp",spp);
+			
+			Map<String,Object> res = new HashMap<String,Object>();
+			res.put("questionList", qnaDao.searchAllQuestion(map));
+			res.put("totalQuestionCnt",qnaDao.countSearchResult(map));
+			
+			
+			return res;
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.happyhouse.model.dto.Category;
 import com.ssafy.happyhouse.model.dto.Question;
 import com.ssafy.happyhouse.model.dto.Reply;
 import com.ssafy.happyhouse.model.service.QnAService;
+import com.ssafy.happyhouse.util.PageNavigation;
 
 @RestController
 @RequestMapping("/qna")
@@ -39,10 +41,15 @@ public class QnAController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<?> questionList(){
+	public ResponseEntity<?> questionList(String key, String word, String selectedPage){
 		System.out.println("GET : question list");
-		List<Question> questionList = qnaService.searchAllQuestion();
-		return new ResponseEntity<List<Question>> (questionList,HttpStatus.OK);
+		System.out.println(key+" , "+word+" , "+selectedPage);
+		String spp = "10"; // size per page (페이지당 글갯수)
+		if(selectedPage==null) selectedPage="1";
+		
+		Map<String,Object> res = qnaService.searchAllQuestion(key,word,spp,selectedPage);
+
+		return new ResponseEntity<Map<String,Object>> (res,HttpStatus.OK);
 	}
 	
 	@GetMapping("/{q_id}") 
