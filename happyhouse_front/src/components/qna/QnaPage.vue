@@ -1,41 +1,93 @@
 <template>
-  <div>
-    <h3>Q. {{ question.title }}</h3>
-    <div>글쓴이 : {{ question.userId }}</div>
-    <br />
-    <div>{{ question.content }}</div>
-    <button @click="moveUpdatePage">질문 수정</button>
-    <button @click="removeThisQuestion(question.id)">질문 삭제</button>
-    <div>
-      <h4>댓글</h4>
-      <div>
-        <input type="text" v-model="reply.content" placeholder="댓글 입력" />
-        <button @click="registThisReply">등록</button>
-      </div>
-      <div>{{ selectedReplyId }}</div>
-      <div v-for="reply in replyList" :key="reply.r_id">
-        <div v-if="reply.id === reply.prId">
-          {{ reply.userId }} :
-          {{ reply.content }}
+  <div class="flex-column question-container">
+    <div class="flex-column question-box">
+      <div class="flex-column question-main">
+        <h3 class="question-title">{{ question.title }}</h3>
 
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button @click="selectReply(reply.id)">대댓글</button>
-          <button @click="removeThisReply(reply.id)">삭제</button>
-          <div v-if="selectedReplyId === reply.id">
-            <div>
-              <input
-                type="text"
-                v-model="reReply.content"
-                placeholder="댓글 입력"
-              />
-              <button @click="registThisReReply(reply.id)">등록</button>
-              <button @click="selectReply(0)">취소</button>
+        <div class="writer">
+          by <span class="user-id">{{ question.userId }}</span>
+        </div>
+        <div>
+          {{ question.regTime }}
+        </div>
+        <br />
+        <div class="question-content">{{ question.content }}</div>
+      </div>
+      <div class="question-control" v-if="isByUser(question.userId)">
+        <button class="question-edit-btn hover-pointer" @click="moveUpdatePage">
+          질문 수정
+        </button>
+        <button
+          class="question-remove-btn hover-pointer"
+          @click="removeThisQuestion(question.id)"
+        >
+          질문 삭제
+        </button>
+      </div>
+      <div class="flex-column reply-container">
+        <div class="bold-display">댓글 {{ replyList.length }}</div>
+        <div>
+          <input type="text" v-model="reply.content" placeholder="댓글 입력" />
+          <button
+            class="hover-pointer reply-regist-btn"
+            @click="registThisReply"
+          >
+            등록
+          </button>
+        </div>
+        <br />
+        <!-- <div>{{ selectedReplyId }}</div> -->
+        <div v-for="reply in replyList" :key="reply.r_id">
+          <div class="reply-box" v-if="reply.id === reply.prId">
+            <span class="user-id">{{ reply.userId }}</span> :
+            {{ reply.content }}
+
+            <button
+              class="hover-pointer rereply-open-btn"
+              @click="selectReply(reply.id)"
+            >
+              대댓글
+            </button>
+            <button
+              class="hover-pointer reply-remove-btn"
+              @click="removeThisReply(reply.id)"
+              v-if="isByUser(reply.userId)"
+            >
+              삭제
+            </button>
+            <div v-if="selectedReplyId === reply.id">
+              <div>
+                <input
+                  type="text"
+                  v-model="reReply.content"
+                  placeholder="댓글 입력"
+                />
+                <button
+                  class="hover-pointer rereply-regist-btn"
+                  @click="registThisReReply(reply.id)"
+                >
+                  등록
+                </button>
+                <button
+                  class="hover-pointer rereply-cancle-btn"
+                  @click="selectReply(0)"
+                >
+                  취소
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div v-else-if="reply.id !== reply.prId">
-          ㄴ {{ reply.userId }} : {{ reply.content }}
-          <button @click="removeThisReply(reply.id)">삭제</button>
+          <div class="rereply-box" v-else-if="reply.id !== reply.prId">
+            <span class="user-id">{{ reply.userId }}</span> :
+            {{ reply.content }}
+            <button
+              class="hover-pointer reply-remove-btn"
+              @click="removeThisReply(reply.id)"
+              v-if="isByUser(reply.userId)"
+            >
+              삭제
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -110,6 +162,9 @@ export default {
         }, 500);
       });
     },
+    isByUser(writerId) {
+      return writerId === this.userInfo.id;
+    },
   },
   computed: {
     ...mapState("qnaStore", ["question", "replyList"]),
@@ -135,4 +190,118 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.question-container {
+  align-items: center;
+
+  width: 100%;
+}
+.question-box {
+  width: 70%;
+  padding: 2rem;
+  border: 1px solid rgba(100, 100, 100, 0.3);
+  border-radius: 5px;
+
+  box-shadow: 6px 3px 10px 6px rgba(100, 100, 100, 0.5);
+}
+.question-main {
+}
+
+.question-title {
+  font-weight: bold;
+}
+
+.question-content {
+  padding: 3rem 0;
+  border-top: 1px solid rgba(100, 100, 100, 0.3);
+}
+
+.question-control {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}
+.question-edit-btn {
+  padding: 0.5rem;
+  background: rgba(71, 125, 226, 0.8);
+  color: white;
+  border: 2px solid rgba(71, 125, 226, 1);
+  border-radius: 3px;
+}
+.question-remove-btn {
+  padding: 0.5rem;
+  background: rgba(226, 71, 81, 0.8);
+  color: white;
+  border: 2px solid rgba(226, 71, 81, 1);
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+.reply-container {
+  border-top: 1px solid rgba(100, 100, 100, 0.3);
+  padding: 2rem 0;
+}
+.reply-box {
+  padding: 2rem 0;
+}
+.reply-container input {
+  width: 80%;
+  font-size: 1.1rem;
+  padding: 0.2rem;
+}
+.reply-regist-btn {
+  padding: 0.5rem;
+  background: rgba(71, 226, 169, 0.8);
+  color: white;
+  border: 2px solid rgba(71, 226, 169, 1);
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+
+.rereply-open-btn {
+  padding: 0.2rem;
+  background: rgba(127, 133, 133, 0.8);
+  color: white;
+  border: 2px solid rgba(123, 139, 141, 1);
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+.reply-remove-btn {
+  padding: 0.2rem;
+  background: rgba(226, 71, 81, 0.8);
+  color: white;
+  border: 2px solid rgba(226, 71, 81, 1);
+  border-radius: 3px;
+  margin-left: 0.3rem;
+}
+
+.rereply-regist-btn {
+  padding: 0.5rem;
+  background: rgba(71, 226, 169, 0.8);
+  color: white;
+  border: 2px solid rgba(71, 226, 169, 1);
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+.rereply-cancle-btn {
+  padding: 0.5rem;
+  background: rgba(123, 139, 141, 0.8);
+  color: white;
+  border: 2px solid rgba(123, 139, 141, 1);
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+.reply-box {
+  padding: 0.5rem;
+  border-top: 1px solid rgba(100, 100, 100, 0.5);
+}
+.rereply-box {
+  padding: 0.5rem;
+  padding-left: 3rem;
+  border-top: 1px solid rgba(100, 100, 100, 0.3);
+  background: rgba(160, 160, 160, 0.1);
+}
+.user-id {
+  font-weight: bold;
+}
+</style>

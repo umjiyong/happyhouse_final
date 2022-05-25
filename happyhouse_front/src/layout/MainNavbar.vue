@@ -84,7 +84,7 @@
                 <md-list-item v-if="showDownload">
                   <router-link :to="{ name: 'qnaView' }">
                     <i class="material-icons">help</i>
-                    <p>QnA</p>
+                    <p>Q&A</p>
                   </router-link>
                 </md-list-item>
 
