@@ -1,6 +1,6 @@
 <template>
   <div class="house-list-container">
-    <div class="bold-display padding-1rem">검색된 아파트</div>
+    <div class="bold-display padding-1rem">조회 결과</div>
     <div class="house-list-box">
       <table class="house-table">
         <tr
@@ -44,12 +44,14 @@ export default {
 }
 .house-list-container {
   flex-grow: 1;
+
   max-height: 80vh;
-  overflow-y: scroll;
   border-bottom: 2px solid rgba(100, 100, 100, 0.2);
 }
 .house-list-box {
   width: 100%;
+  height: 100%;
+  overflow-y: scroll;
 }
 .house-table {
   width: 100%;
@@ -58,9 +60,9 @@ export default {
 }
 .house-table td,
 .house-table th {
-  border: 1px solid rgba(100, 100, 100, 0.5);
-  padding: 0.5rem;
-  font-size: 1rem;
+  border: 1px solid rgba(100, 100, 100, 0.1);
+  padding: 0.8rem;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -69,7 +71,7 @@ export default {
   color: white;
 }
 .house-table tr:nth-child(even) {
-  background-color: rgba(100, 100, 100, 0.2);
+  background-color: rgba(150, 150, 150, 0.1);
 }
 .house-table tr:hover {
   background-color: rgba(100, 100, 150, 0.5);

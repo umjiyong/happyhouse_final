@@ -7,6 +7,8 @@
       <div>
         <p class="bold-display">{{ houseInfo1.aptName }}</p>
       </div>
+      <bar-chart :styles="myStyles" :chart-data="chartDataComputed" />
+
       <div>transportation : {{ transportationList.length }}</div>
       <div>culture : {{ cultureList.length }}</div>
       <div>education : {{ educationList.length }}</div>
@@ -21,9 +23,30 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import HouseDealList from "@/components/house/HouseDealList.vue";
+import BarChart from "@/components/house/charts/BarChart.vue";
 export default {
+  data() {
+    return {
+      myStyles: {
+        width: "300px",
+        height: "300px",
+      },
+      chartData: {
+        labels: [
+          "TransPortation",
+          "Education",
+          "Life",
+          "Environment",
+          "Safety",
+          "Culture",
+        ],
+        datasets: [{ data: [0, 0, 0, 0, 0, 0] }],
+      },
+    };
+  },
   components: {
-    HouseDealList
+    HouseDealList,
+    BarChart,
   },
   computed: {
     ...mapState("houseStore", [
@@ -33,28 +56,53 @@ export default {
       "educationList",
       "environmentList",
       "lifeList",
-      "safetyList"
-    ])
+      "safetyList",
+    ]),
+    chartDataComputed() {
+      const res = {
+        labels: [
+          "TransPortation",
+          "Education",
+          "Life",
+          "Environment",
+          "Safety",
+          "Culture",
+        ],
+        datasets: [
+          {
+            data: [
+              this.transportationList.length,
+              this.educationList.length,
+              this.lifeList.length,
+              this.safetyList.length,
+              this.environmentList.length,
+              this.cultureList.length,
+            ],
+          },
+        ],
+      };
+      return res;
+    },
   },
   watch: {
     houseInfo1(val) {
       console.log("houseInfo updated!!");
       this.searchHouseDealByAptCode(val.aptCode);
       this.searchStatusByAptCode(val.aptCode);
-    }
+    },
   },
 
   methods: {
     ...mapMutations("houseStore", ["CLEAR_HOUSEDEAL_LIST"]),
     ...mapActions("houseStore", [
       "searchHouseDealByAptCode",
-      "searchStatusByAptCode"
+      "searchStatusByAptCode",
     ]),
     closeDetail() {
       this.CLEAR_HOUSEDEAL_LIST();
       this.$emit("closeDetail");
-    }
-  }
+    },
+  },
 };
 </script>
 

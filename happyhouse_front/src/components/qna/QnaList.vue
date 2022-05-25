@@ -1,11 +1,17 @@
 <template>
   <div class="qna-list-container">
-    QnA List
-    <div class="flex-row gap-item">
-      <input type="text" v-model="word" placeholder="질문 제목 검색" />
+    <div class="flex-row search-box">
+      <div class="flex-row gap-item input-box">
+        <select v-model="key">
+          <option value="all" selected>전체</option>
+          <option value="title" selected>제목</option>
+          <option value="userId">작성자</option>
+        </select>
+        <input type="text" v-model="word" placeholder="검색" />
+      </div>
       <span
         class="hover-pointer search-btn"
-        @click="searchQuestionByTitle(word)"
+        @click="searchQuestionListAction(1)"
       >
         <md-icon>search</md-icon>
       </span>
@@ -13,11 +19,11 @@
 
     <table class="question-table">
       <thead>
-        <th>글 번호</th>
-        <th>카테고리</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성 시간</th>
+        <th width="7%">글 번호</th>
+        <th width="13%">카테고리</th>
+        <th width="40%">제목</th>
+        <th width="10%">작성자</th>
+        <th width="20%">작성 시간</th>
       </thead>
       <tbody>
         <tr v-for="question in questionList" :key="question.id">
@@ -42,6 +48,23 @@
         </tr>
       </tbody>
     </table>
+    <br />
+    <div class="page-navi-container">
+      <div class="flex-row gap-item page-navi">
+        pages
+        <span
+          :class="[
+            { 'hover-pointer': true },
+            { 'active-page': isSelected(pageNum) },
+          ]"
+          v-for="pageNum in totalPageCnt"
+          :key="pageNum"
+          @click="searchQuestionListAction(pageNum)"
+        >
+          {{ pageNum }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,30 +73,44 @@ import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      word: ""
+      key: "all",
+      word: "",
+      selectedPage: 1,
     };
   },
   methods: {
     ...mapActions("qnaStore", [
       "getQuestionList",
       "searchQuestionByTitle",
-      "getCategoryList"
+      "getCategoryList",
     ]),
     ...mapMutations("qnaStore", ["CLEAR_QUESTION", "CLEAR_REPLY_LIST"]),
 
     mapCategory(cId) {
       console.log("실행됨...");
       if (this.categoryList) {
-        console.log("카테고리 리스트 있음...");
-        const res = this.categoryList.filter(cat => cat.id === cId);
-        console.log("필터링 성공...");
+        const res = this.categoryList.filter((cat) => cat.id === cId);
         if (res.length > 0) return res[0].name;
         else return "기타";
       } else return cId;
-    }
+    },
+    searchQuestionListAction(selectedPage) {
+      this.selectedPage = selectedPage;
+      this.getQuestionList({ key: this.key, word: this.word, selectedPage });
+    },
+    isSelected(pageNum) {
+      return pageNum === this.selectedPage;
+    },
   },
   computed: {
-    ...mapState("qnaStore", ["questionList", "categoryList"])
+    ...mapState("qnaStore", [
+      "questionList",
+      "categoryList",
+      "totalQuestionCnt",
+    ]),
+    totalPageCnt() {
+      return parseInt((this.totalQuestionCnt - 1) / 10) + 1;
+    },
   },
 
   created() {
@@ -84,7 +121,7 @@ export default {
     console.log("clear qna....");
     this.CLEAR_QUESTION();
     this.CLEAR_REPLY_LIST();
-  }
+  },
 };
 </script>
 
@@ -122,5 +159,36 @@ export default {
   border: 2px solid gainsboro;
   border-radius: 0 5px 5px 0;
   padding: 0.2rem;
+}
+
+.page-navi-container {
+  width: 100%;
+}
+.page-navi {
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
+  color: rgba(100, 100, 100, 100);
+  font-size: 1.1rem;
+}
+.page-navi span:hover {
+  color: rgba(50, 50, 50, 100);
+}
+.active-page {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgba(0, 0, 0, 1);
+}
+
+.search-box {
+  background-color: rgba(59, 59, 59, 1);
+  width: auto;
+  padding: 0.2rem 0.4rem;
+  padding: 1rem;
+
+  justify-content: start;
+}
+.input-box {
+  width: auto;
 }
 </style>
