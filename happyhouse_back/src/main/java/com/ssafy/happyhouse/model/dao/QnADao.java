@@ -2,6 +2,7 @@ package com.ssafy.happyhouse.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +17,8 @@ public interface QnADao {
 	public List<Category> searchAllCategory() throws SQLException;
 	
 	// Question
-	public List<Question> searchAllQuestion() throws SQLException;
+	public int countSearchResult(Map<String,Object> map) throws SQLException;
+	public List<Question> searchAllQuestion(Map<String,Object> map) throws SQLException;
 	public List<Question> searchQuestionByTitle(String title) throws SQLException;
 	public Question searchQuestionById(int id) throws SQLException;
 	public int getNewQuestionId() throws SQLException;

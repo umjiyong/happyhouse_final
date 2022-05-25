@@ -29,10 +29,33 @@
 		FROM q_category
 	</select>
 
+	<sql id="questionSearchOption">
+		<if test="word != null and word != ''">
+			<if test="key == 'title'">
+				and q_title like concat('%', #{word}, '%')
+			</if>
+			<if test="key == 'userId'">
+				and user_id = #{word}
+			</if>
+		</if>
+	</sql>
+		<select id="countSearchResult" resultType="int">
+		SELECT count(*)
+		FROM question
+		<where>		
+		<include refid="questionSearchOption"></include>
+		</where>
+		ORDER BY reg_time desc
+	</select>
+	
 	<select id="searchAllQuestion" resultType="Question">
 		SELECT *
 		FROM question
+		<where>		
+		<include refid="questionSearchOption"></include>
+		</where>
 		ORDER BY reg_time desc
+		limit #{start}, #{spp}
 	</select>
 
 	<select id="searchQuestionByTitle" parameterType="string"

@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.happyhouse.model.dto.Category;
 import com.ssafy.happyhouse.model.dto.Question;
@@ -12,7 +13,7 @@ public interface QnAService {
 	public List<Category> searchAllCategory();
 	
 	// Question
-	public List<Question> searchAllQuestion();
+	public Map<String,Object> searchAllQuestion(String key,String word,String sizePerPage,String currentPage);
 	public List<Question> searchQuestionByTitle(String title);
 	public Question searchQuestionById(int id);
 	public int addQuestion(Question question);
