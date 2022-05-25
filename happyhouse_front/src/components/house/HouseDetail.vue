@@ -9,12 +9,12 @@
       </div>
       <bar-chart :styles="myStyles" :chart-data="chartDataComputed" />
 
-      <div>transportation : {{ transportationList.length }}</div>
+      <!-- <div>transportation : {{ transportationList.length }}</div>
       <div>culture : {{ cultureList.length }}</div>
       <div>education : {{ educationList.length }}</div>
       <div>environment : {{ environmentList.length }}</div>
       <div>life : {{ lifeList.length }}</div>
-      <div>safety : {{ safetyList.length }}</div>
+      <div>safety : {{ safetyList.length }}</div> -->
       <house-deal-list />
     </div>
   </div>

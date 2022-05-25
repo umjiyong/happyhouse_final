@@ -13,12 +13,12 @@
             <h3 class="md-title"></h3>
           </router-link>
         </div>
-        <div class="md-toolbar-section-start">
+        <div>
           <router-link :to="{ name: 'main' }">
-            <div class="avatar">
+            <div>
               <img
                 src="../assets/img/faces/logotest2.png"
-                class="img-raised rounded img-fluid imagelogo"
+                class="rounded img-fluid imagelogo"
               />
             </div>
           </router-link>
@@ -92,15 +92,15 @@
                   <i class="material-icons">login</i>
                   <p class="margin-free">로그인</p>
                 </md-list-item>
-                <div class="avatar" v-if="isLogin == true">
+                <div class=" user-box" v-if="isLogin == true">
                   <img
                     src="../assets/img/faces/avatar.jpg"
-                    class="img-raised rounded-circle img-fluid imagecustom"
+                    class="avatar img-raised rounded-circle img-fluid imagecustom"
                   />
+                  <div>
+                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
+                  </div>
                 </div>
-                <h4 v-if="isLogin == true">
-                  {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                </h4>
                 <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
                   <i class="material-icons">man</i>
                   <p class="margin-free">마이페이지</p>
@@ -270,5 +270,10 @@ export default {
 .imagelogo {
   width: 150px;
   margin-left: 10px;
+}
+.user-box {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
 }
 </style>
