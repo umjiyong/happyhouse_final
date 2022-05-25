@@ -73,7 +73,7 @@ import { mapState, mapActions, mapMutations } from "vuex";
     키: 값
     memberStore: memberStore,
     houseStore: houseStore
-  }  
+  }
 */
 const houseStore = "houseStore";
 
@@ -85,7 +85,7 @@ export default {
       gugun: "",
       dong: "",
       key: "searchbyarea",
-      word: ""
+      word: "",
     };
   },
   computed: {
@@ -95,8 +95,8 @@ export default {
       "dongs",
       "sidoCode",
       "gugunCode",
-      "dongCode"
-    ])
+      "dongCode",
+    ]),
   },
   created() {
     // this.$store.dispatch("getSido");
@@ -120,7 +120,7 @@ export default {
 
       "SET_SIDOCODE",
       "SET_GUGUNCODE",
-      "SET_DONGCODE"
+      "SET_DONGCODE",
     ]),
     changeSido() {
       this.CLEAR_GUGUN_LIST();
@@ -141,13 +141,18 @@ export default {
     },
     doSearchHouseList() {
       this.$emit("closeDetail");
+      console.log("dong :" + this.gugun);
+      if (this.gugun == null) {
+        alert("지역을 정확히 선택해주세요.");
+        return;
+      }
       this.searchHouseList({
         key: this.key,
         word: this.word,
         gugunCode: this.gugunCode,
-        dongCode: this.dongCode
+        dongCode: this.dongCode,
       });
-    }
+    },
 
     // // sidoList() {
     // //   this.getSido();
@@ -161,7 +166,18 @@ export default {
     // searchApt() {
     //   if (this.gugunCode) this.getHouseList(this.gugunCode);
     // },
-  }
+  },
+  watch: {
+    sidos(sidoList) {
+      this.sido = sidoList[0].value;
+    },
+    guguns(gugunList) {
+      this.gugun = gugunList[0].value;
+    },
+    dongs(dongList) {
+      this.dong = dongList[0].value;
+    },
+  },
 };
 </script>
 

@@ -4,7 +4,7 @@
     <div class="flex-row">
       <house-list @openDetail="openDetail" v-show="!detailOn" />
       <house-detail @closeDetail="closeDetail" v-show="detailOn" />
-      <kakao-map @openDetail="openDetail" />
+      <kakao-map @openDetail="openDetail" :detailOn="detailOn" />
     </div>
     <!--modal-->
     <!-- <house-detail v-if="modalOn" @closeDetail="closeDetail" /> -->
@@ -19,7 +19,7 @@ import HouseDetail from "@/components/house/HouseDetail.vue";
 export default {
   data() {
     return {
-      detailOn: false
+      detailOn: false,
     };
   },
   components: { HouseSearchBar, HouseList, KakaoMap, HouseDetail },
@@ -29,8 +29,8 @@ export default {
     },
     closeDetail() {
       this.detailOn = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

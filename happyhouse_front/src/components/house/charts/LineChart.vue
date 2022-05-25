@@ -1,5 +1,5 @@
 <template>
-  <Radar
+  <LineChartGenerator
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -13,36 +13,38 @@
 </template>
 
 <script>
-import { Radar } from "vue-chartjs/legacy";
+import { Line as LineChartGenerator } from "vue-chartjs/legacy";
 
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  PointElement,
   LineElement,
-  RadialLinearScale,
+  LinearScale,
+  CategoryScale,
+  PointElement,
 } from "chart.js";
 
 ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  PointElement,
-  RadialLinearScale,
-  LineElement
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement
 );
 
 export default {
-  name: "RadarChart",
+  name: "LineChart",
   components: {
-    Radar,
+    LineChartGenerator,
   },
   props: {
     chartId: {
       type: String,
-      default: "radar-chart",
+      default: "line-chart",
     },
     datasetIdKey: {
       type: String,
