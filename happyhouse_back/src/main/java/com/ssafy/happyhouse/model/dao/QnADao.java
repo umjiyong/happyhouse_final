@@ -33,5 +33,6 @@ public interface QnADao {
 	public int addReply(Reply reply) throws SQLException;
 	public int updateReply(Reply reply) throws SQLException;
 	public int removeReply(int id) throws SQLException;
+	public int removeRepliesByQId(int qId) throws SQLException;
 	
 }

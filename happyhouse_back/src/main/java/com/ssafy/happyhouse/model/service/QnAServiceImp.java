@@ -117,6 +117,7 @@ public class QnAServiceImp implements QnAService {
 	@Override
 	public int removeQuestion(int id) {
 		try {
+			qnaDao.removeRepliesByQId(id);
 			return qnaDao.removeQuestion(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
