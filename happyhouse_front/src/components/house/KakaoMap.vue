@@ -15,7 +15,7 @@ export default {
     return {
       markers: [],
       infowindow: null,
-      customOverlay: null,
+      customOverlay: null
     };
   },
   mounted() {
@@ -38,7 +38,7 @@ export default {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 6, // 초기 확대 레벨(클수록 넓은 시야)
+        level: 6 // 초기 확대 레벨(클수록 넓은 시야)
       };
 
       //지도 객체를 등록합니다.
@@ -48,9 +48,9 @@ export default {
     // 마커 표시
     displayMarker(placeList, kind) {
       if (this.markers.length > 0) {
-        this.markers.forEach((marker) => marker.setMap(null));
+        this.markers.forEach(marker => marker.setMap(null));
       }
-      const positions = placeList.map((place) => {
+      const positions = placeList.map(place => {
         // plcaeList에 lat, long이 있어야 한다.
         return new kakao.maps.LatLng(place.lat, place.lng);
       });
@@ -78,7 +78,7 @@ export default {
           const marker = new kakao.maps.Marker({
             map: this.map,
             position,
-            image: markerImage,
+            image: markerImage
           });
 
           // 마커 클릭 시 동작
@@ -124,7 +124,7 @@ export default {
         map: this.map, // 인포윈도우가 표시될 지도
         position: iwPosition,
         content: iwContent,
-        removable: iwRemoveable,
+        removable: iwRemoveable
       });
       this.infowindow = iw;
       // this.infowindow.addListener();
@@ -138,10 +138,10 @@ export default {
     openHouseDetail() {
       console.log("open detail!!");
       this.$emit("openDetail");
-    },
+    }
   },
   computed: {
-    ...mapState("houseStore", ["houseList"]),
+    ...mapState("houseStore", ["houseList"])
   },
   watch: {
     // houseList 변화 시 마커 표시 동작
@@ -152,8 +152,8 @@ export default {
       // });
       // lat, lng가 포함된 객체 리스트를 전달하고, 표시할 마커 타입을 전달한다.
       this.displayMarker(houses, "house");
-    },
-  },
+    }
+  }
 };
 </script>
 

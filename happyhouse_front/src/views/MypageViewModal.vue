@@ -11,7 +11,7 @@
           </p>
           <md-field class="md-form-group" slot="inputs">
             <md-icon>man</md-icon>
-            <label>회원님의 아이디</label>
+            <label>회원님의 아이디 : {{ userInfo.id }}</label>
             <md-input v-model="userInfo.id" type="id" readonly></md-input>
           </md-field>
           <md-field class="md-form-group" slot="inputs">
@@ -26,13 +26,13 @@
           </md-field>
           <md-field class="md-form-group" slot="inputs">
             <md-icon>man</md-icon>
-            <label>{{ userInfo.name }}</label>
-            <md-input v-model="user.name" type="text"></md-input>
+            <label>기존 이름 : {{ userInfo.name }}</label>
+            <md-input v-model="userInfo.name" type="text"></md-input>
           </md-field>
           <md-field class="md-form-group" slot="inputs">
             <md-icon>email</md-icon>
-            <label>{{ userInfo.email }}</label>
-            <md-input v-model="user.email" type="email"></md-input>
+            <label>기존 email : {{ userInfo.email }}</label>
+            <md-input v-model="userInfo.email" type="email"></md-input>
           </md-field>
           <md-button
             slot="footer"
@@ -47,6 +47,13 @@
             class="md-simple md-success md-lg"
           >
             탈퇴하기
+          </md-button>
+          <md-button
+            slot="footer"
+            @click="closeModal"
+            class="md-simple md-success md-lg"
+          >
+            창 닫기
           </md-button>
         </login-card>
       </div>
@@ -69,18 +76,18 @@ export default {
         name: null,
         email: null,
         id: null,
-        password: null
+        password: null,
       },
       userpwdConfirm: null,
-      pwMatches: true
+      pwMatches: true,
     };
   },
 
   components: {
-    LoginCard
+    LoginCard,
   },
   computed: {
-    ...mapState(memberStore, ["userInfo"])
+    ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
     ...mapActions(memberStore, ["modifyMember", "deleteMember"]),
@@ -93,22 +100,41 @@ export default {
       }
     },
     updateMember() {
-      this.pwCheck();
-      if (this.pwMatches) {
-        this.modifyMember(this.user);
-        alert("수정 완료");
-        this.$router.push({ name: "main" });
+      if (
+        this.user.id != null &&
+        this.user.password != null &&
+        this.userpwdConfirm != null &&
+        this.user.name != null &&
+        this.user.email != null
+      ) {
+        this.pwCheck();
+        if (this.pwMatches) {
+          this.user.id = this.userInfo.id;
+          this.user.name = this.userInfo.name;
+          this.user.email = this.userInfo.email;
+          this.modifyMember(this.user);
+          alert("수정 완료");
+          this.movePage();
+        } else {
+          alert("비밀번호 확인하세요");
+        }
       } else {
-        alert("비밀번호 확인하세요");
+        alert("빈 칸이 있습니다 확인해주세요");
       }
     },
     unregister() {
       if (confirm("정말로 탈퇴하시겠습니까?")) {
         this.deleteMember(this.userInfo.id);
-        this.$router.push({ name: "main" });
+        this.movePage();
       }
-    }
-  }
+    },
+    closeModal() {
+      this.$emit("closemodal");
+    },
+    movePage() {
+      this.$router.go("this.$router.currentRoute");
+    },
+  },
 };
 </script>
 

@@ -37,7 +37,7 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("houseStore", ["housedealList"]),
+    ...mapState("houseStore", ["housedealList"])
   },
   filters: {
     changeUnit(price) {
@@ -51,8 +51,8 @@ export default {
       }
       if (price % 10000 !== 0) res += " " + (price % 10000) + "만";
       return (res += " 원");
-    },
-  },
+    }
+  }
 };
 </script>
 

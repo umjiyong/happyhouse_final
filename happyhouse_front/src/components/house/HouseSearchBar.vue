@@ -85,7 +85,7 @@ export default {
       gugun: "",
       dong: "",
       key: "searchbyarea",
-      word: "",
+      word: ""
     };
   },
   computed: {
@@ -95,8 +95,8 @@ export default {
       "dongs",
       "sidoCode",
       "gugunCode",
-      "dongCode",
-    ]),
+      "dongCode"
+    ])
   },
   created() {
     // this.$store.dispatch("getSido");
@@ -120,7 +120,7 @@ export default {
 
       "SET_SIDOCODE",
       "SET_GUGUNCODE",
-      "SET_DONGCODE",
+      "SET_DONGCODE"
     ]),
     changeSido() {
       this.CLEAR_GUGUN_LIST();
@@ -145,9 +145,9 @@ export default {
         key: this.key,
         word: this.word,
         gugunCode: this.gugunCode,
-        dongCode: this.dongCode,
+        dongCode: this.dongCode
       });
-    },
+    }
 
     // // sidoList() {
     // //   this.getSido();
@@ -161,7 +161,7 @@ export default {
     // searchApt() {
     //   if (this.gugunCode) this.getHouseList(this.gugunCode);
     // },
-  },
+  }
 };
 </script>
 

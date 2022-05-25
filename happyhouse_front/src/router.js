@@ -3,7 +3,6 @@ import Router from "vue-router";
 import Main from "./views/MainView.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
-
 import store from "@/store/index.js";
 
 Vue.use(Router);
@@ -39,7 +38,7 @@ export default new Router({
     {
       path: "/user",
       name: "userView",
-      component: () => import("@/views/UserView.vue")
+      component: () => import("@/views/UserViewModal.vue")
 
       // {
       //   path: "singin",
@@ -56,7 +55,7 @@ export default new Router({
       path: "/mypage",
       name: "mypage",
       beforeEnter: onlyAuthUser,
-      component: () => import("@/components/user/MemberMyPage.vue")
+      component: () => import("@/views/MypageViewModal.vue")
     },
     {
       path: "/house",

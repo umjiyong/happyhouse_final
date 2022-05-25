@@ -130,7 +130,7 @@ public class UserController {
 		System.out.println("히히");
 		System.out.println("히히"+user);
 		if (user == null) {
-			//if (user == null || !user.getUsername().equals(memberDto.getUsername()) || !user.getEmail().equals(memberDto.getEmail())) {
+//			if (user == null || !user.getUsername().equals(memberDto.getUsername()) || !user.getEmail().equals(memberDto.getEmail())) {
 			return new ResponseEntity<String>(FAIL, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(user.getPassword(), HttpStatus.OK);
@@ -138,8 +138,9 @@ public class UserController {
 
 	
 	@ApiOperation(value = "회원수정", notes = "회원 정보를 수정한다.", response = Map.class)
-	@PutMapping("/modify")
+	@PutMapping("/regist")
 	public ResponseEntity<String> update(@RequestBody User user) throws Exception {
+		System.out.println(user);
 		if (userservice.update(user) == 1) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}

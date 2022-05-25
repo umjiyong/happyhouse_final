@@ -50,14 +50,14 @@ import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      word: "",
+      word: ""
     };
   },
   methods: {
     ...mapActions("qnaStore", [
       "getQuestionList",
       "searchQuestionByTitle",
-      "getCategoryList",
+      "getCategoryList"
     ]),
     ...mapMutations("qnaStore", ["CLEAR_QUESTION", "CLEAR_REPLY_LIST"]),
 
@@ -65,15 +65,15 @@ export default {
       console.log("실행됨...");
       if (this.categoryList) {
         console.log("카테고리 리스트 있음...");
-        const res = this.categoryList.filter((cat) => cat.id === cId);
+        const res = this.categoryList.filter(cat => cat.id === cId);
         console.log("필터링 성공...");
         if (res.length > 0) return res[0].name;
         else return "기타";
       } else return cId;
-    },
+    }
   },
   computed: {
-    ...mapState("qnaStore", ["questionList", "categoryList"]),
+    ...mapState("qnaStore", ["questionList", "categoryList"])
   },
 
   created() {
@@ -84,7 +84,7 @@ export default {
     console.log("clear qna....");
     this.CLEAR_QUESTION();
     this.CLEAR_REPLY_LIST();
-  },
+  }
 };
 </script>
 

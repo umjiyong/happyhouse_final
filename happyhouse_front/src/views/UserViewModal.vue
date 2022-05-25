@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wrapper" v-if="(modalOn == true) & (joinusMode == false)">
+    <div class="wrapper" v-if="joinusMode == false">
       <div class="modal-bg">
         <div class="modal-container">
           <login-card header-color="red">
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="wrapper" v-else-if="(modalOn == true) & (joinusMode == true)">
+    <div class="wrapper" v-else>
       <div class="modal-bg">
         <div class="modal-container">
           <login-card header-color="red">
@@ -124,7 +124,6 @@ export default {
   bodyClass: "login-page",
   data() {
     return {
-      modalOn: true,
       joinusMode: false,
       user: {
         name: null,
@@ -166,7 +165,7 @@ export default {
         console.log(this.isLogin);
         if (this.isLogin) {
           await this.getUserInfo(token);
-          this.$router.push({ name: "main" });
+          this.closeModal();
         }
       } else {
         alert("빈 칸이 있나 확인해주세요");
@@ -199,7 +198,7 @@ export default {
           if (this.isSignupError == false) {
             alert("가입을 환영합니다!");
           }
-          this.$router.push({ name: "main" });
+          this.closeModal();
         }
       } else {
         alert("빈 칸이 있나 확인해주세요");
@@ -208,17 +207,11 @@ export default {
     swapJoinusMode() {
       this.joinusMode = !this.joinusMode;
     },
-    swapModalOn() {
-      this.modalOn = !this.modalOn;
-    },
     movePage() {
       this.$router.go("this.$router.currentRoute");
     },
-    openModal() {
-      this.modalOn = true;
-    },
     closeModal() {
-      this.modalOn = false;
+      this.$emit("closemodal");
     }
   }
 };

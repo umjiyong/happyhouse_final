@@ -4,7 +4,7 @@
     :class="[
       { 'flex-column': flexColumn },
       { 'nav-pills-icons': navPillsIcons },
-      { 'md-card-plain': plain },
+      { 'md-card-plain': plain }
     ]"
   >
     <md-card-header slot="header-title"> </md-card-header>
@@ -21,7 +21,7 @@
               @click="switchPanel(item.name)"
               :class="[
                 { active: isActivePanel(item.name) },
-                { [getColorButton(colorButton)]: isActivePanel(item.name) },
+                { [getColorButton(colorButton)]: isActivePanel(item.name) }
               ]"
             >
               <p :class="[{ whiteFont: isActivePanel(item.name) }]">
@@ -60,12 +60,12 @@ export default {
     tabIcon: Array,
     colorButton: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   data() {
     return {
-      activePanel: this.tabName[0].name,
+      activePanel: this.tabName[0].name
     };
   },
   methods: {
@@ -83,11 +83,11 @@ export default {
     },
     printTabIcons() {
       console.log(this.tabIcon);
-    },
+    }
   },
   updated() {
     this.printTabIcons();
-  },
+  }
 };
 </script>
 
