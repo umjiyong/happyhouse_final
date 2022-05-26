@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="javascriptComponents" class="main-container">
-      <div class="title">
+      <div class="main-title">
         <h2>오늘의 아파트FC 매치 업</h2>
       </div>
       <div class="carousel-container">
@@ -78,7 +78,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.title {
+.main-title {
   font-weight: 600;
   font-size: 1.5rem;
 }
