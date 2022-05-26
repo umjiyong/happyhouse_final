@@ -128,6 +128,12 @@
 		FROM reply
 		WHERE r_id = #{id} OR pr_id = #{id}
 	</delete>
+	
+	<delete id="removeRepliesByQId" parameterType="int">
+		DELETE
+		FROM reply
+		WHERE q_id = #{qId}
+	</delete>
  
  </mapper>
  

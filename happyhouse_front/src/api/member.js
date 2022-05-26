@@ -9,10 +9,10 @@ async function login(user, success, fail) {
     .catch(fail);
 }
 
-async function findById(user, success, fail) {
+async function findById(userid, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api
-    .get(`/user/findpwd`)
+    .get(`/user/info/${userid}`)
     .then(success)
     .catch(fail);
 }
@@ -22,7 +22,7 @@ async function collectMemberInfo(userid) {
   await api.get(`/user/list`);
 }
 async function modifyMemberInfo(user) {
-  await api.put(`/user/modify`, JSON.stringify(user));
+  await api.put(`/user/regist`, JSON.stringify(user));
 }
 async function unregisterMember(userid, success, fail) {
   await api

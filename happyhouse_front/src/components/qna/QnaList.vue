@@ -78,6 +78,7 @@ export default {
       selectedPage: 1,
     };
   },
+
   methods: {
     ...mapActions("qnaStore", [
       "getQuestionList",

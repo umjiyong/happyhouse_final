@@ -4,7 +4,7 @@
     <div class="flex-row">
       <house-list @openDetail="openDetail" v-show="!detailOn" />
       <house-detail @closeDetail="closeDetail" v-show="detailOn" />
-      <kakao-map @openDetail="openDetail" />
+      <kakao-map @openDetail="openDetail" :detailOn="detailOn" />
     </div>
     <!--modal-->
     <!-- <house-detail v-if="modalOn" @closeDetail="closeDetail" /> -->

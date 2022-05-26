@@ -1,181 +1,125 @@
 <template>
-  <md-toolbar
-    id="toolbar"
-    md-elevation="0"
-    class="md-absolute justify-start bg-happyhouse"
-    :class="extraNavClasses"
-    :color-on-scroll="colorOnScroll"
-  >
-    <div class="md-toolbar-column md-collapse-lateral align-left">
-      <div class="md-toolbar-section-start">
-        <router-link :to="{ name: 'main' }">
-          <h3 class="md-title"></h3>
-        </router-link>
-      </div>
-      <div class="md-toolbar-section-start">
-        <router-link :to="{ name: 'main' }">
-          <h3 class="md-title">Happy House</h3>
-        </router-link>
-      </div>
-      <div class="md-toolbar-section-end">
-        <md-button
-          class="md-just-icon md-simple md-toolbar-toggle"
-          :class="{ toggled: toggledClass }"
-          @click="toggleNavbarMobile()"
-        >
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </md-button>
+  <div>
+    <md-toolbar
+      id="toolbar"
+      md-elevation="0"
+      class="md-absolute justify-start bg-happyhouse"
+      :class="extraNavClasses"
+      :color-on-scroll="colorOnScroll"
+    >
+      <div class="md-toolbar-column md-collapse-lateral align-left">
+        <div class="md-toolbar-section-start">
+          <router-link :to="{ name: 'main' }">
+            <h3 class="md-title"></h3>
+          </router-link>
+        </div>
+        <div>
+          <router-link :to="{ name: 'main' }">
+            <div>
+              <img
+                src="../assets/img/faces/logotest2.png"
+                class="rounded img-fluid imagelogo"
+              />
+            </div>
+          </router-link>
+        </div>
+        <div class="md-toolbar-section-end">
+          <md-button
+            class="md-just-icon md-simple md-toolbar-toggle"
+            :class="{ toggled: toggledClass }"
+            @click="toggleNavbarMobile()"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </md-button>
 
-        <div class="md-collapse">
-          <div class="md-collapse-wrapper">
-            <md-list>
-              <li class="md-list-item" v-if="!showDownload">
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">apps</i>
-                        <p>Components</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/">
-                            <i class="material-icons">layers</i>
-                            <p>All Components</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                          >
-                            <i class="material-icons">content_paste</i>
-                            <p>Documentation</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
-                  </div>
-                </a>
-              </li>
+          <div class="md-collapse">
+            <div class="md-collapse-wrapper">
+              <md-list>
+                <li class="md-list-item" v-if="!showDownload">
+                  <a
+                    href="javascript:void(0)"
+                    class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                  >
+                    <div class="md-list-item-content">
+                      <drop-down direction="down">
+                        <md-button
+                          slot="title"
+                          class="md-button md-button-link md-white md-simple dropdown-toggle"
+                          data-toggle="dropdown"
+                        >
+                          <i class="material-icons">apps</i>
+                          <p>Components</p>
+                        </md-button>
+                        <ul class="dropdown-menu dropdown-with-icons">
+                          <li>
+                            <a href="#/">
+                              <i class="material-icons">layers</i>
+                              <p>All Components</p>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="https://demos.creative-tim.com/vue-material-kit/documentation/"
+                            >
+                              <i class="material-icons">content_paste</i>
+                              <p>Documentation</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </drop-down>
+                    </div>
+                  </a>
+                </li>
 
-              <!--router-link-->
-              <md-list-item v-if="showDownload">
-                <router-link :to="{ name: 'houseView' }">
-                  <i class="material-icons">house</i>
-                  <p>아파트</p>
-                </router-link>
-              </md-list-item>
+                <!--router-link-->
+                <md-list-item v-if="showDownload">
+                  <router-link :to="{ name: 'houseView' }">
+                    <i class="material-icons">house</i>
+                    <p>아파트</p>
+                  </router-link>
+                </md-list-item>
 
-              <md-list-item v-if="showDownload">
-                <router-link :to="{ name: 'qnaView' }">
-                  <i class="material-icons">help</i>
-                  <p>QnA</p>
-                </router-link>
-              </md-list-item>
+                <md-list-item v-if="showDownload">
+                  <router-link :to="{ name: 'qnaView' }">
+                    <i class="material-icons">help</i>
+                    <p>Q&A</p>
+                  </router-link>
+                </md-list-item>
 
-              <md-list-item v-if="isLogin == false">
-                <router-link :to="{ name: 'userView' }">
+                <md-list-item v-if="isLogin == false" @click="ShowUserModalOn">
                   <i class="material-icons">login</i>
-                  <p>로그인</p>
-                </router-link>
-              </md-list-item>
-
-              <md-list-item v-if="isLogin == true">
-                <router-link :to="{ name: 'mypage' }">
-                  <i class="material-icons">man</i>
-                  <p>마이페이지</p>
-                </router-link>
-              </md-list-item>
-
-              <md-list-item @click="logout" v-if="isLogin == true">
-                <i class="material-icons">login</i>
-                <p class="margin-free">로그아웃</p>
-              </md-list-item>
-
-              <md-list-item
-                href="javascript:void(0)"
-                @click="scrollToElement()"
-                v-if="showDownload"
-              >
-                <i class="material-icons">cloud_download</i>
-                <p>Download</p>
-              </md-list-item>
-
-              <li class="md-list-item" v-else>
-                <a
-                  href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
-                >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <i class="material-icons">view_carousel</i>
-                        <p>Examples</p>
-                      </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/landing">
-                            <i class="material-icons">view_day</i>
-                            <p>Landing Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/login">
-                            <i class="material-icons">fingerprint</i>
-                            <p>Login Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/profile">
-                            <i class="material-icons">account_circle</i>
-                            <p>Profile Page</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
+                  <p class="margin-free">로그인</p>
+                </md-list-item>
+                <div class=" user-box" v-if="isLogin == true">
+                  <img
+                    src="../assets/img/faces/avatar.jpg"
+                    class="avatar img-raised rounded-circle img-fluid imagecustom"
+                  />
+                  <div>
+                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
                   </div>
-                </a>
-              </li>
+                </div>
+                <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
+                  <i class="material-icons">man</i>
+                  <p class="margin-free">마이페이지</p>
+                </md-list-item>
 
-              <md-list-item
-                href="https://www.facebook.com/CreativeTim"
-                target="_blank"
-              >
-                <i class="fab fa-facebook-square"></i>
-                <p class="hidden-lg">Facebook</p>
-                <md-tooltip md-direction="bottom"
-                  >Like us on Facebook</md-tooltip
-                >
-              </md-list-item>
-              <md-list-item
-                href="https://www.instagram.com/CreativeTimOfficial"
-                target="_blank"
-              >
-                <i class="fab fa-instagram"></i>
-                <p class="hidden-lg">Instagram</p>
-                <md-tooltip md-direction="bottom"
-                  >Follow us on Instagram</md-tooltip
-                >
-              </md-list-item>
-            </md-list>
+                <md-list-item @click="logout" v-if="isLogin == true">
+                  <i class="material-icons">login</i>
+                  <p class="margin-free">로그아웃</p>
+                </md-list-item>
+              </md-list>
+              <md-list></md-list>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </md-toolbar>
+    </md-toolbar>
+    <mypage-view-modal v-if="ShowMypageModal" @closemodal="CloseModal" />
+    <user-view-modal v-if="ShowUserModal" @closemodal="CloseModal" />
+  </div>
 </template>
 
 <script>
@@ -192,10 +136,12 @@ function resizeThrottler(actualResizeHandler) {
   }
 }
 import { mapActions, mapState } from "vuex";
+import MypageViewModal from "../views/MypageViewModal.vue";
+import UserViewModal from "../views/UserViewModal.vue";
 
 const memberStore = "memberStore";
 export default {
-  components: {},
+  components: { UserViewModal, MypageViewModal },
   props: {
     type: {
       type: String,
@@ -219,13 +165,15 @@ export default {
   },
   data() {
     return {
+      ShowUserModal: false,
+      ShowMypageModal: false,
       extraNavClasses: "",
       toggledClass: false,
     };
   },
 
   computed: {
-    ...mapState(memberStore, ["isLogin"]),
+    ...mapState(memberStore, ["isLogin", "userInfo"]),
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
       return excludedRoutes.every((r) => r !== this.$route.name);
@@ -281,6 +229,16 @@ export default {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
     },
+    ShowUserModalOn() {
+      this.ShowUserModal = true;
+    },
+    ShowMypageModalOn() {
+      this.ShowMypageModal = true;
+    },
+    CloseModal() {
+      this.ShowUserModal = false;
+      this.ShowMypageModal = false;
+    },
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
@@ -301,5 +259,21 @@ export default {
 .margin-free {
   margin: 0;
   margin-left: 5px;
+}
+.left {
+  align-self: right;
+}
+.imagecustom {
+  width: 50px;
+  margin-right: 10px;
+}
+.imagelogo {
+  width: 150px;
+  margin-left: 10px;
+}
+.user-box {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
 }
 </style>
