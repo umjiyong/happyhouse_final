@@ -8,6 +8,7 @@
           아파트 선택
         </button>
         <house-detail
+          :compareMode="true"
           :houseInfo="houseInfo2"
           :housedealList="housedealList2"
           :transportationList="transportationList2"
@@ -19,22 +20,23 @@
         />
       </div>
       <div class="compare-module">
-        <house-compare-detail
-          :houseInfo="houseInfo2"
-          :housedealList="housedealList2"
-          :transportationList="transportationList2"
-          :cultureList="cultureList2"
-          :lifeList="lifeList2"
-          :safetyList="safetyList2"
-          :educationList="educationList2"
-          :environmentList="environmentList2"
-        />
+        <div class="compare-title">
+          <span class="red-part">
+            {{ houseInfo2 ? houseInfo2.aptName : "" }}</span
+          >
+          &nbsp;VS&nbsp;
+          <span class="blue-part">
+            {{ houseInfo3 ? houseInfo3.aptName : "" }}</span
+          >
+        </div>
+        <house-compare-detail />
       </div>
       <div class="compare-module">
         <button class="blue-select-btn" @click="setSelectingHouseNum(3)">
           아파트 선택
         </button>
         <house-detail
+          :compareMode="true"
           :houseInfo="houseInfo3"
           :housedealList="housedealList3"
           :transportationList="transportationList3"
@@ -132,7 +134,7 @@ export default {
 }
 .select-map-modal-container {
   z-index: 2000;
-  width: 50%;
+  width: 70%;
 }
 
 .compare-layout {
@@ -142,7 +144,12 @@ export default {
   flex-basis: 1;
   justify-content: space-between;
 }
+.compare-title {
+  font-weight: bold;
+  font-size: 1.3rem;
 
+  padding: 1rem;
+}
 .compare-module {
   display: flex;
   flex-direction: column;

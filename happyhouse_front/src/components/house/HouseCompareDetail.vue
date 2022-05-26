@@ -2,15 +2,6 @@
   <div class="house-detail-container">
     <div :class="[{ 'house-detail-scroll-box': true }]">
       <div class="house-detail-box">
-        <div class="compare-title">
-          <span class="red-part">
-            {{ houseInfo2 ? houseInfo2.aptName : "" }}</span
-          >
-          &nbsp;VS&nbsp;
-          <span class="blue-part">
-            {{ houseInfo3 ? houseInfo3.aptName : "" }}</span
-          >
-        </div>
         <br />
         <br />
         <p class="bold-display">주변 정보</p>
@@ -209,14 +200,22 @@ export default {
             backgroundColor: "#a81f1f",
             borderColor: "#a81f1f",
             data: this.housedealList2
-              .map((deal) =>
-                parseFloat(
-                  deal.dealAmount
-                    .trim()
-                    .split(",")
-                    .join("") / 10000
-                )
-              )
+              .map((deal) => {
+                return {
+                  x:
+                    deal.dealYear +
+                    "/" +
+                    ("00" + deal.dealMonth).slice(-2) +
+                    "/" +
+                    ("00" + deal.dealDay).slice(-2),
+                  y: parseFloat(
+                    deal.dealAmount
+                      .trim()
+                      .split(",")
+                      .join("") / 10000
+                  ),
+                };
+              })
               .reverse(),
           },
           {
@@ -224,14 +223,22 @@ export default {
             backgroundColor: "#211fa8",
             borderColor: "#211fa8",
             data: this.housedealList3
-              .map((deal) =>
-                parseFloat(
-                  deal.dealAmount
-                    .trim()
-                    .split(",")
-                    .join("") / 10000
-                )
-              )
+              .map((deal) => {
+                return {
+                  x:
+                    deal.dealYear +
+                    "/" +
+                    ("00" + deal.dealMonth).slice(-2) +
+                    "/" +
+                    ("00" + deal.dealDay).slice(-2),
+                  y: parseFloat(
+                    deal.dealAmount
+                      .trim()
+                      .split(",")
+                      .join("") / 10000
+                  ),
+                };
+              })
               .reverse(),
           },
         ],
@@ -281,6 +288,9 @@ export default {
 }
 .house-detail-scroll-box {
   overflow-y: scroll;
+
+  width: 100%;
+  max-height: 80vh;
 }
 .house-detail-search-size {
   width: 100%;

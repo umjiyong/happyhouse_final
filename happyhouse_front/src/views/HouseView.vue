@@ -4,7 +4,6 @@
       <house-tabs
         :tab-name="[
           { name: '아파트 조회', comp: 'houseSearch' },
-          { name: '상세', comp: 'houseSearch' },
           { name: '비교', comp: 'houseCompare' },
         ]"
         :tab-icon="['list', 'dashboard', 'compare']"

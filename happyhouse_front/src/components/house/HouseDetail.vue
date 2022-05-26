@@ -1,8 +1,8 @@
 <template>
   <div class="house-detail-container">
-    <span class="hover-pointer x-box" @click="closeDetail">
+    <div v-if="!compareMode" class="hover-pointer x-box" @click="closeDetail">
       <md-icon>close</md-icon>
-    </span>
+    </div>
     <div
       :class="[
         { 'house-detail-scroll-box': true },
@@ -38,7 +38,7 @@
             <td>{{ safetyList.length }}</td>
             <td>{{ cultureList.length }}</td>
           </tr>
-          <tr>
+          <tr v-if="!compareMode">
             <td>
               <button @click="pinStatus('transportation')">
                 <md-icon>map</md-icon>
@@ -83,7 +83,7 @@
         <house-deal-list :housedealList="housedealList" />
       </div>
     </div>
-    <div class="compare-box " v-if="compareMode">
+    <div class="compare-box " v-if="compareRegistMode">
       <button class="hover-pointer" @click="saveCompareHouseInfo">
         비교 아파트로 등록
       </button>
@@ -107,6 +107,10 @@ export default {
   },
   props: {
     compareMode: {
+      type: Boolean,
+      default: false,
+    },
+    compareRegistMode: {
       type: Boolean,
       default: false,
     },

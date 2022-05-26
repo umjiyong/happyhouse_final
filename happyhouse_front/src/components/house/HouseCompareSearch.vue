@@ -14,7 +14,7 @@
       <house-detail
         @closeDetail="closeDetail"
         v-show="detailOn"
-        :compareMode="true"
+        :compareRegistMode="true"
         :selectingHouseNum="selectingHouseNum"
         :boxSize="'compareSize'"
         :houseInfo="houseInfo1"

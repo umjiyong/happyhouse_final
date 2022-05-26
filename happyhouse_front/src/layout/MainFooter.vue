@@ -9,7 +9,7 @@
         <ul>
           <li>
             <a href="https://www.creative-tim.com">
-              Creative Tim
+              SSAFY
             </a>
           </li>
           <li>
@@ -30,9 +30,7 @@
         </ul>
       </nav>
       <div class="copyright">
-        &copy; {{ year }}, made with <md-icon>favorite</md-icon> by
-        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a>
-        for a better web.
+        &copy; HappyHouse {{ year }}, made by CKS, UJY
       </div>
     </div>
   </footer>
@@ -41,13 +39,13 @@
 export default {
   props: {
     backgroundColor: String,
-    type: String
+    type: String,
   },
   data() {
     return {
-      year: new Date().getFullYear()
+      year: new Date().getFullYear(),
     };
-  }
+  },
 };
 </script>
 <style></style>
