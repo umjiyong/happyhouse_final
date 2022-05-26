@@ -245,7 +245,7 @@ export default {
   padding: 2rem 0;
 }
 .reply-container input {
-  width: 80%;
+  width: 90%;
   font-size: 1.1rem;
   padding: 0.2rem;
 }

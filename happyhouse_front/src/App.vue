@@ -59,6 +59,6 @@ export default {
 
 .fill-box {
   width: 100%;
-  height: 220px;
+  height: 200px;
 }
 </style>
