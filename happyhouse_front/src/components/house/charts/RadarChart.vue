@@ -22,7 +22,7 @@ import {
   Legend,
   PointElement,
   LineElement,
-  RadialLinearScale,
+  RadialLinearScale
 } from "chart.js";
 
 ChartJS.register(
@@ -37,48 +37,48 @@ ChartJS.register(
 export default {
   name: "RadarChart",
   components: {
-    Radar,
+    Radar
   },
   props: {
     chartId: {
       type: String,
-      default: "radar-chart",
+      default: "radar-chart"
     },
     datasetIdKey: {
       type: String,
-      default: "label",
+      default: "label"
     },
     width: {
       type: Number,
-      default: 400,
+      default: 400
     },
     height: {
       type: Number,
-      default: 400,
+      default: 400
     },
     cssClasses: {
       default: "",
-      type: String,
+      type: String
     },
     styles: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     plugins: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     chartData: {
-      default: [],
-    },
+      default: []
+    }
   },
   data() {
     return {
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-      },
+        maintainAspectRatio: false
+      }
     };
-  },
+  }
 };
 </script>

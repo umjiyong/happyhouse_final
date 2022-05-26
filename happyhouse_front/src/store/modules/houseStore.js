@@ -2,7 +2,7 @@ import {
   areaList,
   houseList,
   searchHouseDealByAptCode,
-  searchStatus,
+  searchStatus
 } from "@/api/house.js";
 
 const houseStore = {
@@ -24,7 +24,7 @@ const houseStore = {
     environmentList: [],
     lifeList: [],
     safetyList: [],
-    showStatusPosition: "empty",
+    showStatusPosition: "empty"
   },
 
   getters: {},
@@ -32,27 +32,27 @@ const houseStore = {
   mutations: {
     // Area
     SET_SIDO_LIST: (state, sidos) => {
-      sidos.forEach((sido) => {
+      sidos.forEach(sido => {
         state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
       });
     },
     SET_GUGUN_LIST: (state, guguns) => {
-      guguns.forEach((gugun) => {
+      guguns.forEach(gugun => {
         state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
       });
     },
     SET_DONG_LIST: (state, dongs) => {
-      dongs.forEach((dong) => {
+      dongs.forEach(dong => {
         state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
     },
-    CLEAR_SIDO_LIST: (state) => {
+    CLEAR_SIDO_LIST: state => {
       state.sidos = [{ value: null, text: "선택하세요" }];
     },
-    CLEAR_GUGUN_LIST: (state) => {
+    CLEAR_GUGUN_LIST: state => {
       state.guguns = [{ value: null, text: "선택하세요" }];
     },
-    CLEAR_DONG_LIST: (state) => {
+    CLEAR_DONG_LIST: state => {
       state.dongs = [{ value: "all", text: "전체동" }];
     },
     SET_SIDOCODE: (state, sidoCode) => {
@@ -64,20 +64,20 @@ const houseStore = {
     SET_DONGCODE: (state, dongCode) => {
       state.dongCode = dongCode;
     },
-    CLEAR_SIDOCODE: (state) => {
+    CLEAR_SIDOCODE: state => {
       state.sidoCode = "";
     },
-    CLEAR_GUGUNCODE: (state) => {
+    CLEAR_GUGUNCODE: state => {
       state.gugunCode = "";
     },
-    CLEAR_DONGCODE: (state) => {
+    CLEAR_DONGCODE: state => {
       state.dongCode = "all";
     },
     // HouseInfo
     SET_HOUSE_LIST: (state, houseList) => {
       state.houseList = houseList;
     },
-    CLEAR_HOUSE_LIST: (state) => {
+    CLEAR_HOUSE_LIST: state => {
       state.houseList = [];
     },
     SET_HOUSE_INFO1: (state, houseInfo) => {
@@ -91,49 +91,49 @@ const houseStore = {
     SET_HOUSEDEAL_LIST: (state, housedealList) => {
       state.housedealList = housedealList;
     },
-    CLEAR_HOUSEDEAL_LIST: (state) => {
+    CLEAR_HOUSEDEAL_LIST: state => {
       state.housedealList = [];
     },
     // Status
     SET_TRANSPORTATION_LIST: (state, transportationList) => {
       state.transportationList = transportationList;
     },
-    CLEAR_TRANSPORTATION_LIST: (state) => {
+    CLEAR_TRANSPORTATION_LIST: state => {
       state.transportationList = [];
     },
     SET_CULTURE_LIST: (state, cultureList) => {
       state.cultureList = cultureList;
     },
-    CLEAR_CULTURE_LIST: (state) => {
+    CLEAR_CULTURE_LIST: state => {
       state.cultureList = [];
     },
     SET_EDUCATION_LIST: (state, educationList) => {
       state.educationList = educationList;
     },
-    CLEAR_EDUCATION_LIST: (state) => {
+    CLEAR_EDUCATION_LIST: state => {
       state.educationList = [];
     },
     SET_ENVIRONMENT_LIST: (state, environmentList) => {
       state.environmentList = environmentList;
     },
-    CLEAR_ENVIRONMENT_LIST: (state) => {
+    CLEAR_ENVIRONMENT_LIST: state => {
       state.environmentList = [];
     },
     SET_LIFE_LIST: (state, lifeList) => {
       state.lifeList = lifeList;
     },
-    CLEAR_LIFE_LIST: (state) => {
+    CLEAR_LIFE_LIST: state => {
       state.lifeList = [];
     },
     SET_SAFETY_LIST: (state, safetyList) => {
       state.safetyList = safetyList;
     },
-    CLEAR_SAFETY_LIST: (state) => {
+    CLEAR_SAFETY_LIST: state => {
       state.safetyList = [];
     },
     SET_SHOW_STATUS_POSITION: (state, status) => {
       state.showStatusPosition = status;
-    },
+    }
   },
 
   actions: {
@@ -141,7 +141,7 @@ const houseStore = {
       console.log("ACTION getArea ");
       const params = {
         areaUnit,
-        areaCode,
+        areaCode
       };
       areaList(params, ({ data }) => {
         console.log(params);
@@ -184,8 +184,8 @@ const houseStore = {
         commit("SET_ENVIRONMENT_LIST", data["environment"]);
         commit("SET_CULTURE_LIST", data["culture"]);
       });
-    },
-  },
+    }
+  }
 };
 
 export default houseStore;

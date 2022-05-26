@@ -19,7 +19,7 @@ import HouseDetail from "@/components/house/HouseDetail.vue";
 export default {
   data() {
     return {
-      detailOn: false,
+      detailOn: false
     };
   },
   components: { HouseSearchBar, HouseList, KakaoMap, HouseDetail },
@@ -29,8 +29,8 @@ export default {
     },
     closeDetail() {
       this.detailOn = false;
-    },
-  },
+    }
+  }
 };
 </script>
 

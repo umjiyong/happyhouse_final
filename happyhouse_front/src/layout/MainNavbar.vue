@@ -17,13 +17,11 @@
         </div>
         <div>
           <router-link :to="{ name: 'main' }">
-
             <div>
               <img
                 src="../assets/img/faces/logotest2.png"
                 class="rounded img-fluid imagelogo"
               />
-
             </div>
           </router-link>
         </div>
@@ -31,53 +29,45 @@
           <!--router-link-->
           <div class="flex-row menu-container">
             <md-list>
-                <!--router-link-->
-                <md-list-item v-if="showDownload">
-                  <router-link :to="{ name: 'houseView' }">
-                    <i class="material-icons">house</i>
-                    <p>아파트</p>
-                  </router-link>
-                </md-list-item>
+              <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'houseView' }">
+                  <i class="material-icons">house</i>
+                  <p>아파트</p>
+                </router-link>
+              </md-list-item>
 
-                <md-list-item v-if="showDownload">
-                  <router-link :to="{ name: 'qnaView' }">
-                    <i class="material-icons">help</i>
-                    <p>Q&A</p>
-                  </router-link>
-                </md-list-item>
+              <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'qnaView' }">
+                  <i class="material-icons">help</i>
+                  <p>Q&A</p>
+                </router-link>
+              </md-list-item>
+            </md-list>
+            <md-list>
+              <md-list-item v-if="isLogin == false" @click="ShowUserModalOn">
+                <i class="material-icons">login</i>
+                <p class="margin-free">로그인</p>
+              </md-list-item>
+              <div class=" user-box" v-if="isLogin == true">
+                <img
+                  src="../assets/img/faces/avatar.jpg"
+                  class="avatar img-raised rounded-circle img-fluid imagecustom"
+                />
+                <div>{{ userInfo.name }}({{ userInfo.id }})님 환영합니다.</div>
+              </div>
+              <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
+                <i class="material-icons">man</i>
+                <p class="margin-free">마이페이지</p>
+              </md-list-item>
 
-                <md-list-item v-if="isLogin == false" @click="ShowUserModalOn">
-                  <i class="material-icons">login</i>
-                  <p class="margin-free">로그인</p>
-                </md-list-item>
-
-                <div class="user-box" v-if="isLogin == true">
-                  <img
-                    src="../assets/img/faces/avatar.jpg"
-                    class="avatar img-raised rounded-circle img-fluid imagecustom"
-                  />
-                  <div>
-                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                  </div>
-                </div>
-                <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
-                  <p class="margin-right">
-                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                  </p>
-                  <i class="material-icons">man</i>
-                  <p class="margin-free">마이페이지</p>
-                </md-list-item>
-
-                <md-list-item @click="logout" v-if="isLogin == true">
-                  <i class="material-icons">login</i>
-                  <p class="margin-free">로그아웃</p>
-                </md-list-item>
-              </md-list>
-              <md-list></md-list>
-            </div>
+              <md-list-item @click="logout" v-if="isLogin == true">
+                <i class="material-icons">login</i>
+                <p class="margin-free">로그아웃</p>
+              </md-list-item>
+            </md-list>
           </div>
         </div>
-      
+      </div>
     </md-toolbar>
     <mypage-view-modal v-if="ShowMypageModal" @closemodal="CloseModal" />
     <user-view-modal v-if="ShowUserModal" @closemodal="CloseModal" />
@@ -116,21 +106,21 @@ export default {
           "danger",
           "success",
           "warning",
-          "info",
+          "info"
         ].includes(value);
-      },
+      }
     },
     colorOnScroll: {
       type: Number,
-      default: 1,
-    },
+      default: 1
+    }
   },
   data() {
     return {
       ShowUserModal: false,
       ShowMypageModal: false,
       extraNavClasses: "",
-      toggledClass: false,
+      toggledClass: false
     };
   },
 
@@ -138,8 +128,8 @@ export default {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every((r) => r !== this.$route.name);
-    },
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
   },
   methods: {
     ...mapActions(memberStore, ["logoutMember"]),
@@ -200,14 +190,14 @@ export default {
     CloseModal() {
       this.ShowUserModal = false;
       this.ShowMypageModal = false;
-    },
+    }
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  },
+  }
 };
 </script>
 
@@ -248,7 +238,6 @@ export default {
   font-size: 0.9rem;
   display: flex;
   align-items: center;
-
 }
 .menu-container {
   width: 100%;

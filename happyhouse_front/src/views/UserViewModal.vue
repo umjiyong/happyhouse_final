@@ -163,10 +163,13 @@ export default {
         let token = sessionStorage.getItem("access-token");
         console.log(this.user);
         console.log(this.isLogin);
-        alert("입력 정보와 일치하는 아이디 및 비밀번호가 없습니다.");
+        
         if (this.isLogin) {
           await this.getUserInfo(token);
           this.closeModal();
+        }
+        else {
+          alert("입력 정보와 일치하는 아이디 및 비밀번호가 없습니다.");
         }
       } else {
         alert("빈 칸이 있나 확인해주세요");

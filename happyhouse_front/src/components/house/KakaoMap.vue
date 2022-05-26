@@ -15,11 +15,11 @@ export default {
     return {
       markers: [],
       infowindow: null,
-      customOverlay: null,
+      customOverlay: null
     };
   },
   props: {
-    detailOn: Boolean,
+    detailOn: Boolean
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -39,13 +39,13 @@ export default {
   methods: {
     ...mapMutations("houseStore", [
       "SET_SHOW_STATUS_POSITION",
-      "SET_HOUSE_INFO1",
+      "SET_HOUSE_INFO1"
     ]),
     initMap() {
       const container = document.getElementById("map");
       const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 6, // 초기 확대 레벨(클수록 넓은 시야)
+        level: 6 // 초기 확대 레벨(클수록 넓은 시야)
       };
 
       //지도 객체를 등록합니다.
@@ -58,9 +58,9 @@ export default {
     // 마커 표시
     displayMarker(placeList, kind) {
       if (this.markers.length > 0) {
-        this.markers.forEach((marker) => marker.setMap(null));
+        this.markers.forEach(marker => marker.setMap(null));
       }
-      const positions = placeList.map((place) => {
+      const positions = placeList.map(place => {
         // plcaeList에 lat, long이 있어야 한다.
         return new kakao.maps.LatLng(place.lat, place.lng);
       });
@@ -106,7 +106,7 @@ export default {
           const marker = new kakao.maps.Marker({
             map: this.map,
             position,
-            image: markerImage,
+            image: markerImage
           });
           // 아파트만 클릭 시 인포윈도우 출력
           if (kind === "house") {
@@ -136,7 +136,7 @@ export default {
               this.houseInfo1.lat,
               this.houseInfo1.lng
             ),
-            image: markerImage,
+            image: markerImage
           });
           this.markers.push(marker);
 
@@ -177,7 +177,7 @@ export default {
         map: this.map, // 인포윈도우가 표시될 지도
         position: iwPosition,
         content: iwContent,
-        removable: iwRemoveable,
+        removable: iwRemoveable
       });
       this.infowindow = iw;
       // this.infowindow.addListener();
@@ -191,7 +191,7 @@ export default {
     openHouseDetail() {
       console.log("open detail!!");
       this.$emit("openDetail");
-    },
+    }
   },
   computed: {
     cultureList: [],
@@ -204,8 +204,8 @@ export default {
       "environmentList",
       "lifeList",
       "safetyList",
-      "cultureList",
-    ]),
+      "cultureList"
+    ])
   },
   watch: {
     // houseList 변화 시 마커 표시 동작
@@ -258,8 +258,8 @@ export default {
         console.log("디테일 보기 종료.....");
         this.SET_SHOW_STATUS_POSITION("empty");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -22,7 +22,7 @@ import {
   Legend,
   BarElement,
   CategoryScale,
-  LinearScale,
+  LinearScale
 } from "chart.js";
 
 ChartJS.register(
@@ -40,35 +40,35 @@ export default {
   props: {
     chartId: {
       type: String,
-      default: "bar-chart",
+      default: "bar-chart"
     },
     datasetIdKey: {
       type: String,
-      default: "label",
+      default: "label"
     },
     width: {
       type: Number,
-      default: 400,
+      default: 400
     },
     height: {
       type: Number,
-      default: 400,
+      default: 400
     },
     cssClasses: {
       default: "",
-      type: String,
+      type: String
     },
     styles: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     plugins: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     chartData: {
-      default: [],
-    },
+      default: []
+    }
   },
   data() {
     return {
@@ -77,9 +77,9 @@ export default {
       //   datasets: [{ data: [40, 20, 12] }],
       // },
       chartOptions: {
-        responsive: true,
-      },
+        responsive: true
+      }
     };
-  },
+  }
 };
 </script>

@@ -55,7 +55,7 @@
         <span
           :class="[
             { 'hover-pointer': true },
-            { 'active-page': isSelected(pageNum) },
+            { 'active-page': isSelected(pageNum) }
           ]"
           v-for="pageNum in totalPageCnt"
           :key="pageNum"
@@ -75,7 +75,7 @@ export default {
     return {
       key: "all",
       word: "",
-      selectedPage: 1,
+      selectedPage: 1
     };
   },
 
@@ -83,14 +83,14 @@ export default {
     ...mapActions("qnaStore", [
       "getQuestionList",
       "searchQuestionByTitle",
-      "getCategoryList",
+      "getCategoryList"
     ]),
     ...mapMutations("qnaStore", ["CLEAR_QUESTION", "CLEAR_REPLY_LIST"]),
 
     mapCategory(cId) {
       console.log("실행됨...");
       if (this.categoryList) {
-        const res = this.categoryList.filter((cat) => cat.id === cId);
+        const res = this.categoryList.filter(cat => cat.id === cId);
         if (res.length > 0) return res[0].name;
         else return "기타";
       } else return cId;
@@ -101,17 +101,17 @@ export default {
     },
     isSelected(pageNum) {
       return pageNum === this.selectedPage;
-    },
+    }
   },
   computed: {
     ...mapState("qnaStore", [
       "questionList",
       "categoryList",
-      "totalQuestionCnt",
+      "totalQuestionCnt"
     ]),
     totalPageCnt() {
       return parseInt((this.totalQuestionCnt - 1) / 10) + 1;
-    },
+    }
   },
 
   created() {
@@ -122,7 +122,7 @@ export default {
     console.log("clear qna....");
     this.CLEAR_QUESTION();
     this.CLEAR_REPLY_LIST();
-  },
+  }
 };
 </script>
 

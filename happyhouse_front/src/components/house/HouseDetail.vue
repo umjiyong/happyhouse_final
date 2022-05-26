@@ -90,13 +90,13 @@ export default {
     return {
       myStyles: {
         width: "300px",
-        height: "300px",
-      },
+        height: "300px"
+      }
     };
   },
   components: {
     HouseDealList,
-    RadarChart,
+    RadarChart
   },
   computed: {
     ...mapState("houseStore", [
@@ -106,7 +106,7 @@ export default {
       "educationList",
       "environmentList",
       "lifeList",
-      "safetyList",
+      "safetyList"
     ]),
     statusDataComputed() {
       const res = {
@@ -129,30 +129,30 @@ export default {
               this.lifeList.length / 2,
               this.environmentList.length / 2,
               this.safetyList.length / 30,
-              this.cultureList.length,
-            ],
-          },
-        ],
+              this.cultureList.length
+            ]
+          }
+        ]
       };
       return res;
-    },
+    }
   },
   watch: {
     houseInfo1(val) {
       console.log("houseInfo updated!!");
       this.searchHouseDealByAptCode(val.aptCode);
       this.searchStatusByAptCode(val.aptCode);
-    },
+    }
   },
 
   methods: {
     ...mapMutations("houseStore", [
       "CLEAR_HOUSEDEAL_LIST",
-      "SET_SHOW_STATUS_POSITION",
+      "SET_SHOW_STATUS_POSITION"
     ]),
     ...mapActions("houseStore", [
       "searchHouseDealByAptCode",
-      "searchStatusByAptCode",
+      "searchStatusByAptCode"
     ]),
     closeDetail() {
       this.CLEAR_HOUSEDEAL_LIST();
@@ -160,8 +160,8 @@ export default {
     },
     pinStatus(status) {
       this.SET_SHOW_STATUS_POSITION(status);
-    },
-  },
+    }
+  }
 };
 </script>
 

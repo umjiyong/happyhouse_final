@@ -23,7 +23,7 @@ import {
   LineElement,
   LinearScale,
   CategoryScale,
-  PointElement,
+  PointElement
 } from "chart.js";
 
 ChartJS.register(
@@ -39,48 +39,48 @@ ChartJS.register(
 export default {
   name: "LineChart",
   components: {
-    LineChartGenerator,
+    LineChartGenerator
   },
   props: {
     chartId: {
       type: String,
-      default: "line-chart",
+      default: "line-chart"
     },
     datasetIdKey: {
       type: String,
-      default: "label",
+      default: "label"
     },
     width: {
       type: Number,
-      default: 400,
+      default: 400
     },
     height: {
       type: Number,
-      default: 400,
+      default: 400
     },
     cssClasses: {
       default: "",
-      type: String,
+      type: String
     },
     styles: {
       type: Object,
-      default: () => {},
+      default: () => {}
     },
     plugins: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     chartData: {
-      default: [],
-    },
+      default: []
+    }
   },
   data() {
     return {
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-      },
+        maintainAspectRatio: false
+      }
     };
-  },
+  }
 };
 </script>

@@ -61,15 +61,15 @@ export default {
         content: "",
         category: "",
         userId: "",
-        regTime: "",
-      },
+        regTime: ""
+      }
     };
   },
   methods: {
     ...mapActions("qnaStore", [
       "getCategoryList",
       "registQuestion",
-      "getQuestionList",
+      "getQuestionList"
     ]),
     registNewQuestion() {
       console.log("new Question!! : " + JSON.stringify(this.newQuestion));
@@ -79,16 +79,16 @@ export default {
         }, 500);
         this.$router.push({ name: "qnaList" });
       });
-    },
+    }
   },
   computed: {
     ...mapState("qnaStore", ["categoryList"]),
-    ...mapState("memberStore", ["userInfo"]),
+    ...mapState("memberStore", ["userInfo"])
   },
   created() {
     this.getCategoryList();
     this.newQuestion.userId = this.userInfo.id;
-  },
+  }
 };
 </script>
 
