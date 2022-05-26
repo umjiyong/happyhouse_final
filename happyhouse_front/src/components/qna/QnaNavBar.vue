@@ -4,7 +4,7 @@
       <div
         :class="[
           { 'qna-nav-item': true },
-          { 'active-qna-item': selected === 'qnaList' },
+          { 'active-qna-item': selected === 'qnaList' }
         ]"
         @click="selectQnaList"
       >
@@ -17,7 +17,7 @@
       <div
         :class="[
           { 'qna-nav-item': true },
-          { 'active-qna-item': selected === 'questionRegist' },
+          { 'active-qna-item': selected === 'questionRegist' }
         ]"
         @click="selectQuestionRegist"
       >
@@ -32,7 +32,7 @@
 export default {
   data() {
     return {
-      selected: "qnaList",
+      selected: "qnaList"
     };
   },
   methods: {
@@ -41,8 +41,8 @@ export default {
     },
     selectQuestionRegist() {
       this.selected = "questionRegist";
-    },
-  },
+    }
+  }
 };
 </script>
 

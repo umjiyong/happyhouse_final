@@ -76,18 +76,18 @@ export default {
         name: null,
         email: null,
         id: null,
-        password: null,
+        password: null
       },
       userpwdConfirm: null,
-      pwMatches: true,
+      pwMatches: true
     };
   },
 
   components: {
-    LoginCard,
+    LoginCard
   },
   computed: {
-    ...mapState(memberStore, ["userInfo"]),
+    ...mapState(memberStore, ["userInfo"])
   },
   methods: {
     ...mapActions(memberStore, ["modifyMember", "deleteMember"]),
@@ -133,8 +133,8 @@ export default {
     },
     movePage() {
       this.$router.go("this.$router.currentRoute");
-    },
-  },
+    }
+  }
 };
 </script>
 

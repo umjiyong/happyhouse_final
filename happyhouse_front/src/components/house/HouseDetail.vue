@@ -167,6 +167,7 @@ export default {
     //   "lifeList",
     //   "safetyList",
     // ]),
+
     statusDataComputed() {
       const res = {
         labels: ["교통", "교육", "생활", "환경", "안전", "문화"],

@@ -37,6 +37,13 @@
               </md-list-item>
 
               <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'newsView' }">
+                  <i class="material-icons">work</i>
+                  <p>관련뉴스</p>
+                </router-link>
+              </md-list-item>
+
+              <md-list-item v-if="showDownload">
                 <router-link :to="{ name: 'qnaView' }">
                   <i class="material-icons">help</i>
                   <p>Q&A</p>
@@ -106,21 +113,21 @@ export default {
           "danger",
           "success",
           "warning",
-          "info",
+          "info"
         ].includes(value);
-      },
+      }
     },
     colorOnScroll: {
       type: Number,
-      default: 1,
-    },
+      default: 1
+    }
   },
   data() {
     return {
       ShowUserModal: false,
       ShowMypageModal: false,
       extraNavClasses: "",
-      toggledClass: false,
+      toggledClass: false
     };
   },
 
@@ -128,8 +135,8 @@ export default {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
     showDownload() {
       const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every((r) => r !== this.$route.name);
-    },
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
   },
   methods: {
     ...mapActions(memberStore, ["logoutMember"]),
@@ -190,14 +197,14 @@ export default {
     CloseModal() {
       this.ShowUserModal = false;
       this.ShowMypageModal = false;
-    },
+    }
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
-  },
+  }
 };
 </script>
 

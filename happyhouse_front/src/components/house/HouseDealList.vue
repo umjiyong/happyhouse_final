@@ -47,8 +47,8 @@ export default {
     return {
       myStyles: {
         width: "400px",
-        height: "200px",
-      },
+        height: "200px"
+      }
     };
   },
   props: {
@@ -58,14 +58,14 @@ export default {
     },
   },
   components: {
-    LineChart,
+    LineChart
   },
   computed: {
     dealDataComputed() {
       const res = {
         labels: this.housedealList
           .map(
-            (deal) => deal.dealYear + "/" + deal.dealMonth + "/" + deal.dealDay
+            deal => deal.dealYear + "/" + deal.dealMonth + "/" + deal.dealDay
           )
           .reverse(),
 
@@ -75,7 +75,7 @@ export default {
             backgroundColor: "#f84949",
             borderColor: "#f9a9a9",
             data: this.housedealList
-              .map((deal) =>
+              .map(deal =>
                 parseFloat(
                   deal.dealAmount
                     .trim()
@@ -83,13 +83,13 @@ export default {
                     .join("") / 10000
                 )
               )
-              .reverse(),
-          },
-        ],
+              .reverse()
+          }
+        ]
       };
       console.log(res);
       return res;
-    },
+    }
   },
   filters: {
     changeUnit(price) {
@@ -103,8 +103,8 @@ export default {
       }
       if (price % 10000 !== 0) res += " " + (price % 10000) + "만";
       return (res += " 원");
-    },
-  },
+    }
+  }
 };
 </script>
 
