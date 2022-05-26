@@ -107,7 +107,7 @@ export default {
         prId: 0,
         content: "",
         userId: "",
-        regTime: "",
+        regTime: ""
       },
       reReply: {
         id: "",
@@ -115,8 +115,8 @@ export default {
         prId: 0,
         content: "",
         userId: "",
-        regTime: "",
-      },
+        regTime: ""
+      }
     };
   },
   methods: {
@@ -124,7 +124,7 @@ export default {
       "getQnA",
       "removeQuestion",
       "registReply",
-      "removeReply",
+      "removeReply"
     ]),
     moveUpdatePage() {
       this.$router.push({ name: "questionUpdate", params: { q_id: this.qId } });
@@ -164,18 +164,18 @@ export default {
     },
     isByUser(writerId) {
       return writerId === this.userInfo.id;
-    },
+    }
   },
   computed: {
     ...mapState("qnaStore", ["question", "replyList"]),
-    ...mapState("memberStore", ["userInfo"]),
+    ...mapState("memberStore", ["userInfo"])
   },
   watch: {
     replyList(newVal, oldVal) {
       console.log("reply List changed!! : ");
       console.log(oldVal);
       console.log(newVal);
-    },
+    }
   },
   created() {
     const qId = this.$route.params.q_id;
@@ -186,7 +186,7 @@ export default {
 
     this.reply.userId = this.userInfo.id;
     this.reReply.userId = this.userInfo.id;
-  },
+  }
 };
 </script>
 
@@ -245,7 +245,7 @@ export default {
   padding: 2rem 0;
 }
 .reply-container input {
-  width: 80%;
+  width: 90%;
   font-size: 1.1rem;
   padding: 0.2rem;
 }

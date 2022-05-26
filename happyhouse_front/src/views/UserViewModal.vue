@@ -163,9 +163,13 @@ export default {
         let token = sessionStorage.getItem("access-token");
         console.log(this.user);
         console.log(this.isLogin);
+
         if (this.isLogin) {
           await this.getUserInfo(token);
           this.closeModal();
+          this.movePage();
+        } else {
+          alert("입력 정보와 일치하는 아이디 및 비밀번호가 없습니다.");
         }
       } else {
         alert("빈 칸이 있나 확인해주세요");
@@ -208,7 +212,7 @@ export default {
       this.joinusMode = !this.joinusMode;
     },
     movePage() {
-      this.$router.go("this.$router.currentRoute");
+      this.$router.push({ name: "main" });
     },
     closeModal() {
       this.$emit("closemodal");

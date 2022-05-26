@@ -9,13 +9,15 @@ import boardStore from "@/store/modules/boardStore.js";
 import houseStore from "@/store/modules/houseStore.js";
 import todoStore from "@/store/modules/todoStore.js";
 import qnaStore from "@/store/modules/qnaStore.js";
+import newsStore from "@/store/modules/newsStore.js";
 const store = new Vuex.Store({
   modules: {
     memberStore,
     boardStore,
     houseStore,
     todoStore,
-    qnaStore
+    qnaStore,
+    newsStore
   },
   plugins: [
     createPersistedState({

@@ -8,7 +8,7 @@ import {
   removeQuestion,
   registReply,
   updateReply,
-  removeReply,
+  removeReply
 } from "@/api/qna";
 
 const qnaStore = {
@@ -18,12 +18,12 @@ const qnaStore = {
     question: {},
     replyList: [],
     categoryList: [],
-    totalQuestionCnt: 0,
+    totalQuestionCnt: 0
   },
   actions: {
     getQuestionList(context, searchInfo) {
       const params = {
-        ...searchInfo,
+        ...searchInfo
       };
       getQuestionList(params, ({ data }) => {
         console.log(data);
@@ -32,7 +32,7 @@ const qnaStore = {
       });
     },
     getQnA(context, qId) {
-      getQnA(qId, (response) => {
+      getQnA(qId, response => {
         console.log("url : " + `/question/${qId}`);
         console.log(response);
         context.commit("SET_QUESTION", response.data["question"]);
@@ -40,35 +40,35 @@ const qnaStore = {
       });
     },
     getCategoryList(context) {
-      getCategoryList((response) => {
+      getCategoryList(response => {
         console.log(response);
         context.commit("SET_CATEGORY_LIST", response.data);
       });
     },
     async registQuestion(context, newQuestion) {
-      await registQuestion(newQuestion, (response) => {
+      await registQuestion(newQuestion, response => {
         alert(response.data);
       });
     },
     searchQuestion(context, qId) {
-      searchQuestion(qId, (response) => {
+      searchQuestion(qId, response => {
         context.commit("SET_QUESTION", response.data);
       });
     },
     async updateQuestion(context, newQuestion) {
-      await updateQuestion(newQuestion, (response) => {
+      await updateQuestion(newQuestion, response => {
         alert(response.data);
       });
     },
     async removeQuestion(context, qId) {
-      await removeQuestion(qId, (response) => {
+      await removeQuestion(qId, response => {
         alert(response.data);
       });
     },
     // searchQuestionByTitle(context, word) {},
 
     async registReply(context, newReply) {
-      await registReply(newReply, (response) => {
+      await registReply(newReply, response => {
         alert(response.data);
         // console.log(response);
         // this.$router.push({ name: "QnAList" });
@@ -76,16 +76,16 @@ const qnaStore = {
     },
 
     async updateReply(context, newReply) {
-      await updateReply(newReply, (response) => {
+      await updateReply(newReply, response => {
         alert(response.data);
       });
     },
 
     async removeReply(context, rId) {
-      await removeReply(rId, (response) => {
+      await removeReply(rId, response => {
         alert(response.data);
       });
-    },
+    }
   },
   mutations: {
     SET_QUESTION_LIST(state, payload) {
@@ -108,8 +108,8 @@ const qnaStore = {
     },
     SET_TOTAL_QUESTION_COUNT(state, totalQuestionCnt) {
       state.totalQuestionCnt = totalQuestionCnt;
-    },
-  },
+    }
+  }
 };
 
 export default qnaStore;

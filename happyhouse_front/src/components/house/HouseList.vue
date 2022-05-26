@@ -1,5 +1,11 @@
 <template>
-  <div class="house-list-container">
+  <div
+    :class="[
+      { 'house-list-container': true },
+      { 'house-list-search-size': boxSize === 'searchSize' },
+      { 'house-list-compare-size': boxSize === 'compareSize' },
+    ]"
+  >
     <div class="bold-display padding-1rem">조회 결과</div>
     <div class="house-list-box">
       <table class="house-table">
@@ -21,20 +27,26 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 export default {
+  props: {
+    boxSize: {
+      type: String,
+      default: "searchSize",
+    },
+  },
   computed: {
-    ...mapState("houseStore", ["houseList"]),
+    ...mapState("houseStore", ["houseList"])
   },
   methods: {
     ...mapMutations("houseStore", ["CLEAR_HOUSE_LIST", "SET_HOUSE_INFO1"]),
     openDetail(houseInfo) {
       this.SET_HOUSE_INFO1(houseInfo);
       this.$emit("openDetail");
-    },
+    }
   },
   created() {
     this.CLEAR_HOUSE_LIST();
     console.log("create");
-  },
+  }
 };
 </script>
 
@@ -44,9 +56,15 @@ export default {
 }
 .house-list-container {
   flex-grow: 1;
+  background: white;
 
-  max-height: 80vh;
   border-bottom: 2px solid rgba(100, 100, 100, 0.2);
+}
+.house-list-search-size {
+  max-height: 80vh;
+}
+.house-list-compare-size {
+  max-height: 50vh;
 }
 .house-list-box {
   width: 100%;

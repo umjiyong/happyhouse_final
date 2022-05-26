@@ -25,6 +25,26 @@ const houseStore = {
     lifeList: [],
     safetyList: [],
     showStatusPosition: "empty",
+
+    // house2
+    houseInfo2: {},
+    housedealList2: [],
+    transportationList2: [],
+    cultureList2: [],
+    educationList2: [],
+    environmentList2: [],
+    lifeList2: [],
+    safetyList2: [],
+
+    // house3
+    houseInfo3: {},
+    housedealList3: [],
+    transportationList3: [],
+    cultureList3: [],
+    educationList3: [],
+    environmentList3: [],
+    lifeList3: [],
+    safetyList3: [],
   },
 
   getters: {},
@@ -133,6 +153,29 @@ const houseStore = {
     },
     SET_SHOW_STATUS_POSITION: (state, status) => {
       state.showStatusPosition = status;
+    },
+
+    // house 2
+    COPY_TO_HOUSE_2: (state) => {
+      state.houseInfo2 = Object.assign({}, state.houseInfo1);
+      state.housedealList2 = state.housedealList.map((deal) => deal);
+      state.transportationList2 = state.transportationList.map((val) => val);
+      state.educationList2 = state.educationList.map((val) => val);
+      state.cultureList2 = state.cultureList.map((val) => val);
+      state.environmentList2 = state.environmentList.map((val) => val);
+      state.lifeList2 = state.lifeList.map((val) => val);
+      state.safetyList2 = state.safetyList.map((val) => val);
+    },
+    // house 3
+    COPY_TO_HOUSE_3: (state) => {
+      state.houseInfo3 = Object.assign({}, state.houseInfo1);
+      state.housedealList3 = state.housedealList.map((deal) => deal);
+      state.transportationList3 = state.transportationList.map((val) => val);
+      state.educationList3 = state.educationList.map((val) => val);
+      state.cultureList3 = state.cultureList.map((val) => val);
+      state.environmentList3 = state.environmentList.map((val) => val);
+      state.lifeList3 = state.lifeList.map((val) => val);
+      state.safetyList3 = state.safetyList.map((val) => val);
     },
   },
 

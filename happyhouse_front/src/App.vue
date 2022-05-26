@@ -16,7 +16,7 @@ import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
 export default {
-  components: { MainNavbar, MainFooter },
+  components: { MainNavbar, MainFooter }
 };
 </script>
 
@@ -59,6 +59,6 @@ export default {
 
 .fill-box {
   width: 100%;
-  height: 220px;
+  height: 200px;
 }
 </style>

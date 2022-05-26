@@ -4,8 +4,7 @@
       <house-tabs
         :tab-name="[
           { name: '아파트 조회', comp: 'houseSearch' },
-          { name: '상세', comp: 'houseSearch' },
-          { name: '비교', com: 'houseSearch' }
+          { name: '비교', comp: 'houseCompare' },
         ]"
         :tab-icon="['list', 'dashboard', 'compare']"
         plain
@@ -21,7 +20,7 @@
 <script>
 import HouseTabs from "@/components/house/HouseTabs.vue";
 export default {
-  components: { HouseTabs }
+  components: { HouseTabs },
 };
 </script>
 

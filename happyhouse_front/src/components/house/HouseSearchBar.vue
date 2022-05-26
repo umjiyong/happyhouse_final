@@ -85,7 +85,7 @@ export default {
       gugun: "",
       dong: "",
       key: "searchbyarea",
-      word: "",
+      word: ""
     };
   },
   computed: {
@@ -95,8 +95,8 @@ export default {
       "dongs",
       "sidoCode",
       "gugunCode",
-      "dongCode",
-    ]),
+      "dongCode"
+    ])
   },
   created() {
     // this.$store.dispatch("getSido");
@@ -120,7 +120,7 @@ export default {
 
       "SET_SIDOCODE",
       "SET_GUGUNCODE",
-      "SET_DONGCODE",
+      "SET_DONGCODE"
     ]),
     changeSido() {
       this.CLEAR_GUGUN_LIST();
@@ -142,7 +142,7 @@ export default {
     doSearchHouseList() {
       this.$emit("closeDetail");
       console.log("dong :" + this.gugun);
-      if (this.gugun == null) {
+      if (this.key === "searchbyarea" && this.gugun == null) {
         alert("지역을 정확히 선택해주세요.");
         return;
       }
@@ -150,9 +150,9 @@ export default {
         key: this.key,
         word: this.word,
         gugunCode: this.gugunCode,
-        dongCode: this.dongCode,
+        dongCode: this.dongCode
       });
-    },
+    }
 
     // // sidoList() {
     // //   this.getSido();
@@ -176,8 +176,8 @@ export default {
     },
     dongs(dongList) {
       this.dong = dongList[0].value;
-    },
-  },
+    }
+  }
 };
 </script>
 

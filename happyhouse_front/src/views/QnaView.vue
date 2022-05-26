@@ -10,8 +10,8 @@
 import QnaNavBar from "@/components/qna/QnaNavBar.vue";
 export default {
   components: {
-    QnaNavBar,
-  },
+    QnaNavBar
+  }
 };
 </script>
 
