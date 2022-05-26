@@ -1,6 +1,12 @@
 <template>
   <div class="map-container">
-    <div id="map" style="width: 100%; height: 80vh"></div>
+    <div
+      id="map"
+      :class="[
+        { 'search-size': mapSize === 'searchSize' },
+        { 'compare-size': mapSize === 'compareSize' },
+      ]"
+    ></div>
     <div class="map-controller flex-row gap-item"></div>
   </div>
   <!--카카오 맵 API-->
@@ -20,6 +26,7 @@ export default {
   },
   props: {
     detailOn: Boolean,
+    mapSize: String,
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -264,6 +271,14 @@ export default {
 </script>
 
 <style>
+.search-size {
+  width: 100%;
+  height: 80vh;
+}
+.compare-size {
+  width: 100%;
+  height: 50vh;
+}
 .map-container {
   flex-grow: 6;
   flex-shrink: 0;

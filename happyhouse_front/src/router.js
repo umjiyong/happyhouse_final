@@ -32,13 +32,13 @@ export default new Router({
       components: { default: Main, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 1 },
-        footer: { backgroundColor: "black" }
-      }
+        footer: { backgroundColor: "black" },
+      },
     },
     {
       path: "/user",
       name: "userView",
-      component: () => import("@/views/UserViewModal.vue")
+      component: () => import("@/views/UserViewModal.vue"),
 
       // {
       //   path: "singin",
@@ -55,7 +55,7 @@ export default new Router({
       path: "/mypage",
       name: "mypage",
       beforeEnter: onlyAuthUser,
-      component: () => import("@/views/MypageViewModal.vue")
+      component: () => import("@/views/MypageViewModal.vue"),
     },
     {
       path: "/house",
@@ -67,14 +67,14 @@ export default new Router({
         {
           path: "search",
           name: "houseSearch",
-          component: () => import("@/components/house/HouseSearch.vue")
+          component: () => import("@/components/house/HouseSearch.vue"),
         },
         {
-          path: "detail",
-          name: "houseDetail",
-          component: () => import("@/components/house/HouseDetail.vue")
-        }
-      ]
+          path: "compare",
+          name: "houseCompare",
+          component: () => import("@/components/house/HouseCompare.vue"),
+        },
+      ],
     },
     {
       path: "/qna",
@@ -85,31 +85,31 @@ export default new Router({
         {
           path: "list",
           name: "qnaList",
-          component: () => import("@/components/qna/QnaList.vue")
+          component: () => import("@/components/qna/QnaList.vue"),
         },
         {
           path: "regist",
           name: "questionRegist",
-          component: () => import("@/components/qna/QuestionRegist.vue")
+          component: () => import("@/components/qna/QuestionRegist.vue"),
         },
         {
           path: "update",
           name: "questionUpdate",
-          component: () => import("@/components/qna/QuestionUpdate.vue")
+          component: () => import("@/components/qna/QuestionUpdate.vue"),
         },
         {
           path: ":q_id",
           name: "qnaPage",
-          component: () => import("@/components/qna/QnaPage.vue")
-        }
-      ]
-    }
+          component: () => import("@/components/qna/QnaPage.vue"),
+        },
+      ],
+    },
   ],
-  scrollBehavior: to => {
+  scrollBehavior: (to) => {
     if (to.hash) {
       return { selector: to.hash };
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });

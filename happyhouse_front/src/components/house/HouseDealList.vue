@@ -51,11 +51,16 @@ export default {
       },
     };
   },
+  props: {
+    housedealList: {
+      type: Array,
+      default: () => [],
+    },
+  },
   components: {
     LineChart,
   },
   computed: {
-    ...mapState("houseStore", ["housedealList"]),
     dealDataComputed() {
       const res = {
         labels: this.housedealList

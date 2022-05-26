@@ -3,10 +3,16 @@
     <span class="hover-pointer x-box" @click="closeDetail">
       <md-icon>close</md-icon>
     </span>
-    <div class="house-detail-scroll-box">
-      <div v-if="houseInfo1" class="house-detail-box">
+    <div
+      :class="[
+        { 'house-detail-scroll-box': true },
+        { 'house-detail-search-size': boxSize === 'searchSize' },
+        { 'house-detail-compare-size': boxSize === 'compareSize' },
+      ]"
+    >
+      <div v-if="houseInfo" class="house-detail-box">
         <div>
-          <p class="bold-display">{{ houseInfo1.aptName }}</p>
+          <p class="bold-display">{{ houseInfo.aptName }}</p>
         </div>
         <br />
         <br />
@@ -74,14 +80,19 @@
       <div>safety : {{ safetyList.length }}</div> -->
         <br /><br />
         <hr />
-        <house-deal-list />
+        <house-deal-list :housedealList="housedealList" />
       </div>
+    </div>
+    <div class="compare-box " v-if="compareMode">
+      <button class="hover-pointer" @click="saveCompareHouseInfo">
+        비교 아파트로 등록
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import HouseDealList from "@/components/house/HouseDealList.vue";
 // import BarChart from "@/components/house/charts/BarChart.vue";
 import RadarChart from "@/components/house/charts/RadarChart.vue";
@@ -94,20 +105,68 @@ export default {
       },
     };
   },
+  props: {
+    compareMode: {
+      type: Boolean,
+      default: false,
+    },
+    selectingHouseNum: {
+      type: Number,
+      default: 2,
+    },
+    boxSize: {
+      type: String,
+      default: "searchSize",
+    },
+    houseInfo: {
+      type: Object,
+      default: () => {
+        return {};
+      },
+    },
+    housedealList: {
+      type: Array,
+      default: () => [],
+    },
+    transportationList: {
+      type: Array,
+      default: () => [],
+    },
+    cultureList: {
+      type: Array,
+      default: () => [],
+    },
+    lifeList: {
+      type: Array,
+      default: () => [],
+    },
+    safetyList: {
+      type: Array,
+      default: () => [],
+    },
+    educationList: {
+      type: Array,
+      default: () => [],
+    },
+    environmentList: {
+      type: Array,
+      default: () => [],
+    },
+  },
   components: {
     HouseDealList,
     RadarChart,
   },
   computed: {
-    ...mapState("houseStore", [
-      "houseInfo1",
-      "transportationList",
-      "cultureList",
-      "educationList",
-      "environmentList",
-      "lifeList",
-      "safetyList",
-    ]),
+    // ...mapState("houseStore", [
+    //   "houseInfo1",
+    //   "transportationList",
+    //   "cultureList",
+    //   "educationList",
+    //   "environmentList",
+    //   "lifeList",
+    //   "safetyList",
+    // ]),
     statusDataComputed() {
       const res = {
         labels: ["교통", "교육", "생활", "환경", "안전", "문화"],
@@ -138,7 +197,7 @@ export default {
     },
   },
   watch: {
-    houseInfo1(val) {
+    houseInfo(val) {
       console.log("houseInfo updated!!");
       this.searchHouseDealByAptCode(val.aptCode);
       this.searchStatusByAptCode(val.aptCode);
@@ -149,6 +208,9 @@ export default {
     ...mapMutations("houseStore", [
       "CLEAR_HOUSEDEAL_LIST",
       "SET_SHOW_STATUS_POSITION",
+      ,
+      "COPY_TO_HOUSE_2",
+      "COPY_TO_HOUSE_3",
     ]),
     ...mapActions("houseStore", [
       "searchHouseDealByAptCode",
@@ -161,6 +223,16 @@ export default {
     pinStatus(status) {
       this.SET_SHOW_STATUS_POSITION(status);
     },
+    saveCompareHouseInfo() {
+      console.log("save HouseInfo...");
+      if (this.selectingHouseNum === 2) {
+        this.COPY_TO_HOUSE_2();
+        alert("등록 되었습니다.");
+      } else if (this.selectingHouseNum === 3) {
+        this.COPY_TO_HOUSE_3();
+        alert("등록 되었습니다.");
+      }
+    },
   },
 };
 </script>
@@ -169,11 +241,18 @@ export default {
 .house-detail-container {
   flex-grow: 0.3;
   position: relative;
+  background: white;
 }
 .house-detail-scroll-box {
+  overflow-y: scroll;
+}
+.house-detail-search-size {
   width: 100%;
   max-height: 80vh;
-  overflow-y: scroll;
+}
+.house-detail-compare-size {
+  width: 100%;
+  max-height: 50vh;
 }
 .house-detail-box {
   width: 100%;
@@ -199,5 +278,25 @@ export default {
 }
 .status-table button:hover {
   cursor: pointer;
+}
+
+/* compare */
+.compare-box {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+.compare-box button {
+  background: rgba(191, 59, 59, 0.7);
+  border: 2px solid rgba(191, 59, 59, 1);
+  border-radius: 3px;
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}
+.compare-box button:hover {
+  cursor: pointer;
+  background: rgba(191, 59, 59, 0.5);
+  transition: all 300ms;
 }
 </style>

@@ -1,11 +1,22 @@
 <template>
-  <div class="view-container">
+  <div class="compare-search-container">
+    <button @click="closeThisModal" class="close-compare-map-btn">
+      <md-icon>close</md-icon>
+    </button>
     <house-search-bar @closeDetail="closeDetail" />
     <div class="flex-row">
-      <house-list @openDetail="openDetail" v-show="!detailOn" />
+      <house-list
+        @openDetail="openDetail"
+        v-show="!detailOn"
+        :boxSize="'compareSize'"
+      />
+
       <house-detail
         @closeDetail="closeDetail"
         v-show="detailOn"
+        :compareMode="true"
+        :selectingHouseNum="selectingHouseNum"
+        :boxSize="'compareSize'"
         :houseInfo="houseInfo1"
         :housedealList="housedealList"
         :transportationList="transportationList"
@@ -18,7 +29,7 @@
       <kakao-map
         @openDetail="openDetail"
         :detailOn="detailOn"
-        :mapSize="'searchSize'"
+        :mapSize="'compareSize'"
       />
     </div>
     <!--modal-->
@@ -38,7 +49,24 @@ export default {
       detailOn: false,
     };
   },
+  props: {
+    selectingHouseNum: {
+      type: Number,
+      default: 2,
+    },
+  },
   components: { HouseSearchBar, HouseList, KakaoMap, HouseDetail },
+  methods: {
+    openDetail() {
+      this.detailOn = true;
+    },
+    closeDetail() {
+      this.detailOn = false;
+    },
+    closeThisModal() {
+      this.$emit("closeModal");
+    },
+  },
   computed: {
     ...mapState("houseStore", [
       "houseInfo1",
@@ -51,15 +79,26 @@ export default {
       "educationList",
     ]),
   },
-  methods: {
-    openDetail() {
-      this.detailOn = true;
-    },
-    closeDetail() {
-      this.detailOn = false;
-    },
-  },
 };
 </script>
 
-<style></style>
+<style>
+.compare-search-container {
+  position: relative;
+}
+.close-compare-map-btn {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+}
+.close-compare-map-btn:hover {
+  cursor: pointer;
+}
+.close-compare-map-btn i {
+  color: white !important;
+  font-size: 2rem !important;
+}
+</style>

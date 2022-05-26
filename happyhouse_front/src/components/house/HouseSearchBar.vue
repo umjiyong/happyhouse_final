@@ -142,7 +142,7 @@ export default {
     doSearchHouseList() {
       this.$emit("closeDetail");
       console.log("dong :" + this.gugun);
-      if (this.gugun == null) {
+      if (this.key === "searchbyarea" && this.gugun == null) {
         alert("지역을 정확히 선택해주세요.");
         return;
       }
