@@ -73,7 +73,7 @@ public class HouseServiceImp implements HouseService {
 		};
 		
 		List<Status> transportationList = houseDao.searchAllTransportation(pos);
-		List<Status> cultureList = houseDao.searchAllTransportation(pos);
+		List<Status> cultureList = houseDao.searchAllCulture(pos);
 		List<Status> educationList = houseDao.searchAllEducation(pos);
 		List<Status> environmentList = houseDao.searchAllEnvironment(pos);
 		List<Status> lifeList = houseDao.searchAllLife(pos);

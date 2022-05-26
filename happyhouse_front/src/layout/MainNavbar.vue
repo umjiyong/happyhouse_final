@@ -13,10 +13,15 @@
             <h3 class="md-title"></h3>
           </router-link>
         </div>
-        <div class="md-toolbar-section-start">
+        <div>
           <router-link :to="{ name: 'main' }">
-            <div class="avatar">
-              <img src="../assets/img/faces/logotest2.png" class="imagelogo" />
+
+            <div>
+              <img
+                src="../assets/img/faces/logotest2.png"
+                class="rounded img-fluid imagelogo"
+              />
+
             </div>
           </router-link>
         </div>
@@ -81,7 +86,7 @@
                 <md-list-item v-if="showDownload">
                   <router-link :to="{ name: 'qnaView' }">
                     <i class="material-icons">help</i>
-                    <p>QnA</p>
+                    <p>Q&A</p>
                   </router-link>
                 </md-list-item>
 
@@ -89,13 +94,16 @@
                   <i class="material-icons">login</i>
                   <p class="margin-free">로그인</p>
                 </md-list-item>
-                <div class="avatar margin-zero" v-if="isLogin == true">
+
+                <div class="user-box" v-if="isLogin == true">
                   <img
                     src="../assets/img/faces/avatar.jpg"
-                    class="img-raised rounded-circle img-fluid imagecustom margin-zero"
+                    class="avatar img-raised rounded-circle img-fluid imagecustom"
                   />
+                  <div>
+                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
+                  </div>
                 </div>
-
                 <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
                   <p class="margin-right">
                     {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
@@ -275,5 +283,11 @@ export default {
 .margin-right {
   margin: 0;
   margin-right: 5px;
+}
+.user-box {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+
 }
 </style>
