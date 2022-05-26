@@ -52,6 +52,11 @@ export default new Router({
       // },
     },
     {
+      path: "/news",
+      name: "newsView",
+      component: () => import("@/views/NewsView.vue")
+    },
+    {
       path: "/mypage",
       name: "mypage",
       beforeEnter: onlyAuthUser,

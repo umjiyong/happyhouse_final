@@ -23,7 +23,6 @@ public class QnAServiceImp implements QnAService {
 		this.qnaDao = qnaDao;
 	}
 	
-	
 	@Override
 	public List<Category> searchAllCategory() {
 		

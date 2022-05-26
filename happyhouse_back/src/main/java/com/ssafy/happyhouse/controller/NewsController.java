@@ -25,11 +25,10 @@ public class NewsController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<?> NewsList(){
+	public ResponseEntity<List<News>> NewsList(){
 		System.out.println("GET : Newslist");
 		
 		List<News> res = newsService.getNews();
-
 		return new ResponseEntity<List<News>> (res,HttpStatus.OK);
 	}
 	

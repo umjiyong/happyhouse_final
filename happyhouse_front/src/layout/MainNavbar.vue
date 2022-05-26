@@ -37,6 +37,13 @@
               </md-list-item>
 
               <md-list-item v-if="showDownload">
+                <router-link :to="{ name: 'newsView' }">
+                  <i class="material-icons">work</i>
+                  <p>관련뉴스</p>
+                </router-link>
+              </md-list-item>
+
+              <md-list-item v-if="showDownload">
                 <router-link :to="{ name: 'qnaView' }">
                   <i class="material-icons">help</i>
                   <p>Q&A</p>

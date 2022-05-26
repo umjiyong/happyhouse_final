@@ -8,21 +8,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.model.dao.NewsDao;
 import com.ssafy.happyhouse.model.dto.News;
 
 @Service
 public class NewsServiceImp implements NewsService{
 	
+//private NewsDao newsDao;
+//	
+//	@Autowired
+//	public NewsServiceImp(NewsDao newsDao) {
+//		this.newsDao = newsDao;
+//	}
 
 	@Override
 	public List<News> getNews() {
+		
 		
 		String url = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid2=260&sid1=101&date=20220526&page=1";
 		Document doc;
 		List<News> rnews = new ArrayList<News>();
 		try {
+			
 			doc = Jsoup.connect(url).get();
 			Elements elements = doc.getElementsByAttributeValue("class", "list_body newsflash_body");
 			Element element = elements.get(0);
@@ -44,7 +54,7 @@ public class NewsServiceImp implements NewsService{
 //				Element contentElement = subDoc.getElementById("newsct_article");
 //				String content = contentElement.text();
 				
-				News rsnews = new News(title, articleUrl, imgUrl);
+				News rsnews = new News(i, title, articleUrl, imgUrl);
 				
 				rnews.add(rsnews);
 //            System.out.println("제목 : " + title);
@@ -52,7 +62,7 @@ public class NewsServiceImp implements NewsService{
 //            System.out.println("뉴스 url : "+articleUrl);
 //            System.out.println("이미지 url : "+imgUrl);
 //            System.out.println();	
-				return rnews;
+			
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
