@@ -17,13 +17,11 @@
         </div>
         <div>
           <router-link :to="{ name: 'main' }">
-
             <div>
               <img
                 src="../assets/img/faces/logotest2.png"
                 class="rounded img-fluid imagelogo"
               />
-
             </div>
           </router-link>
         </div>
@@ -62,58 +60,11 @@
                 <p class="margin-free">마이페이지</p>
               </md-list-item>
 
-<<<<<<< HEAD
               <md-list-item @click="logout" v-if="isLogin == true">
                 <i class="material-icons">login</i>
                 <p class="margin-free">로그아웃</p>
               </md-list-item>
             </md-list>
-=======
-                <!--router-link-->
-                <md-list-item v-if="showDownload">
-                  <router-link :to="{ name: 'houseView' }">
-                    <i class="material-icons">house</i>
-                    <p>아파트</p>
-                  </router-link>
-                </md-list-item>
-
-                <md-list-item v-if="showDownload">
-                  <router-link :to="{ name: 'qnaView' }">
-                    <i class="material-icons">help</i>
-                    <p>Q&A</p>
-                  </router-link>
-                </md-list-item>
-
-                <md-list-item v-if="isLogin == false" @click="ShowUserModalOn">
-                  <i class="material-icons">login</i>
-                  <p class="margin-free">로그인</p>
-                </md-list-item>
-
-                <div class="user-box" v-if="isLogin == true">
-                  <img
-                    src="../assets/img/faces/avatar.jpg"
-                    class="avatar img-raised rounded-circle img-fluid imagecustom"
-                  />
-                  <div>
-                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                  </div>
-                </div>
-                <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
-                  <p class="margin-right">
-                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                  </p>
-                  <i class="material-icons">man</i>
-                  <p class="margin-free">마이페이지</p>
-                </md-list-item>
-
-                <md-list-item @click="logout" v-if="isLogin == true">
-                  <i class="material-icons">login</i>
-                  <p class="margin-free">로그아웃</p>
-                </md-list-item>
-              </md-list>
-              <md-list></md-list>
-            </div>
->>>>>>> 6671ce10cd20787c61043c5d326f3aa5aa444cf5
           </div>
         </div>
       </div>
@@ -261,13 +212,11 @@ export default {
   margin: 0;
   margin-left: 5px;
 }
-<<<<<<< HEAD
 .header-container {
   width: 100%;
-=======
+}
 .margin-zero {
   margin: 0;
->>>>>>> 6671ce10cd20787c61043c5d326f3aa5aa444cf5
 }
 .left {
   align-self: right;
@@ -277,11 +226,8 @@ export default {
   margin-right: 10px;
 }
 .imagelogo {
-<<<<<<< HEAD
   width: 120px;
-=======
-  width: 180px;
->>>>>>> 6671ce10cd20787c61043c5d326f3aa5aa444cf5
+
   margin-left: 10px;
 }
 .margin-right {
@@ -292,7 +238,6 @@ export default {
   font-size: 0.9rem;
   display: flex;
   align-items: center;
-
 }
 .menu-container {
   width: 100%;
