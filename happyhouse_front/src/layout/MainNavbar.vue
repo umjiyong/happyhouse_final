@@ -16,10 +16,7 @@
         <div class="md-toolbar-section-start">
           <router-link :to="{ name: 'main' }">
             <div class="avatar">
-              <img
-                src="../assets/img/faces/logotest2.png"
-                class="img-raised rounded img-fluid imagelogo"
-              />
+              <img src="../assets/img/faces/logotest2.png" class="imagelogo" />
             </div>
           </router-link>
         </div>
@@ -92,16 +89,17 @@
                   <i class="material-icons">login</i>
                   <p class="margin-free">로그인</p>
                 </md-list-item>
-                <div class="avatar" v-if="isLogin == true">
+                <div class="avatar margin-zero" v-if="isLogin == true">
                   <img
                     src="../assets/img/faces/avatar.jpg"
-                    class="img-raised rounded-circle img-fluid imagecustom"
+                    class="img-raised rounded-circle img-fluid imagecustom margin-zero"
                   />
                 </div>
-                <h4 v-if="isLogin == true">
-                  {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
-                </h4>
+
                 <md-list-item v-if="isLogin == true" @click="ShowMypageModalOn">
+                  <p class="margin-right">
+                    {{ userInfo.name }}({{ userInfo.id }})님 환영합니다.
+                  </p>
                   <i class="material-icons">man</i>
                   <p class="margin-free">마이페이지</p>
                 </md-list-item>
@@ -260,6 +258,9 @@ export default {
   margin: 0;
   margin-left: 5px;
 }
+.margin-zero {
+  margin: 0;
+}
 .left {
   align-self: right;
 }
@@ -268,7 +269,11 @@ export default {
   margin-right: 10px;
 }
 .imagelogo {
-  width: 150px;
+  width: 180px;
   margin-left: 10px;
+}
+.margin-right {
+  margin: 0;
+  margin-right: 5px;
 }
 </style>
