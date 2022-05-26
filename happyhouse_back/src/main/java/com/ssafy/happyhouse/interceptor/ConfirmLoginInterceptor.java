@@ -14,10 +14,9 @@ public class ConfirmLoginInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("ConfirmLogin 인터셉터 실행!!!");
-		User user = (User)request.getSession().getAttribute("userInfo");
+		User user = (User) request.getSession().getAttribute("userInfo");
 		
 		if(user==null) {
-			System.out.println(user);
 			response.sendRedirect("/happyhouse/user/login");
 			return false;
 		}
