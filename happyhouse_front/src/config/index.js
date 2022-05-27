@@ -1,6 +1,9 @@
-const API_BASE_URL = "http://localhost:9999/vue";
-const APT_DEAL_URL =
-  "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev";
+const HAPPYHOUSE_SPRING_SEVER_URL = "http://localhost:8080/happyhouse";
+const API_BASE_URL = "http://localhost:8080/happyhouse";
 
-export { API_BASE_URL, APT_DEAL_URL };
-// test
+// 규섭님 URL
+
+// ------------------------------- URL 분계선 ---------------------------------------//
+
+// 지용님 URL
+export { API_BASE_URL, HAPPYHOUSE_SPRING_SEVER_URL };

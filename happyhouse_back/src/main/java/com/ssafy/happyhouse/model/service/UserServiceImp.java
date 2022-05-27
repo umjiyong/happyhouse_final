@@ -75,16 +75,21 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public User login(String id, String password) throws SQLException {
+	public User login(User user) throws SQLException {
 		try {
 			Map<String,String> map = new HashMap<String, String>();
-			map.put("id", id);
-			map.put("password", password);
+			map.put("id", user.getId());
+			map.put("password", user.getPassword());
 			return dao.login(map);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public User userInfo(String userid) throws Exception {
+		return dao.userInfo(userid);
 	}
 
 }
